@@ -1,4 +1,3 @@
-DROP TABLE Posilek;
 DROP TABLE PosilkiWCiaguDnia;
 DROP TABLE NazwyPosilkow;
 DROP TABLE Uzytkownik;
@@ -41,23 +40,11 @@ COMMENT ON COLUMN uzytkownik.wagajednostka IS
 
 
 
-
-CREATE TABLE Posilek (
-    IDPosilek                             INTEGER NOT NULL PRIMARY KEY,
-    Nazwa                                 VARCHAR2(100) NOT NULL,
-    Kalorycznosc                          INTEGER NOT NULL, 
-    NazwyPosilkowID                       INTEGER NOT NULL,
-    FOREIGN KEY (NazwyPosilkowID) REFERENCES NazwyPosilkow(IDNazwyPosilkow)
-);
-
-
 CREATE TABLE PosilkiWCiaguDnia (
     IDPosilkiWCiaguDnia INTEGER NOT NULL PRIMARY KEY,
     UzytkownikID         INTEGER NOT NULL,
     Data                 DATE NOT NULL,
     KolejnyNumerWDniu    INTEGER NOT NULL,
     PosilekID            INTEGER NOT NULL,
-    FOREIGN KEY (UzytkownikID) REFERENCES Uzytkownik(IDUzytkownik),
-    FOREIGN KEY (PosilekID) REFERENCES Posilek(IDPosilek)
+    FOREIGN KEY (UzytkownikID) REFERENCES Uzytkownik(IDUzytkownik)
 );
-
