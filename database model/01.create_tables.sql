@@ -1,13 +1,13 @@
-DROP TABLE PosilkiWCiaguDnia;
-DROP TABLE NazwyPosilkow;
-DROP TABLE Uzytkownik;
+-- DROP TABLE PosilkiWCiaguDnia;
+-- DROP TABLE Posilek;
+-- DROP TABLE Uzytkownik;
 
-CREATE TABLE NazwyPosilkow (
-    IDNazwyPosilkow INTEGER NOT NULL PRIMARY KEY,
+CREATE TABLE Posilek (
+    IDPosilek       INTEGER NOT NULL PRIMARY KEY,
     Nazwa           VARCHAR2(100 CHAR) NOT NULL
 );
 
-COMMENT ON COLUMN nazwyposilkow.nazwa IS
+COMMENT ON COLUMN posilek.nazwa IS
     'śniadanie, II śniadanie, obiad, podwieczorek, kolacja';
 
 
@@ -44,7 +44,9 @@ CREATE TABLE PosilkiWCiaguDnia (
     IDPosilkiWCiaguDnia INTEGER NOT NULL PRIMARY KEY,
     UzytkownikID         INTEGER NOT NULL,
     Data                 DATE NOT NULL,
-    KolejnyNumerWDniu    INTEGER NOT NULL,
     PosilekID            INTEGER NOT NULL,
-    FOREIGN KEY (UzytkownikID) REFERENCES Uzytkownik(IDUzytkownik)
+    KolejnyNumerWDniu    INTEGER NOT NULL,
+    Kalorycznosc		 INTEGER NOT NULL,
+    FOREIGN KEY (UzytkownikID) REFERENCES Uzytkownik(IDUzytkownik),
+    FOREIGN KEY (PosilekID) REFERENCES Posilek(IDPosilek)    
 );
