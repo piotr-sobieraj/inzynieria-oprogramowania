@@ -1,10 +1,25 @@
-# Inżynieria oprogramowania
+## Spis treści
+- [14 marca](#14-marca)
+  - [Działająca pierwsza strona aplikacji](#działająca-pierwsza-strona-aplikacji)
+  - [Działająca pierwsza strona aplikacji II](#działająca-pierwsza-strona-aplikacji-ii)
+- [7 marca](#7-marca)
+  - [Prototyp interfejsu użytkownika](#prototyp-interfejsu-użytkownika)
+  - [Baza danych](#baza-danych)
+  - [Miro (backlog, przepływ danych etc.)](#miro-backlog-przepływ-danych-etc)
+  - [Pliki](#pliki)
 
-## 14 marca - działająca pierwsza strona aplikacji
+---
 
 
+# 14 marca
+## Działająca pierwsza strona aplikacji
+![Pierwsza strona](/pictures/04.pierwsza.strona.png)
 
-## 7 marca - Prototyp interfejsu użytkownika
+## Działająca pierwsza strona aplikacji II
+[![Filmik na yt](http://img.youtube.com/vi/M4exoZGWGHg/0.jpg)](http://www.youtube.com/watch?v=M4exoZGWGHg "Kliknij")
+
+# 7 marca
+## Prototyp interfejsu użytkownika
 [Prototypy na Figmie](https://www.figma.com/file/tlUhczssThAchhPDkaIm7u/Untitled?type=design&node-id=0-1&mode=design)
 
 ![Interfejs użytkownika](/pictures/01.UI.jpg)
