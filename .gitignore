@@ -1,0 +1,18 @@
+# Pliki wygenerowane przez Android Studio
+/.idea/
+/build/
+/captures/
+/navigation/json/
+
+# Pliki konfiguracyjne
+*.iml
+.gradle/
+/local.properties
+
+# Pliki wygenerowane przez system operacyjny
+.DS_Store
+Thumbs.db
+
+# Inne pliki tymczasowe
+/crashlytics.properties
+

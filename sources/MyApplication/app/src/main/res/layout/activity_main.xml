@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/buttonSummary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="makeSummary"
+        android:text="Dalej"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.86"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.918" />
+
+    <EditText
+        android:id="@+id/editTextName"
+        android:layout_width="288dp"
+        android:layout_height="71dp"
+        android:layout_marginTop="48dp"
+        android:ems="10"
+        android:hint="Imię"
+        android:inputType="text"
+        android:nextFocusForward="@+id/radioGroup"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.463"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="279dp"
+        android:layout_height="114dp"
+        android:layout_marginTop="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextName">
+
+        <RadioButton
+            android:id="@+id/radioButtonFemale"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:text="Kobieta" />
+
+        <RadioButton
+            android:id="@+id/radioButtonMale"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Mężczyzna" />
+
+    </RadioGroup>
+
+    <EditText
+        android:id="@+id/editTextDate"
+        android:layout_width="227dp"
+        android:layout_height="54dp"
+        android:layout_marginBottom="372dp"
+        android:ems="10"
+        android:hint="Data urodzenia"
+        android:inputType="date"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.326"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/editTextWzrost"
+        android:layout_width="223dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="60dp"
+        android:digits="0123456789,"
+        android:ems="10"
+        android:hint="Wzrost"
+        android:inputType="numberDecimal"
+        android:nextFocusForward="@+id/editTextWaga"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextDate" />
+
+    <EditText
+        android:id="@+id/editTextWaga"
+        android:layout_width="239dp"
+        android:layout_height="63dp"
+        android:layout_marginStart="60dp"
+        android:digits="0123456789,"
+        android:ems="10"
+        android:hint="Waga"
+        android:inputType="numberDecimal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextWzrost" />
+
+    <EditText
+        android:id="@+id/editTextDocelowaWaga"
+        android:layout_width="239dp"
+        android:layout_height="59dp"
+        android:layout_marginStart="60dp"
+        android:digits="0123456789,"
+        android:ems="10"
+        android:hint="Docelowa waga"
+        android:inputType="numberDecimal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextWaga" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
