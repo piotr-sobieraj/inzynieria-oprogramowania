@@ -1,3 +1,19 @@
 <resources>
     <string name="app_name">My Application</string>
+    <string name="avatar_image">avatar image</string>
+    <string name="who_are_you">Who are you?</string>
+    <string name="female">Female</string>
+    <string name="name">Name</string>
+    <string name="male">Male</string>
+    <string name="next">Next</string>
+    <string name="pick_date">Pick date</string>
+    <string name="lb">lb</string>
+    <string name="st_lb">st/lb</string>
+    <string name="kg">kg</string>
+    <string name="in">in</string>
+    <string name="ft_in">ft/in</string>
+    <string name="cm">cm</string>
+    <string name="target_body_weight">Target body weight</string>
+    <string name="current_body_weight">Current body weight</string>
+    <string name="height">Height</string>
 </resources>
