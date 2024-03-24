@@ -1,5 +1,6 @@
 # Pliki wygenerowane przez Android Studio
-/.idea/
+Sources/.idea/
+.idea/
 /build/
 /captures/
 /navigation/json/
