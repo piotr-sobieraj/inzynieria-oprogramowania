@@ -1,7 +1,5 @@
 package com.example.myapplication;
 
-import static android.content.ContentValues.TAG;
-
 import android.app.DatePickerDialog;
 import android.icu.util.Calendar;
 import android.os.Bundle;
@@ -10,8 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.TextView;
-import java.util.Map;
-import java.util.HashMap;
+
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,15 +16,9 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
-
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,7 +85,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void makeSummary(View v){
-        Map<String, Object> user = new HashMap<>();
         String imie = getName();
         String plec = getSex();
         String dataUrodzenia = getBirthDate();
@@ -108,29 +98,5 @@ public class MainActivity extends AppCompatActivity {
                 "\",\nwzrost: \"" + wzrost +
                 "\",\nwaga: \"" + waga +
                 "\",\ndocelowaWaga: \"" + docelowaWaga + "\"}");
-        user.put("Imie", imie);
-        user.put("Plec", plec);
-        user.put("dataUrodzenia", dataUrodzenia);
-        user.put("wzrost", wzrost);
-        user.put("waga", waga);
-        user.put("docelowaWaga", docelowaWaga);
-        Log.d("Podsumowanie 2", user.toString());
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("users")
-                .add(user)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                    @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w(TAG, "Error adding document", e);
-                    }
-                });
     }
-
-
 }
