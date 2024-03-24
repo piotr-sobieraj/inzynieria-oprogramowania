@@ -1,8 +1,0 @@
-<?xml version = '1.0' encoding = 'UTF-8'?>
-<oracle.dbtools.crest.model.design.logical.LogicalDesign>
-   <object objectType="Entity" objectID="B0D67AB9-F2BE-C293-AEEE-765A85CC5BEF" name="Posilek" seqName="seg_0" propertyClassName="oracle.dbtools.crest.model.design.logical.Entity" propertyParentId="23614D2A-D3CE-10A3-1929-9FEF8F293242" propertySourceId="" propertyTargetId=""/>
-   <object objectType="Entity" objectID="6983558D-22B2-2D77-D3C8-FFF22D3F0807" name="PosilkiWCiaguDnia" seqName="seg_0" propertyClassName="oracle.dbtools.crest.model.design.logical.Entity" propertyParentId="23614D2A-D3CE-10A3-1929-9FEF8F293242" propertySourceId="" propertyTargetId=""/>
-   <object objectType="Entity" objectID="E4644E0C-099A-9308-E94B-C30786A3E3F2" name="Uzytkownik" seqName="seg_0" propertyClassName="oracle.dbtools.crest.model.design.logical.Entity" propertyParentId="23614D2A-D3CE-10A3-1929-9FEF8F293242" propertySourceId="" propertyTargetId=""/>
-   <object objectType="Relation" objectID="ABFA46D5-C1E6-925C-6E81-E8E1021191FF" name="posilek_w_dniu" seqName="seg_0" propertyClassName="oracle.dbtools.crest.model.design.logical.Relation" propertyParentId="23614D2A-D3CE-10A3-1929-9FEF8F293242" propertySourceId="B0D67AB9-F2BE-C293-AEEE-765A85CC5BEF" propertyTargetId="6983558D-22B2-2D77-D3C8-FFF22D3F0807"/>
-   <object objectType="Relation" objectID="0C21544E-80F9-1CED-320A-491D0E0E3454" name="posilki_uzytkownika" seqName="seg_0" propertyClassName="oracle.dbtools.crest.model.design.logical.Relation" propertyParentId="23614D2A-D3CE-10A3-1929-9FEF8F293242" propertySourceId="E4644E0C-099A-9308-E94B-C30786A3E3F2" propertyTargetId="6983558D-22B2-2D77-D3C8-FFF22D3F0807"/>
-</oracle.dbtools.crest.model.design.logical.LogicalDesign>
