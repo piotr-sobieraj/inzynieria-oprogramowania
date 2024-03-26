@@ -3,6 +3,7 @@ package com.example.myapplication;
 import static android.content.ContentValues.TAG;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.util.Log;
@@ -93,28 +94,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void makeSummary(View v){
-        Map<String, Object> user = new HashMap<>();
-        String imie = getName();
-        String plec = getSex();
-        String dataUrodzenia = getBirthDate();
-        String wzrost = getHeight();
-        String waga = getWeight();
-        String docelowaWaga = getTargetWeight();
-
-        Log.d ("Podsumowanie", "{imie: \"" + imie +
-                "\",\nplec: \"" + plec +
-                "\",\ndataUrodzenia: \"" + dataUrodzenia +
-                "\",\nwzrost: \"" + wzrost +
-                "\",\nwaga: \"" + waga +
-                "\",\ndocelowaWaga: \"" + docelowaWaga + "\"}");
-        user.put("Imie", imie);
-        user.put("Plec", plec);
-        user.put("dataUrodzenia", dataUrodzenia);
-        user.put("wzrost", wzrost);
-        user.put("waga", waga);
-        user.put("docelowaWaga", docelowaWaga);
+    public void saveUserToDatabase(){
+        Map<String, Object> user = getUser();
         Log.d("Podsumowanie 2", user.toString());
+
+        saveUserToDatabase(user);
+    }
+
+    private static void saveUserToDatabase(Map<String, Object> user) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("users")
                 .add(user)
@@ -132,5 +119,32 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
+    @NonNull
+    private Map<String, Object> getUser() {
+        Map<String, Object> user = new HashMap<>();
+        String imie = getName();
+        String plec = getSex();
+        String dataUrodzenia = getBirthDate();
+        String wzrost = getHeight();
+        String waga = getWeight();
+        String docelowaWaga = getTargetWeight();
 
+        user.put("Imie", imie);
+        user.put("Plec", plec);
+        user.put("dataUrodzenia", dataUrodzenia);
+        user.put("wzrost", wzrost);
+        user.put("waga", waga);
+        user.put("docelowaWaga", docelowaWaga);
+        return user;
+    }
+
+    public void openAddingMeals(View v){
+        Intent addingMeals = new Intent(this, AddingMeals.class);
+        startActivity(addingMeals);
+    }
+
+    public void saveUserToDatabaseAndOpenAddingMeals(View v){
+        saveUserToDatabase();
+        openAddingMeals(v);
+    }
 }
