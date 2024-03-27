@@ -11,14 +11,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.TextView;
-import java.util.Map;
-import java.util.HashMap;
+
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -30,7 +26,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Objects;
 
-public class MainActivity extends AppCompatActivity {
+public class PersonalInformation extends AppCompatActivity {
     private User user;
     final String documentId = "wgNYXUW3ot9njNv5zqfJ";//Dokument na sztywno!!!
 
@@ -38,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setUpUI();
-        readDataFromDatabase();
+        //readDataFromDatabase();
     }
 
     private void setViewData() {
@@ -73,11 +69,6 @@ public class MainActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         Objects.requireNonNull(getSupportActionBar()).hide();
         setContentView(R.layout.activity_main);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
         Button date = (Button) findViewById(R.id.pickDate);
         final Calendar c = Calendar.getInstance();
         int mYear = c.get(Calendar.YEAR);
@@ -86,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
         date.setText(mDay + "/" + (mMonth + 1) + "/" + mYear);
         date.setOnClickListener(v -> {
 
-            DatePickerDialog datePickerDialog = new DatePickerDialog(MainActivity.this,
+            DatePickerDialog datePickerDialog = new DatePickerDialog(PersonalInformation.this,
                     (view, year, monthOfYear, dayOfMonth) -> {
                         date.setText(dayOfMonth + "/"
                                 + (monthOfYear + 1) + "/" + year);
@@ -131,12 +122,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void saveUserToDatabase(){
-        Map<String, Object> user = buildUserData();
-        saveUserToDatabase(user);
-    }
-
-    private static void saveUserToDatabase(Map<String, Object> user) {
+    private void saveUserToDatabase(User user) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("users")
                 .add(user)
@@ -155,32 +141,24 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @NonNull
-    private Map<String, Object> buildUserData() {
-        Map<String, Object> user = new HashMap<>();
-        String name = getNameFromView();
-        String sex = getSexFromView();
-        String birthDate = getBirthDateFromView();
-        String height = getHeightFromView();
-        String weight = getWeightFromView();
-        String targetWeight = getTargetWeightFromView();
-
-        user.put("name", name);
-        user.put("sex", sex);
-        user.put("birthDate", birthDate);
-        user.put("height", height);
-        user.put("weight", weight);
-        user.put("targetWeight", targetWeight);
-        return user;
+    private User buildUserData() {
+        return new User(getNameFromView(),getSexFromView(),getBirthDateFromView(),getHeightFromView(),
+                getWeightFromView(),getTargetWeightFromView());
     }
 
     public void openAddingMeals(View v){
-        Intent addingMeals = new Intent(MainActivity.this, AddingMeals.class);
+        Intent addingMeals = new Intent(PersonalInformation.this, AddingMeals.class);
         addingMeals.putExtra("userKey", user);
         startActivity(addingMeals);
     }
 
+    public void openMore(){
+        Intent intent = new Intent(this, MoreUI.class);
+        startActivity(intent);
+    }
+
     public void saveUserToDatabaseAndOpenAddingMeals(View v){
-//        saveUserToDatabase(); <- wyłączone, bo w tej chwili tylko odczytuję dane z bazy
-        openAddingMeals(v);
+       // saveUserToDatabase(buildUserData()); //<- wyłączone, bo w tej chwili tylko odczytuję dane z bazy
+        openMore();
     }
 }
