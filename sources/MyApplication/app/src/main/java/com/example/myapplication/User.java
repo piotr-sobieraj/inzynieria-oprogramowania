@@ -5,19 +5,20 @@ import android.annotation.SuppressLint;
 import androidx.annotation.NonNull;
 
 import java.io.Serializable;
+import java.util.List;
 
 import com.example.myapplication.MealDay;
 
 public class User implements Serializable {
-    public String name;
-    public String sex;
-    public String birthDate;
-    public String height;
-    public String weight;
-    public String targetWeight;
-//    public List<MealDay> mealCalendar;
+    private String name;
+    private String sex;
+    private String birthDate;
+    private String height;
+    private String weight;
+    private String targetWeight;
+    private List<MealDay> mealCalendar;
 
-    public User() {
+    private User() {
         // Konstruktor domyślny wymagany dla operacji Firebase
     }
 
@@ -27,8 +28,8 @@ public class User implements Serializable {
                 String birthDate,
                 String height,
                 String weight,
-                String targetWeight
-//                List<MealDay> mealCalendar
+                String targetWeight,
+                List<MealDay> mealCalendar
     ) {
         this.name = name;
         this.sex = sex;
@@ -36,7 +37,7 @@ public class User implements Serializable {
         this.height = height;
         this.weight = weight;
         this.targetWeight = targetWeight;
-//        this.mealCalendar = mealCalendar;
+        this.mealCalendar = mealCalendar;
     }
 
     public String getName() { return name; }
