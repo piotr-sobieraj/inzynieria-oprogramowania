@@ -20,20 +20,55 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Objects;
 
+import com.example.myapplication.User;
 
 public class MainActivity extends AppCompatActivity {
-
+    User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setUpUI();
+        readDataFromDatabase();
+//        Log.d("Liczba", user.name);
+    }
+
+
+    private void readDataFromDatabase(){
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        String userId = "wHqKIUV2M1HzAJO9fOFK"; // ID użytkownika na sztywno!!!
+
+        db.collection("users").document(userId)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot document = task.getResult();
+                            if (document.exists()) {
+                                user = document.toObject(User.class);
+                                Log.d(TAG, "DocumentSnapshot data: " + document.getData());
+                            } else {
+                                Log.d(TAG, "No such document");
+                            }
+                        } else {
+                            Log.d(TAG, "get failed with ", task.getException());
+                        }
+                    }
+                });
+    }
+
+    private void setUpUI() {
         EdgeToEdge.enable(this);
         Objects.requireNonNull(getSupportActionBar()).hide();
         setContentView(R.layout.activity_main);
@@ -97,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void saveUserToDatabase(){
         Map<String, Object> user = getUser();
-        Log.d("Podsumowanie 2", user.toString());
+        Log.d("Summary", user.toString());
 
         saveUserToDatabase(user);
     }
@@ -123,19 +158,19 @@ public class MainActivity extends AppCompatActivity {
     @NonNull
     private Map<String, Object> getUser() {
         Map<String, Object> user = new HashMap<>();
-        String imie = getName();
-        String plec = getSex();
-        String dataUrodzenia = getBirthDate();
-        String wzrost = getHeight();
-        String waga = getWeight();
-        String docelowaWaga = getTargetWeight();
+        String name = getName();
+        String sex = getSex();
+        String birthDate = getBirthDate();
+        String height = getHeight();
+        String weight = getWeight();
+        String targetWeight = getTargetWeight();
 
-        user.put("Imie", imie);
-        user.put("Plec", plec);
-        user.put("dataUrodzenia", dataUrodzenia);
-        user.put("wzrost", wzrost);
-        user.put("waga", waga);
-        user.put("docelowaWaga", docelowaWaga);
+        user.put("name", name);
+        user.put("sex", sex);
+        user.put("birthDate", birthDate);
+        user.put("height", height);
+        user.put("weight", weight);
+        user.put("targetWeight", targetWeight);
         return user;
     }
 

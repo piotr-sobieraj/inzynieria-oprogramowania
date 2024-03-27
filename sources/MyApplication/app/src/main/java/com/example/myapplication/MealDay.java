@@ -1,6 +1,7 @@
 package com.example.myapplication;
 
 import java.util.List;
+import com.example.myapplication.Meal;
 
 public class MealDay {
     public String date;

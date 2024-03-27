@@ -1,6 +1,13 @@
 package com.example.myapplication;
 
+import android.annotation.SuppressLint;
+
+import androidx.annotation.NonNull;
+
 import java.util.List;
+import java.util.Locale;
+
+import com.example.myapplication.MealDay;
 
 public class User {
     public String name;
@@ -30,5 +37,12 @@ public class User {
         this.weight = weight;
         this.targetWeight = targetWeight;
         this.mealCalendar = mealCalendar;
+    }
+
+
+    @NonNull
+    public String toString(){
+        @SuppressLint("DefaultLocale") String user = String.format("%s %d", name, height);
+        return user;
     }
 }
