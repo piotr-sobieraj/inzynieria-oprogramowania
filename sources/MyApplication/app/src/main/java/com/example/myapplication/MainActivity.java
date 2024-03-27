@@ -31,7 +31,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
-    User user;
+    private User user;
+    final String documentId = "wgNYXUW3ot9njNv5zqfJ";//Dokument na sztywno!!!
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,10 +41,12 @@ public class MainActivity extends AppCompatActivity {
         readDataFromDatabase();
     }
 
+    private void setViewData() {
+
+    }
 
     private void readDataFromDatabase(){
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        String documentId = "wgNYXUW3ot9njNv5zqfJ"; // ID użytkownika na sztywno!!!
         db.collection("users").document(documentId)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -54,10 +57,8 @@ public class MainActivity extends AppCompatActivity {
                             DocumentSnapshot document = task.getResult();
                             if (document.exists()) {
                                 user = document.toObject(User.class);
-                                if(user != null)
-                                    Log.d(TAG, "DocumentSnapshot data: " + document.getData());
-
-
+                                Log.d(TAG, "DocumentSnapshot data: " + document.getData());
+                                setViewData();//Ustawia wartości kontrolek na dane odczytane z bazy
                             } else {
                                 Log.d(TAG, "No such document");
                             }
@@ -131,9 +132,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void saveUserToDatabase(){
-        Map<String, Object> user = getUser();
-        Log.d("Summary", user.toString());
-
+        Map<String, Object> user = buildUserData();
         saveUserToDatabase(user);
     }
 
@@ -156,7 +155,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @NonNull
-    private Map<String, Object> getUser() {
+    private Map<String, Object> buildUserData() {
         Map<String, Object> user = new HashMap<>();
         String name = getNameFromView();
         String sex = getSexFromView();
