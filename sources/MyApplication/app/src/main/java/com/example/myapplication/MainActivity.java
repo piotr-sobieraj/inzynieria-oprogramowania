@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setViewData() {
-
+        /* @TODO wypełnić kontrolki danymi z bazy*/
     }
 
     private void readDataFromDatabase(){
@@ -174,12 +174,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void openAddingMeals(View v){
-        Intent addingMeals = new Intent(this, AddingMeals.class);
+        Intent addingMeals = new Intent(MainActivity.this, AddingMeals.class);
+        addingMeals.putExtra("userKey", user);
         startActivity(addingMeals);
     }
 
     public void saveUserToDatabaseAndOpenAddingMeals(View v){
-        saveUserToDatabase();
+//        saveUserToDatabase(); <- wyłączone, bo w tej chwili tylko odczytuję dane z bazy
         openAddingMeals(v);
     }
 }

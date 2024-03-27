@@ -4,12 +4,11 @@ import android.annotation.SuppressLint;
 
 import androidx.annotation.NonNull;
 
-import java.util.List;
-import java.util.Locale;
+import java.io.Serializable;
 
 import com.example.myapplication.MealDay;
 
-public class User {
+public class User implements Serializable {
     public String name;
     public String sex;
     public String birthDate;
