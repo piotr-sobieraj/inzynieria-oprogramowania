@@ -33,7 +33,7 @@ import java.util.Objects;
 import com.example.myapplication.User;
 
 public class MainActivity extends AppCompatActivity {
-    User user;
+    User user = new User();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,18 +46,19 @@ public class MainActivity extends AppCompatActivity {
 
     private void readDataFromDatabase(){
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        String userId = "wHqKIUV2M1HzAJO9fOFK"; // ID użytkownika na sztywno!!!
-
-        db.collection("users").document(userId)
+        String documentId = "wgNYXUW3ot9njNv5zqfJ"; // ID użytkownika na sztywno!!!
+        db.collection("users").document(documentId)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+
                         if (task.isSuccessful()) {
                             DocumentSnapshot document = task.getResult();
                             if (document.exists()) {
-                                user = document.toObject(User.class);
+//                                user = document.toObject(User.class);
                                 Log.d(TAG, "DocumentSnapshot data: " + document.getData());
+
                             } else {
                                 Log.d(TAG, "No such document");
                             }
