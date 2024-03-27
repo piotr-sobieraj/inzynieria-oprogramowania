@@ -12,11 +12,11 @@ import com.example.myapplication.MealDay;
 public class User {
     public String name;
     public String sex;
-    public String dateOfBirth;
-    public int height;
-    public int weight;
-    public int targetWeight;
-    public List<MealDay> mealCalendar;
+    public String birthDate;
+    public String height;
+    public String weight;
+    public String targetWeight;
+//    public List<MealDay> mealCalendar;
 
     public User() {
         // Konstruktor domyślny wymagany dla operacji Firebase
@@ -25,24 +25,33 @@ public class User {
     // Konstruktor z parametrami
     public User(String name,
                 String sex,
-                String dateOfBirth,
-                int height,
-                int weight,
-                int targetWeight,
-                List<MealDay> mealCalendar) {
+                String birthDate,
+                String height,
+                String weight,
+                String targetWeight
+//                List<MealDay> mealCalendar
+    ) {
         this.name = name;
         this.sex = sex;
-        this.dateOfBirth = dateOfBirth;
+        this.birthDate = birthDate;
         this.height = height;
         this.weight = weight;
         this.targetWeight = targetWeight;
-        this.mealCalendar = mealCalendar;
+//        this.mealCalendar = mealCalendar;
     }
 
+    public String getName() { return name; }
+    public String getSex() { return sex; }
+    public String getBirthDate() { return birthDate; }
+    public String getHeight() { return height; }
+    public String getWeight() { return weight; }
+    public String getTargetWeight() { return targetWeight; }
 
-    @NonNull
-    public String toString(){
-        @SuppressLint("DefaultLocale") String user = String.format("%s %d", name, height);
-        return user;
-    }
+
+    public void setName(String name) { this.name = name; }
+    public void setSex(String sex) { this.sex = sex; }
+    public void setBirthDate(String date) { this.birthDate = date; }
+    public void setHeight(String height) { this.height = height; }
+    public void setWeight(String weight) { this.weight = weight; }
+    public void setTargetWeight(String targetWeight) { this.targetWeight = targetWeight; }
 }

@@ -30,17 +30,14 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Objects;
 
-import com.example.myapplication.User;
-
 public class MainActivity extends AppCompatActivity {
-    User user = new User();
+    User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setUpUI();
         readDataFromDatabase();
-//        Log.d("Liczba", user.name);
     }
 
 
@@ -56,8 +53,10 @@ public class MainActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             DocumentSnapshot document = task.getResult();
                             if (document.exists()) {
-//                                user = document.toObject(User.class);
-                                Log.d(TAG, "DocumentSnapshot data: " + document.getData());
+                                user = document.toObject(User.class);
+                                if(user != null)
+                                    Log.d(TAG, "DocumentSnapshot data: " + document.getData());
+
 
                             } else {
                                 Log.d(TAG, "No such document");
@@ -97,12 +96,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @NonNull
-    private String getName(){
+    private String getNameFromView(){
         return ((TextView) findViewById(R.id.editTextName)).getText().toString();
     }
 
     @NonNull
-    private String getSex(){
+    private String getSexFromView(){
         RadioButton radioButtonFemale = (RadioButton) findViewById(R.id.radioButtonFemale);
         if(radioButtonFemale.isChecked())
             return "K";
@@ -111,22 +110,22 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @NonNull
-    private String getBirthDate() {
+    private String getBirthDateFromView() {
         return ((Button)findViewById(R.id.pickDate)).getText().toString();
     }
 
     @NonNull
-    private String getTargetWeight() {
+    private String getTargetWeightFromView() {
         return ((TextView)findViewById(R.id.editTextDocelowaWaga)).getText().toString();
     }
 
     @NonNull
-    private String getWeight() {
+    private String getWeightFromView() {
         return ((TextView)findViewById(R.id.editTextWaga)).getText().toString();
     }
 
     @NonNull
-    private String getHeight() {
+    private String getHeightFromView() {
         return ((TextView)findViewById(R.id.editTextWzrost)).getText().toString();
     }
 
@@ -159,12 +158,12 @@ public class MainActivity extends AppCompatActivity {
     @NonNull
     private Map<String, Object> getUser() {
         Map<String, Object> user = new HashMap<>();
-        String name = getName();
-        String sex = getSex();
-        String birthDate = getBirthDate();
-        String height = getHeight();
-        String weight = getWeight();
-        String targetWeight = getTargetWeight();
+        String name = getNameFromView();
+        String sex = getSexFromView();
+        String birthDate = getBirthDateFromView();
+        String height = getHeightFromView();
+        String weight = getWeightFromView();
+        String targetWeight = getTargetWeightFromView();
 
         user.put("name", name);
         user.put("sex", sex);
