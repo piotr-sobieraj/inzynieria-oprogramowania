@@ -3,6 +3,7 @@ package com.example.myapplication;
 import static android.content.ContentValues.TAG;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,19 +20,56 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
-
+    private User user;
+    final String documentId = "wgNYXUW3ot9njNv5zqfJ";//Dokument na sztywno!!!
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setUpUI();
+        readDataFromDatabase();
+    }
+
+    private void setViewData() {
+        /* @TODO wypełnić kontrolki danymi z bazy*/
+    }
+
+    private void readDataFromDatabase(){
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("users").document(documentId)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot document = task.getResult();
+                            if (document.exists()) {
+                                user = document.toObject(User.class);
+                                Log.d(TAG, "DocumentSnapshot data: " + document.getData());
+                                setViewData();//Ustawia wartości kontrolek na dane odczytane z bazy
+                            } else {
+                                Log.d(TAG, "No such document");
+                            }
+                        } else {
+                            Log.d(TAG, "get failed with ", task.getException());
+                        }
+                    }
+                });
+    }
+
+    private void setUpUI() {
         EdgeToEdge.enable(this);
         Objects.requireNonNull(getSupportActionBar()).hide();
         setContentView(R.layout.activity_main);
@@ -59,12 +97,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @NonNull
-    private String getName(){
+    private String getNameFromView(){
         return ((TextView) findViewById(R.id.editTextName)).getText().toString();
     }
 
     @NonNull
-    private String getSex(){
+    private String getSexFromView(){
         RadioButton radioButtonFemale = (RadioButton) findViewById(R.id.radioButtonFemale);
         if(radioButtonFemale.isChecked())
             return "K";
@@ -73,48 +111,32 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @NonNull
-    private String getBirthDate() {
+    private String getBirthDateFromView() {
         return ((Button)findViewById(R.id.pickDate)).getText().toString();
     }
 
     @NonNull
-    private String getTargetWeight() {
+    private String getTargetWeightFromView() {
         return ((TextView)findViewById(R.id.editTextDocelowaWaga)).getText().toString();
     }
 
     @NonNull
-    private String getWeight() {
+    private String getWeightFromView() {
         return ((TextView)findViewById(R.id.editTextWaga)).getText().toString();
     }
 
     @NonNull
-    private String getHeight() {
+    private String getHeightFromView() {
         return ((TextView)findViewById(R.id.editTextWzrost)).getText().toString();
     }
 
 
-    public void makeSummary(View v){
-        Map<String, Object> user = new HashMap<>();
-        String imie = getName();
-        String plec = getSex();
-        String dataUrodzenia = getBirthDate();
-        String wzrost = getHeight();
-        String waga = getWeight();
-        String docelowaWaga = getTargetWeight();
+    public void saveUserToDatabase(){
+        Map<String, Object> user = buildUserData();
+        saveUserToDatabase(user);
+    }
 
-        Log.d ("Podsumowanie", "{imie: \"" + imie +
-                "\",\nplec: \"" + plec +
-                "\",\ndataUrodzenia: \"" + dataUrodzenia +
-                "\",\nwzrost: \"" + wzrost +
-                "\",\nwaga: \"" + waga +
-                "\",\ndocelowaWaga: \"" + docelowaWaga + "\"}");
-        user.put("Imie", imie);
-        user.put("Plec", plec);
-        user.put("dataUrodzenia", dataUrodzenia);
-        user.put("wzrost", wzrost);
-        user.put("waga", waga);
-        user.put("docelowaWaga", docelowaWaga);
-        Log.d("Podsumowanie 2", user.toString());
+    private static void saveUserToDatabase(Map<String, Object> user) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("users")
                 .add(user)
@@ -132,5 +154,33 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
+    @NonNull
+    private Map<String, Object> buildUserData() {
+        Map<String, Object> user = new HashMap<>();
+        String name = getNameFromView();
+        String sex = getSexFromView();
+        String birthDate = getBirthDateFromView();
+        String height = getHeightFromView();
+        String weight = getWeightFromView();
+        String targetWeight = getTargetWeightFromView();
 
+        user.put("name", name);
+        user.put("sex", sex);
+        user.put("birthDate", birthDate);
+        user.put("height", height);
+        user.put("weight", weight);
+        user.put("targetWeight", targetWeight);
+        return user;
+    }
+
+    public void openAddingMeals(View v){
+        Intent addingMeals = new Intent(MainActivity.this, AddingMeals.class);
+        addingMeals.putExtra("userKey", user);
+        startActivity(addingMeals);
+    }
+
+    public void saveUserToDatabaseAndOpenAddingMeals(View v){
+//        saveUserToDatabase(); <- wyłączone, bo w tej chwili tylko odczytuję dane z bazy
+        openAddingMeals(v);
+    }
 }
