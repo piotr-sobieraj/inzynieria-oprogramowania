@@ -30,8 +30,6 @@ import java.util.Objects;
 public class MoreUI extends AppCompatActivity {
 
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +39,7 @@ public class MoreUI extends AppCompatActivity {
         changeUI();
     }
 
-    public void changeUI(){
+    public void changeUI() {
         RadioGroup radioGroup = (RadioGroup) findViewById(R.id.mainMenu);
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -53,8 +51,7 @@ public class MoreUI extends AppCompatActivity {
                 } else if (checkedId == R.id.Recipes) {
                     intent = new Intent(MoreUI.this, RecipesUI.class);
                     startActivity(intent);
-                }
-                else if (checkedId == R.id.More) {
+                } else if (checkedId == R.id.More) {
                     intent = new Intent(MoreUI.this, MoreUI.class);
                     startActivity(intent);
                 }
@@ -63,10 +60,8 @@ public class MoreUI extends AppCompatActivity {
     }
 
 
-    public void popout(View v){
+    public void popout(View v) {
         Intent intent = new Intent(this, popup.class);
         startActivity(intent);
     }
-
-
 }
