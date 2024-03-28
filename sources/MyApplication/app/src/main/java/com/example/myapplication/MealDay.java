@@ -1,20 +1,33 @@
 package com.example.myapplication;
 
 import java.util.List;
-import com.example.myapplication.Meal;
 
 public class MealDay {
-    public String date;
-    public List<Meal> meals;
+    private String date;
+    private List<Meal> meals;
 
     public MealDay() {
         // Konstruktor domyślny
     }
 
     public MealDay(String date, List<Meal> meals) {
-        this.date = date;
-        this.meals = meals;
+        this.setDate(date);
+        this.setMeals(meals);
     }
 
-    // Gettery i settery
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public List<Meal> getMeals() {
+        return meals;
+    }
+
+    public void setMeals(List<Meal> meals) {
+        this.meals = meals;
+    }
 }

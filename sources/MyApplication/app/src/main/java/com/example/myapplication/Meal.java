@@ -1,19 +1,41 @@
 package com.example.myapplication;
 
 public class Meal {
-    public int mealNumberInDay;
-    public String name;
-    public int caloricValue;
+    private int mealNumberInDay;
+    private String name;
+    private int caloricValue;
 
     public Meal() {
         // Konstruktor domyślny
     }
 
     public Meal(int mealNumberInDay, String name, int caloricValue) {
-        this.mealNumberInDay = mealNumberInDay;
-        this.name = name;
-        this.caloricValue = caloricValue;
+        this.setMealNumberInDay(mealNumberInDay);
+        this.setName(name);
+        this.setCaloricValue(caloricValue);
     }
 
-    // Gettery i settery
+    public int getMealNumberInDay() {
+        return mealNumberInDay;
+    }
+
+    public void setMealNumberInDay(int mealNumberInDay) {
+        this.mealNumberInDay = mealNumberInDay;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getCaloricValue() {
+        return caloricValue;
+    }
+
+    public void setCaloricValue(int caloricValue) {
+        this.caloricValue = caloricValue;
+    }
 }
