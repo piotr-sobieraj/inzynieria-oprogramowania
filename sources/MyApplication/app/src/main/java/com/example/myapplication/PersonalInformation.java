@@ -28,8 +28,6 @@ import java.util.Date;
 import java.util.Objects;
 
 public class PersonalInformation extends AppCompatActivity {
-    private User user;
-    final String documentId = "wgNYXUW3ot9njNv5zqfJ";//Dokument na sztywno!!!
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,12 +114,6 @@ public class PersonalInformation extends AppCompatActivity {
     private User buildUserData() {
         return new User(getNameFromView(),getSexFromView(),getBirthDateFromView(),getHeightFromView(),
                 getWeightFromView(),getTargetWeightFromView(), null);
-    }
-
-    public void openAddingMeals(View v){
-        Intent addingMeals = new Intent(PersonalInformation.this, AddingMeals.class);
-        addingMeals.putExtra("userKey", user);
-        startActivity(addingMeals);
     }
 
     public void openMore(){
