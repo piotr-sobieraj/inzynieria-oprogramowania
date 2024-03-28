@@ -35,35 +35,6 @@ public class PersonalInformation extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setUpUI();
-        //readDataFromDatabase();
-    }
-
-    private void setViewData() {
-        /* @TODO wypełnić kontrolki danymi z bazy*/
-    }
-
-    private void readDataFromDatabase(){
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("users").document(documentId)
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-
-                        if (task.isSuccessful()) {
-                            DocumentSnapshot document = task.getResult();
-                            if (document.exists()) {
-                                user = document.toObject(User.class);
-                                Log.d(TAG, "DocumentSnapshot data: " + document.getData());
-                                setViewData();//Ustawia wartości kontrolek na dane odczytane z bazy
-                            } else {
-                                Log.d(TAG, "No such document");
-                            }
-                        } else {
-                            Log.d(TAG, "get failed with ", task.getException());
-                        }
-                    }
-                });
     }
 
     private void setUpUI() {
