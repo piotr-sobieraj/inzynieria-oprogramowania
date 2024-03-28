@@ -55,7 +55,7 @@
         android:fontFamily="@font/poppins"
         android:hint="@string/password"
         android:importantForAutofill="no"
-        android:inputType="text"
+        android:inputType="textPassword"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -87,29 +87,4 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="LabelFor,TextFields" />
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="418dp"
-        android:layout_height="112dp"
-        android:contentDescription="@string/logo_background"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.571"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/rectangle_blue" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginTop="56dp"
-        android:fontFamily="@font/poppins_medium"
-        android:text="@string/logo"
-        android:textAlignment="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="#FFFFFF"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
