@@ -13,10 +13,10 @@
         android:theme="@style/AppTheme"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity2"
+            android:name=".popup"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".LoginUI"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,7 +24,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+        <activity
+            android:name=".PersonalInformation"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".AddingMeals"
+            android:exported="true"/>
+        <activity
+            android:name=".MoreUI"
+            android:exported="true"/>
+        <activity android:name=".RecipesUI"/>
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

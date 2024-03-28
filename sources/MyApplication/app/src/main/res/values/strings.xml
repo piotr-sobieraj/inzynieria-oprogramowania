@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">FitApp</string>
     <string name="avatar_image">avatar image</string>
     <string name="who_are_you">Who are you?</string>
     <string name="female">Female</string>

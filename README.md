@@ -1,15 +1,25 @@
-## Spis treści
-- [14 marca](#14-marca)
-  - [Działająca pierwsza strona aplikacji](#działająca-pierwsza-strona-aplikacji)
-  - [Działająca pierwsza strona aplikacji II](#działająca-pierwsza-strona-aplikacji-ii)
-- [7 marca](#7-marca)
-  - [Prototyp interfejsu użytkownika](#prototyp-interfejsu-użytkownika)
-  - [Baza danych](#baza-danych)
-  - [Miro (backlog, przepływ danych etc.)](#miro-backlog-przepływ-danych-etc)
-  - [Pliki](#pliki)
+# Spis treści
+
+## 22 marca
+- [Podłączenie do bazy Firebase](#podłączenie-do-bazy-firebase)
+- [Finalnie nazwa aplikacji - FitApp](#finalnie-nazwa-aplikacji---fitapp)
+
+## 14 marca
+- [Działająca pierwsza strona aplikacji](#działająca-pierwsza-strona-aplikacji)
+- [Działająca pierwsza strona aplikacji II](#działająca-pierwsza-strona-aplikacji-ii)
+
+## 7 marca
+- [Prototyp interfejsu użytkownika](#prototyp-interfejsu-użytkownika)
+- [Baza danych](#baza-danych)
+- [Miro (backlog, przepływ danych etc.)](#miro-backlog-przepływ-danych-etc-)
+
+
 
 ---
-
+# 22 marca
+## Podłączenie do bazy Firebase
+![Firebase](/pictures/05.firebase.jpg)
+## Finalnie nazwa aplikacji - FitApp
 
 # 14 marca
 ## Działająca pierwsza strona aplikacji
