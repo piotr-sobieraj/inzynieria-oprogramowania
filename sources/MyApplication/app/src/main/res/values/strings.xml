@@ -18,9 +18,17 @@
     <string name="current_body_weight">Current body weight in kg</string>
     <string name="height">Height in cm</string>
     <string name="email">Email</string>
-    <string name="first_last_name">First &amp; Last name</string>
+    <string name="first_last_name"><![CDATA[First & Last name]]></string>
     <string name="password">Password</string>
     <string name="loginBtn">Login</string>
     <string name="logo">FitApp</string>
     <string name="logo_background">logo background</string>
+    <string name="name_login">Name</string>
+    <string name="login">Login</string>
+    <string name="options">Options</string>
+    <string name="delete_account">Delete account</string>
+    <string name="about_us">About us</string>
+    <string name="recipes">Recipes</string>
+    <string name="more">More</string>
+    <string name="menu">Menu</string>
 </resources>
