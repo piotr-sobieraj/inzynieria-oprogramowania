@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.RadioGroup;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,12 +25,7 @@ public class AddingMeals extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_adding_meals);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
-
+        changeUI();
         fillUserData();
     }
 
@@ -65,5 +61,25 @@ public class AddingMeals extends AppCompatActivity {
 
         MealDay newMealDay = new MealDay("27/3/2024", mealsForToday);
         addMealDayToDatabase(newMealDay); // Dodajemy nowy dzień posiłku do bazy
+
+    public void changeUI(){
+        RadioGroup radioGroup = (RadioGroup) findViewById(R.id.mainMenu);
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                Intent intent;
+                if (checkedId == R.id.Menu) {
+                    intent = new Intent(AddingMeals.this, AddingMeals.class);
+                    startActivity(intent);
+                } else if (checkedId == R.id.Recipes) {
+                    intent = new Intent(AddingMeals.this, RecipesUI.class);
+                    startActivity(intent);
+                }
+                else if (checkedId == R.id.More) {
+                    intent = new Intent(AddingMeals.this, MoreUI.class);
+                    startActivity(intent);
+                }
+            }
+        });
     }
 }

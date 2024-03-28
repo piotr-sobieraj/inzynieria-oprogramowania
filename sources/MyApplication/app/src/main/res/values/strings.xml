@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">FitApp</string>
     <string name="avatar_image">avatar image</string>
     <string name="who_are_you">Who are you?</string>
     <string name="female">Female</string>
@@ -16,4 +16,15 @@
     <string name="target_body_weight">Target body weight</string>
     <string name="current_body_weight">Current body weight</string>
     <string name="height">Height</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="first_last_name"><![CDATA[First & Last name]]></string>
+    <string name="name_login">Name</string>
+    <string name="login">Login</string>
+    <string name="options">Options</string>
+    <string name="delete_account">Delete account</string>
+    <string name="about_us">About us</string>
+    <string name="recipes">Recipes</string>
+    <string name="more">More</string>
+    <string name="menu">Menu</string>
 </resources>

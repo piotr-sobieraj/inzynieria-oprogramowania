@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddingMeals">
+    tools:context=".RecipesUI">
 
     <RadioGroup
         android:id="@+id/mainMenu"
@@ -24,7 +24,7 @@
             android:layout_weight="1"
             android:background="#3D3D3D"
             android:button="@null"
-            android:checked="true"
+            android:checked="false"
             android:clickable="true"
             android:enabled="true"
             android:focusable="true"
@@ -41,7 +41,7 @@
             android:layout_weight="1"
             android:background="#3D3D3D"
             android:button="@null"
-            android:checked="false"
+            android:checked="true"
             android:clickable="true"
             android:enabled="true"
             android:focusable="true"
@@ -68,16 +68,4 @@
             android:textColor="@drawable/menu"
             android:textSize="16sp" />
     </RadioGroup>
-
-    <Button
-        android:id="@+id/buttonLogData"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:onClick="addMealToDatabase"
-        android:text="Save meals to db"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
