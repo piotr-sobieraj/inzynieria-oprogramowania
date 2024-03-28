@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
 
     @NonNull
     private String getName(){
-        return ((TextView) findViewById(R.id.editTextName)).getText().toString();
+        return ((TextView) findViewById(R.id.editTextNames)).getText().toString();
     }
 
     @NonNull
