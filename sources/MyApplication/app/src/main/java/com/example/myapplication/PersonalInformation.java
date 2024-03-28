@@ -143,7 +143,7 @@ public class PersonalInformation extends AppCompatActivity {
     @NonNull
     private User buildUserData() {
         return new User(getNameFromView(),getSexFromView(),getBirthDateFromView(),getHeightFromView(),
-                getWeightFromView(),getTargetWeightFromView());
+                getWeightFromView(),getTargetWeightFromView(), null);
     }
 
     public void openAddingMeals(View v){
