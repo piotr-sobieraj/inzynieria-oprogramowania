@@ -8,9 +8,6 @@ import android.widget.RadioGroup;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -44,7 +41,7 @@ public class AddingMeals extends AppCompatActivity {
     private void addMealDayToDatabase(MealDay newMealDay) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-        final String documentId = "wgNYXUW3ot9njNv5zqfJ";;
+        final String documentId = "wgNYXUW3ot9njNv5zqfJ";
 
         db.collection("users").document(documentId)
                 .collection("mealDays").add(newMealDay)
@@ -52,7 +49,7 @@ public class AddingMeals extends AppCompatActivity {
                 .addOnFailureListener(e -> Log.e("AddingMeals", "Error adding MealDay", e));
     }
 
-    public void addMealToDatabase(View v){
+    public void addMealToDatabase(View v) {
         List<Meal> mealsForToday = Arrays.asList(
                 new Meal(1, "Śniadanie", 300),
                 new Meal(2, "Drugie śniadanie", 200),
@@ -61,25 +58,25 @@ public class AddingMeals extends AppCompatActivity {
 
         MealDay newMealDay = new MealDay("27/3/2024", mealsForToday);
         addMealDayToDatabase(newMealDay); // Dodajemy nowy dzień posiłku do bazy
-
-    public void changeUI(){
-        RadioGroup radioGroup = (RadioGroup) findViewById(R.id.mainMenu);
-        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                Intent intent;
-                if (checkedId == R.id.Menu) {
-                    intent = new Intent(AddingMeals.this, AddingMeals.class);
-                    startActivity(intent);
-                } else if (checkedId == R.id.Recipes) {
-                    intent = new Intent(AddingMeals.this, RecipesUI.class);
-                    startActivity(intent);
-                }
-                else if (checkedId == R.id.More) {
-                    intent = new Intent(AddingMeals.this, MoreUI.class);
-                    startActivity(intent);
-                }
-            }
-        });
     }
-}
+
+        public void changeUI () {
+            RadioGroup radioGroup = (RadioGroup) findViewById(R.id.mainMenu);
+            radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(RadioGroup group, int checkedId) {
+                    Intent intent;
+                    if (checkedId == R.id.Menu) {
+                        intent = new Intent(AddingMeals.this, AddingMeals.class);
+                        startActivity(intent);
+                    } else if (checkedId == R.id.Recipes) {
+                        intent = new Intent(AddingMeals.this, RecipesUI.class);
+                        startActivity(intent);
+                    } else if (checkedId == R.id.More) {
+                        intent = new Intent(AddingMeals.this, MoreUI.class);
+                        startActivity(intent);
+                    }
+                }
+            });
+        }
+    }
