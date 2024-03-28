@@ -10,12 +10,15 @@ import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.Arrays;
 import java.util.List;
 
 public class AddingMeals extends AppCompatActivity {
     private User user;
+    final String documentId = "wgNYXUW3ot9njNv5zqfJ"; //<- dokument (user) na sztywno!!!
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,8 +44,6 @@ public class AddingMeals extends AppCompatActivity {
     private void addMealDayToDatabase(MealDay newMealDay) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-        final String documentId = "wgNYXUW3ot9njNv5zqfJ";
-
         db.collection("users").document(documentId)
                 .collection("mealDays").add(newMealDay)
                 .addOnSuccessListener(documentReference -> Log.d("AddingMeals", "MealDay successfully added!"))
@@ -51,12 +52,12 @@ public class AddingMeals extends AppCompatActivity {
 
     public void addMealToDatabase(View v) {
         List<Meal> mealsForToday = Arrays.asList(
-                new Meal(1, "Śniadanie", 300),
-                new Meal(2, "Drugie śniadanie", 200),
-                new Meal(3, "Obiad", 500)
+                new Meal(1, "Śniadanie", 280),
+                new Meal(2, "Lunch", 250),
+                new Meal(3, "Podwieczorek", 500)
         );
 
-        MealDay newMealDay = new MealDay("27/3/2024", mealsForToday);
+        MealDay newMealDay = new MealDay("28/3/2024", mealsForToday);
         addMealDayToDatabase(newMealDay); // Dodajemy nowy dzień posiłku do bazy
     }
 
@@ -79,4 +80,25 @@ public class AddingMeals extends AppCompatActivity {
                 }
             });
         }
+
+
+    private void addOrUpdateMeal() {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        db.collection("users").document(documentId)
+            .collection("mealDays")
+            .get()
+            .addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    QuerySnapshot querySnapshot = task.getResult();
+                    if (querySnapshot != null && !querySnapshot.isEmpty()) {
+                        return;
+                    } else {
+                        return;
+                    }
+                }
+            });
     }
+
+    }
+
