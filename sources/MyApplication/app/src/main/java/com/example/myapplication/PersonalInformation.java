@@ -158,7 +158,63 @@ public class PersonalInformation extends AppCompatActivity {
     }
 
     public void saveUserToDatabaseAndOpenAddingMeals(View v){
-       // saveUserToDatabase(buildUserData()); //<- wyłączone, bo w tej chwili tylko odczytuję dane z bazy
-        openMore();
+        if (validateUser(buildUserData())){
+            saveUserToDatabase(buildUserData()); //<- wyłączone, bo w tej chwili tylko odczytuję dane z bazy
+            openMore();
+        }
+    }
+
+    private boolean validateUser(User user){
+        boolean result = true;
+        final Calendar c = Calendar.getInstance();
+        int mYear = c.get(Calendar.YEAR);
+        int mMonth = c.get(Calendar.MONTH);
+        int mDay = c.get(Calendar.DAY_OF_MONTH);
+        String[] date = user.getBirthDate().split("/");
+        if(user.getBirthDate() == null || Objects.equals(user.getBirthDate(), ""))
+            result = false;
+        else if(Integer.parseInt(date[0]) == mDay && Integer.parseInt(date[1]) == mMonth - 1 && Integer.parseInt(date[2]) >= mYear - 13){
+            ((Button)findViewById(R.id.pickDate)).setError("Too young");
+            result = false;
+        }
+        else if (user.getHeight().matches("[a-zA-Z\\W]*[0-9]*[a-zA-Z\\W]+[0-9]*[a-zA-Z\\W]*")) {
+            ((TextView) findViewById(R.id.editTextWzrost)).setError("Height contains forbidden characters");
+            result = false;
+        }
+        if (user.getSex() == null || Objects.equals(user.getSex(), ""))
+            result = false;
+        if (user.getName() == null || Objects.equals(user.getName(), "")){
+            ((TextView) findViewById(R.id.editTextName)).setError("Missing Name");
+            result = false;
+        }
+        else if (user.getName().matches("\\W*[a-zA-Z0-9]*\\W+[a-zA-Z0-9]*\\W*")) {
+            ((TextView) findViewById(R.id.editTextName)).setError("Name contains forbidden characters");
+            result = false;
+        }
+        if (user.getHeight() == null || Objects.equals(user.getHeight(), "")) {
+            ((TextView) findViewById(R.id.editTextWzrost)).setError("Missing Height");
+            result = false;
+        }
+        else if (user.getHeight().matches("[a-zA-Z\\W]*[0-9]*[a-zA-Z\\W]+[0-9]*[a-zA-Z\\W]*")) {
+            ((TextView) findViewById(R.id.editTextWzrost)).setError("Height contains forbidden characters");
+            result = false;
+        }
+        if (user.getWeight() == null || Objects.equals(user.getWeight(), "")) {
+            ((TextView) findViewById(R.id.editTextWaga)).setError("Missing Weight");
+            result = false;
+        }
+        else if (user.getWeight().matches("[a-zA-Z\\W]*[0-9]*[a-zA-Z\\W]+[0-9]*[a-zA-Z\\W]*")) {
+            ((TextView) findViewById(R.id.editTextWaga)).setError("Weight contains forbidden characters");
+            result = false;
+        }
+        if (user.getTargetWeight() == null || Objects.equals(user.getTargetWeight(), "")) {
+            ((TextView) findViewById(R.id.editTextDocelowaWaga)).setError("Missing Target Weight");
+            result = false;
+        }
+        else if (user.getTargetWeight().matches("[a-zA-Z\\W]*[0-9]*[a-zA-Z\\W]+[0-9]*[a-zA-Z\\W]*")) {
+            ((TextView) findViewById(R.id.editTextDocelowaWaga)).setError("Target Weight contains forbidden characters");
+            result = false;
+        }
+        return result;
     }
 }
