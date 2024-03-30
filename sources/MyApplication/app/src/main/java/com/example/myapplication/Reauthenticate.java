@@ -7,13 +7,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -25,7 +23,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 import java.util.Objects;
 
-public class popup extends AppCompatActivity {
+public class Reauthenticate extends AppCompatActivity {
 
     public String getEmail() {
         return email;
@@ -51,7 +49,7 @@ public class popup extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         Objects.requireNonNull(getSupportActionBar()).hide();
-        setContentView(R.layout.popup);
+        setContentView(R.layout.reauthenticate);
     }
 
     public void getCred(){
@@ -66,29 +64,24 @@ public class popup extends AppCompatActivity {
             AuthCredential credential = EmailAuthProvider
                     .getCredential(getEmail(), getPassword());
             currentUser.reauthenticate(credential)
-                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            Log.d(TAG, "User re-authenticated.");
-                            currentUser.delete()
-                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
-                                            if (task.isSuccessful()) {
-                                                Log.d(TAG, "User account deleted.");
-                                                Intent intent = new Intent(popup.this, LoginUI.class);
-                                                startActivity(intent);
-                                            }
+                    .addOnCompleteListener(task -> {
+                        Log.d(TAG, "User re-authenticated.");
+                        currentUser.delete()
+                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if (task.isSuccessful()) {
+                                            Log.d(TAG, "User account deleted.");
+                                            Intent intent = new Intent(Reauthenticate.this, SignUp.class);
+                                            startActivity(intent);
                                         }
-                                    })
-                                    .addOnFailureListener(new OnFailureListener() {
-                                        @Override
-                                        public void onFailure(@NonNull Exception e) {
-                                            Log.w(TAG, "Error User account deleted", e);
+                                        else {
+                                            Toast.makeText(Reauthenticate.this, "Authentication failed.",
+                                                    Toast.LENGTH_SHORT).show();
                                         }
-                                    });
+                                    }
+                                });
 
-                        }
                     });
 
         }

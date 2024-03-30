@@ -16,16 +16,13 @@ import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.Arrays;
-import java.util.Date;
 import java.util.Objects;
 
 public class PersonalInformation extends AppCompatActivity {
@@ -40,20 +37,20 @@ public class PersonalInformation extends AppCompatActivity {
         EdgeToEdge.enable(this);
         Objects.requireNonNull(getSupportActionBar()).hide();
         setContentView(R.layout.activity_main);
-        Button date = (Button) findViewById(R.id.pickDate);
+        Button date = findViewById(R.id.pickDate);
         final Calendar c = Calendar.getInstance();
         int mYear = c.get(Calendar.YEAR);
         int mMonth = c.get(Calendar.MONTH);
         int mDay = c.get(Calendar.DAY_OF_MONTH);
-        date.setText(mDay + "/" + (mMonth + 1) + "/" + mYear);
+        String date_string = mDay + "/" + (mMonth + 1) + "/" + mYear;
+        date.setText(date_string);
         date.setOnClickListener(v -> {
 
             DatePickerDialog datePickerDialog = new DatePickerDialog(PersonalInformation.this,
                     (view, year, monthOfYear, dayOfMonth) -> {
-                        date.setText(dayOfMonth + "/"
-                                + (monthOfYear + 1) + "/" + year);
-
-                    }, mYear, mMonth, mDay);
+                        date.setText(date_string);
+                    },
+                    mYear, mMonth, mDay);
             datePickerDialog.show();
         });
     }
@@ -65,7 +62,7 @@ public class PersonalInformation extends AppCompatActivity {
 
     @NonNull
     private String getSexFromView(){
-        RadioButton radioButtonFemale = (RadioButton) findViewById(R.id.radioButtonFemale);
+        RadioButton radioButtonFemale = findViewById(R.id.radioButtonFemale);
         if(radioButtonFemale.isChecked())
             return "K";
         else
@@ -113,7 +110,8 @@ public class PersonalInformation extends AppCompatActivity {
 
     @NonNull
     private User buildUserData() {
-        return new User(getNameFromView(),getSexFromView(),getBirthDateFromView(),getHeightFromView(),
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        return new User(Objects.requireNonNull(firebaseUser).getUid(),getNameFromView(),getSexFromView(),getBirthDateFromView(),getHeightFromView(),
                 getWeightFromView(),getTargetWeightFromView(), null);
     }
 
@@ -123,11 +121,10 @@ public class PersonalInformation extends AppCompatActivity {
     }
 
     public void saveUserToDatabaseAndOpenAddingMeals(View v){
-//        if (validateUser(buildUserData())){
-//            saveUserToDatabase(buildUserData());
-//            openMore();
-//        }
-        openMore();
+        if (validateUser(buildUserData())){
+            saveUserToDatabase(buildUserData());
+            openMore();
+        }
     }
 
     private boolean validateUser(User user){

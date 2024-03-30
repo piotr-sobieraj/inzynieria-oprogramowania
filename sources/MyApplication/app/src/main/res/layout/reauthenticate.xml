@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".popup">
+    tools:context=".Reauthenticate">
 
     <EditText
         android:id="@+id/emailCred"
@@ -14,10 +14,12 @@
         android:layout_marginStart="100dp"
         android:layout_marginTop="124dp"
         android:ems="10"
-        android:hint="Email"
+        android:importantForAutofill="no"
         android:inputType="text"
+        android:hint="@string/email"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="TextFields" />
 
     <EditText
         android:id="@+id/passwordCred"
@@ -26,10 +28,11 @@
         android:layout_marginStart="100dp"
         android:layout_marginTop="40dp"
         android:ems="10"
-        android:hint="Password"
+        android:hint="@string/password"
         android:inputType="textPassword"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/emailCred" />
+        app:layout_constraintTop_toBottomOf="@+id/emailCred"
+        android:importantForAutofill="no" />
 
     <Button
         android:id="@+id/button2"
@@ -38,7 +41,7 @@
         android:layout_marginStart="160dp"
         android:layout_marginTop="60dp"
         android:onClick="deleteAcc"
-        android:text="OK"
+        android:text="@string/ok"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/passwordCred" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -31,4 +31,9 @@
     <string name="recipes">Recipes</string>
     <string name="more">More</string>
     <string name="menu">Menu</string>
+    <string name="i_already_have_an_account">I already have an account</string>
+    <string name="sign_up_with_email">Sign up with email</string>
+    <string name="logout">Logout</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="ok">OK</string>
 </resources>

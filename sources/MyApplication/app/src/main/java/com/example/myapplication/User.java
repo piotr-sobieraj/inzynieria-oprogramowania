@@ -10,6 +10,8 @@ import java.util.List;
 import com.example.myapplication.MealDay;
 
 public class User implements Serializable {
+
+    private String userUID;
     private String name;
     private String sex;
     private String birthDate;
@@ -23,7 +25,8 @@ public class User implements Serializable {
     }
 
     // Konstruktor z parametrami
-    public User(String name,
+    public User(String userUID,
+                String name,
                 String sex,
                 String birthDate,
                 String height,
@@ -31,6 +34,7 @@ public class User implements Serializable {
                 String targetWeight,
                 List<MealDay> mealCalendar
     ) {
+        this.userUID = userUID;
         this.name = name;
         this.sex = sex;
         this.birthDate = birthDate;
@@ -54,4 +58,8 @@ public class User implements Serializable {
     public void setHeight(String height) { this.height = height; }
     public void setWeight(String weight) { this.weight = weight; }
     public void setTargetWeight(String targetWeight) { this.targetWeight = targetWeight; }
+
+    public String getUserUID() {
+        return userUID;
+    }
 }

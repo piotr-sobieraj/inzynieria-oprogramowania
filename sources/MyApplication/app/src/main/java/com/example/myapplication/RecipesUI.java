@@ -20,7 +20,7 @@ public class RecipesUI extends AppCompatActivity {
         changeUI();
     }
     public void changeUI(){
-        RadioGroup radioGroup = (RadioGroup) findViewById(R.id.mainMenu);
+        RadioGroup radioGroup = findViewById(R.id.mainMenu);
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {

@@ -1,29 +1,14 @@
 package com.example.myapplication;
 
-import static android.content.ContentValues.TAG;
-
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.PopupWindow;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import androidx.annotation.NonNull;
-
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthCredential;
-import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 import java.util.Objects;
 
@@ -40,7 +25,7 @@ public class MoreUI extends AppCompatActivity {
     }
 
     public void changeUI() {
-        RadioGroup radioGroup = (RadioGroup) findViewById(R.id.mainMenu);
+        RadioGroup radioGroup = findViewById(R.id.mainMenu);
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -59,9 +44,15 @@ public class MoreUI extends AppCompatActivity {
         });
     }
 
+    public void logout(View v){
+        FirebaseAuth.getInstance().signOut();
+        Intent intent = new Intent(MoreUI.this, Start.class);
+        startActivity(intent);
+    }
 
-    public void popout(View v) {
-        Intent intent = new Intent(this, popup.class);
+
+    public void reAuth(View v) {
+        Intent intent = new Intent(this, Reauthenticate.class);
         startActivity(intent);
     }
 }
