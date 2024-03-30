@@ -53,7 +53,8 @@ public class SignUp extends AppCompatActivity {
     }
 
     public void register(View v){
-        if(getCred()){
+        getCred();
+        if(signUp()){
             createAccount(email, password);
         }
     }
@@ -97,17 +98,19 @@ public class SignUp extends AppCompatActivity {
                     }
                 });
     }
+    public void getCred(){
+        email = ((TextView)findViewById(R.id.email)).getText().toString();
+        password = ((TextView)findViewById(R.id.password)).getText().toString();
+    }
 
-    public boolean getCred(){
+    public boolean signUp(){
         boolean result = true;
         if(email.isEmpty()){
             ((TextView)findViewById(R.id.email)).setError("Missing Email");
-            email = ((TextView)findViewById(R.id.email)).getText().toString();
             result = false;
         }
         if (password.isEmpty()){
             ((TextView)findViewById(R.id.password)).setError("Missing Password");
-            password = ((TextView)findViewById(R.id.password)).getText().toString();
             result = false;
         }
         return result;

@@ -36,25 +36,28 @@ public class SignIn extends AppCompatActivity {
         }
         setContentView(R.layout.signin_ui);
     }
-
-    public boolean getCred(){
+    public void getCred(){
+        email = ((TextView)findViewById(R.id.login_email)).getText().toString();
+        password = ((TextView)findViewById(R.id.login_password)).getText().toString();
+    }
+    public boolean signIn(){
         boolean result = true;
         if(email.isEmpty()){
             ((TextView)findViewById(R.id.login_email)).setError("Missing Email");
-            email = ((TextView)findViewById(R.id.login_email)).getText().toString();
             result = false;
         }
         if (password.isEmpty()){
             ((TextView)findViewById(R.id.login_password)).setError("Missing Password");
-            password = ((TextView)findViewById(R.id.login_password)).getText().toString();
             result = false;
         }
         return result;
     }
 
 
+
     public void signIn(View v){
-        if (getCred()){
+        getCred();
+        if (signIn()){
             mAuth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override
