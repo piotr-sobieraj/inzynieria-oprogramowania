@@ -16,6 +16,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.EmailAuthProvider;
@@ -55,7 +56,7 @@ public class popup extends AppCompatActivity {
 
     public void getCred(){
         setEmail(((TextView)findViewById(R.id.emailCred)).getText().toString());
-        setPassword(((TextView)findViewById(R.id.emailCred)).getText().toString());
+        setPassword(((TextView)findViewById(R.id.passwordCred)).getText().toString());
     }
 
     public void deleteAcc(View v){
@@ -69,24 +70,27 @@ public class popup extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             Log.d(TAG, "User re-authenticated.");
+                            currentUser.delete()
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()) {
+                                                Log.d(TAG, "User account deleted.");
+                                                Intent intent = new Intent(popup.this, LoginUI.class);
+                                                startActivity(intent);
+                                            }
+                                        }
+                                    })
+                                    .addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Log.w(TAG, "Error User account deleted", e);
+                                        }
+                                    });
+
                         }
                     });
-            currentUser.delete()
-                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isSuccessful()) {
-                                Log.d(TAG, "User account deleted.");
-                            }
-                        }
-                    });
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-            Intent intent = new Intent(this, LoginUI.class);
-            startActivity(intent);
+
         }
     }
 }

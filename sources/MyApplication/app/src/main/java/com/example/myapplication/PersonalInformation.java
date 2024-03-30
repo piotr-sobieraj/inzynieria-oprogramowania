@@ -24,6 +24,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Objects;
 
@@ -122,10 +123,11 @@ public class PersonalInformation extends AppCompatActivity {
     }
 
     public void saveUserToDatabaseAndOpenAddingMeals(View v){
-        if (validateUser(buildUserData())){
-            saveUserToDatabase(buildUserData()); //<- wyłączone, bo w tej chwili tylko odczytuję dane z bazy
-            openMore();
-        }
+//        if (validateUser(buildUserData())){
+//            saveUserToDatabase(buildUserData());
+//            openMore();
+//        }
+        openMore();
     }
 
     private boolean validateUser(User user){
@@ -137,7 +139,7 @@ public class PersonalInformation extends AppCompatActivity {
         String[] date = user.getBirthDate().split("/");
         if(user.getBirthDate() == null || Objects.equals(user.getBirthDate(), ""))
             result = false;
-        else if(Integer.parseInt(date[0]) == mDay && Integer.parseInt(date[1]) == mMonth - 1 && Integer.parseInt(date[2]) >= mYear - 13){
+        else if(Integer.parseInt(date[0]) == mDay && Integer.parseInt(date[1]) == mMonth + 1 && Integer.parseInt(date[2]) >= mYear - 13){
             ((Button)findViewById(R.id.pickDate)).setError("Too young");
             result = false;
         }
