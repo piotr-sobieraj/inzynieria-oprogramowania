@@ -116,7 +116,7 @@ public class PersonalInformation extends AppCompatActivity {
     public void saveUserToDatabaseAndOpenAddingMeals(View v){
         if (validateUser(buildUserData())){
             saveUserToDatabase(buildUserData());
-            openMore();
+            openPlan();
         }
     }
 

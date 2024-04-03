@@ -10,12 +10,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.Objects;
 
@@ -53,12 +59,24 @@ public class Reauthenticate extends AppCompatActivity {
         setPassword(((TextView)findViewById(R.id.passwordCred)).getText().toString());
     }
 
-    public void deleteAcc(View v){
+    public void deleteAcc(View v) {
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        if (currentUser != null){
+        if (currentUser != null) {
             getCred();
             AuthCredential credential = EmailAuthProvider
                     .getCredential(getEmail(), getPassword());
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+            CollectionReference usersRef = db.collection("users");
+            usersRef.whereEqualTo("userUID", currentUser.getUid()).get()
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                db.collection("users").document(
+                                        document.getId()).delete().addOnCompleteListener(
+                                        task2 -> Log.d("Firebase", "Document successful deleted"));
+                            }
+                        }
+                    });
             currentUser.reauthenticate(credential)
                     .addOnCompleteListener(task -> {
                         Log.d(TAG, "User re-authenticated.");
@@ -68,14 +86,14 @@ public class Reauthenticate extends AppCompatActivity {
                                         Log.d(TAG, "User account deleted.");
                                         Intent intent = new Intent(Reauthenticate.this, SignUp.class);
                                         startActivity(intent);
-                                    }
-                                    else {
+                                    } else {
                                         Toast.makeText(Reauthenticate.this, "Authentication failed.",
                                                 Toast.LENGTH_SHORT).show();
                                     }
                                 });
 
                     });
+
 
         }
     }

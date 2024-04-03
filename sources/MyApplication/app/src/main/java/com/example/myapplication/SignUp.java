@@ -71,7 +71,7 @@ public class SignUp extends AppCompatActivity {
     private void reload(FirebaseUser user) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         CollectionReference usersRef = db.collection("users");
-        usersRef.whereEqualTo("user_uid", user.getUid()).get()
+        usersRef.whereEqualTo("userUID", user.getUid()).get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         for (QueryDocumentSnapshot document : task.getResult()) {
