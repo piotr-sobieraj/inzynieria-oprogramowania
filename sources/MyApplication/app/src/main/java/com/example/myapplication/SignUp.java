@@ -60,20 +60,18 @@ public class SignUp extends AppCompatActivity {
     }
 
     private void createAccount(String email, String password) {
+        //TODO Rozwiązanie niepoprawne, trzeba zaimplementować złapanie generycznych błedów lub usunąć email protection w Firebase
         mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            Log.d(TAG, "createUserWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            Intent intent = new Intent(SignUp.this, PersonalInformation.class);
-                            startActivity(intent);
-                        } else {
-                            Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(SignUp.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                        }
+                .addOnCompleteListener(this, task -> {
+                    if (task.isSuccessful()) {
+                        Log.d("signUp", "createUserWithEmail:success");
+                        FirebaseUser user = mAuth.getCurrentUser();
+                        Intent intent = new Intent(SignUp.this, PersonalInformation.class);
+                        startActivity(intent);
+                    } else {
+                        Log.w("signUp", "createUserWithEmail:failure", task.getException());
+                        Toast.makeText(SignUp.this, "Creating an account failed",
+                                Toast.LENGTH_SHORT).show();
                     }
                 });
     }
@@ -81,20 +79,17 @@ public class SignUp extends AppCompatActivity {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         CollectionReference usersRef = db.collection("users");
         usersRef.whereEqualTo("user_uid", user.getUid()).get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                Log.d(TAG, document.getId() + " => " + document.getData());
-                                Intent intent = new Intent(SignUp.this, MoreUI.class);
-                                startActivity(intent);
-                            }
-                        } else {
-                            Log.d(TAG, "Error getting documents: ", task.getException());
-                            Intent intent = new Intent(SignUp.this, PersonalInformation.class);
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            Log.d("Firebase", document.getId() + " => " + document.getData());
+                            Intent intent = new Intent(SignUp.this, MoreUI.class);
                             startActivity(intent);
                         }
+                    } else {
+                        Log.d("Firebase", "Error getting documents: ", task.getException());
+                        Intent intent = new Intent(SignUp.this, PersonalInformation.class);
+                        startActivity(intent);
                     }
                 });
     }

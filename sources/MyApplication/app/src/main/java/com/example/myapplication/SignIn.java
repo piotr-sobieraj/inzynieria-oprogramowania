@@ -58,19 +58,18 @@ public class SignIn extends AppCompatActivity {
     public void signIn(View v){
         getCred();
         if (signIn()){
+            //TODO Rozwiązanie niepoprawne, trzeba zaimplementować złapanie generycznych błedów lub usunąć email protection w Firebase
             mAuth.signInWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-                                Log.d(TAG, "signInWithEmail:success");
-                                Intent intent = new Intent(SignIn.this, MoreUI.class);
-                                startActivity(intent);
-                            }
-                            else {
-                                Toast.makeText(SignIn.this, "Authentication failed.",
-                                        Toast.LENGTH_SHORT).show();
-                            }
+                    .addOnCompleteListener(this, task -> {
+                        if (task.isSuccessful()) {
+                            Log.d("signIn", "signInWithEmail:success");
+                            Intent intent = new Intent(SignIn.this, MoreUI.class);
+                            startActivity(intent);
+                        }
+                        else {
+                            Log.d("signIn", "signInWithEmail:failure");
+                            Toast.makeText(SignIn.this, "Login failed.",
+                                    Toast.LENGTH_SHORT).show();
                         }
                     });
         }
