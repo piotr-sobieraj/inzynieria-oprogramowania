@@ -10,12 +10,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
@@ -67,18 +63,15 @@ public class Reauthenticate extends AppCompatActivity {
                     .addOnCompleteListener(task -> {
                         Log.d(TAG, "User re-authenticated.");
                         currentUser.delete()
-                                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        if (task.isSuccessful()) {
-                                            Log.d(TAG, "User account deleted.");
-                                            Intent intent = new Intent(Reauthenticate.this, SignUp.class);
-                                            startActivity(intent);
-                                        }
-                                        else {
-                                            Toast.makeText(Reauthenticate.this, "Authentication failed.",
-                                                    Toast.LENGTH_SHORT).show();
-                                        }
+                                .addOnCompleteListener(task1 -> {
+                                    if (task1.isSuccessful()) {
+                                        Log.d(TAG, "User account deleted.");
+                                        Intent intent = new Intent(Reauthenticate.this, SignUp.class);
+                                        startActivity(intent);
+                                    }
+                                    else {
+                                        Toast.makeText(Reauthenticate.this, "Authentication failed.",
+                                                Toast.LENGTH_SHORT).show();
                                     }
                                 });
 

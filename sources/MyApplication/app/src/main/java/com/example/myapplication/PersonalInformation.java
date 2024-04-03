@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
@@ -16,11 +17,8 @@ import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Objects;
@@ -48,7 +46,8 @@ public class PersonalInformation extends AppCompatActivity {
 
             DatePickerDialog datePickerDialog = new DatePickerDialog(PersonalInformation.this,
                     (view, year, monthOfYear, dayOfMonth) -> {
-                        date.setText(date_string);
+                        String date_s = dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
+                        date.setText(date_s);
                     },
                     mYear, mMonth, mDay);
             datePickerDialog.show();
@@ -94,18 +93,8 @@ public class PersonalInformation extends AppCompatActivity {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("users")
                 .add(user)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                    @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w(TAG, "Error adding document", e);
-                    }
-                });
+                .addOnSuccessListener(documentReference -> Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId()))
+                .addOnFailureListener(e -> Log.w(TAG, "Error adding document", e));
     }
 
     @NonNull
@@ -115,6 +104,10 @@ public class PersonalInformation extends AppCompatActivity {
                 getWeightFromView(),getTargetWeightFromView(), null);
     }
 
+    public void openPlan(){
+        Intent intent = new Intent(this, Plan.class);
+        startActivity(intent);
+    }
     public void openMore(){
         Intent intent = new Intent(this, MoreUI.class);
         startActivity(intent);

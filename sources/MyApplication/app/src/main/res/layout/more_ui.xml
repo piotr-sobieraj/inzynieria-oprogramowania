@@ -127,6 +127,7 @@
         android:fontFamily="@font/poppins_semibold"
         android:onClick="logout"
         android:text="@string/logout"
+        android:textColor="#616061"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button3" />
