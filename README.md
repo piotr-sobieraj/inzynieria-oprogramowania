@@ -1,5 +1,8 @@
 # Spis treści
 
+## 5 kwietnia
+- [Logowanie użytkowników do aplikacji](#logowanie-użytkowników-do-aplikacji)
+
 ## 22 marca
 - [Podłączenie do bazy Firebase](#podłączenie-do-bazy-firebase)
 - [Finalnie nazwa aplikacji - FitApp](#finalnie-nazwa-aplikacji---fitapp)
@@ -16,6 +19,14 @@
 
 
 ---
+# 5 kwietnia
+## Logowanie użytkowników do aplikacji
+![Wybór logowania](/pictures/06.logowanie.jpg)
+![Tworzenie nowego konta](/pictures/06-1.logowanie.jpg)
+![Logowanie na instniejące konto](/pictures/06-2.logowanie.jpg)
+
+
+
 # 22 marca
 ## Podłączenie do bazy Firebase
 ![Firebase](/pictures/05.firebase.jpg)
