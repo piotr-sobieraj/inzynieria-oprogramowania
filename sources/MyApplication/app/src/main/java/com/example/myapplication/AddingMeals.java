@@ -9,6 +9,7 @@ import android.widget.RadioGroup;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -36,28 +37,24 @@ public class AddingMeals extends AppCompatActivity {
             // Próba odczytania obiektu User przekazanego z poprzedniej aktywności
             user = (User) intent.getSerializableExtra("userKey");
             if (user != null) {
-                Log.d("Adding meal activity", user.getName());
+                Log.d("AddingMeals", user.getName());
             }
         }
     }
 
     private void addMealDayToDatabase(MealDay newMealDay) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-        db.collection("users").document(documentId)
-                .collection("mealDays").add(newMealDay)
-                .addOnSuccessListener(documentReference -> Log.d("AddingMeals", "MealDay successfully added!"))
-                .addOnFailureListener(e -> Log.e("AddingMeals", "Error adding MealDay", e));
+        addOrUpdateMeal(newMealDay);
     }
 
     public void addMealToDatabase(View v) {
         List<Meal> mealsForToday = Arrays.asList(
-                new Meal(1, "Śniadanie", 280),
+                new Meal(1, "Śniadanie", 310),
                 new Meal(2, "Lunch", 250),
                 new Meal(3, "Podwieczorek", 500)
         );
 
-        MealDay newMealDay = new MealDay("28/3/2024", mealsForToday);
+        MealDay newMealDay = new MealDay("04/04/2024", mealsForToday);
         addMealDayToDatabase(newMealDay); // Dodajemy nowy dzień posiłku do bazy
     }
 
@@ -82,7 +79,7 @@ public class AddingMeals extends AppCompatActivity {
         }
 
 
-    private void addOrUpdateMeal() {
+    private void addOrUpdateMeal(MealDay newMealDay) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         db.collection("users").document(documentId)
@@ -92,9 +89,20 @@ public class AddingMeals extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     QuerySnapshot querySnapshot = task.getResult();
                     if (querySnapshot != null && !querySnapshot.isEmpty()) {
-                        return;
+
+                        // Pobierz pierwszy (i jedyny) dokument
+                        DocumentSnapshot document = querySnapshot.getDocuments().get(0);
+                        String documentId = document.getId();
+                        Log.d("AddingMeals", "Istnieje już lista posiłków, ID dokumentu: "
+                                + documentId);
                     } else {
-                        return;
+                        Log.d("Informacja", "Dodaję nowy dokument z listą posiłków");
+
+                        db.collection("users").document(documentId)
+                                .collection("mealDays").add(newMealDay)
+                                .addOnSuccessListener(documentReference -> Log.d("AddingMeals",
+                                        "MealDay successfully added!"))
+                                .addOnFailureListener(e -> Log.e("AddingMeals", "Error adding MealDay", e));
                     }
                 }
             });

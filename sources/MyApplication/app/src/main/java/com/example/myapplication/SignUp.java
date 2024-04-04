@@ -92,16 +92,15 @@ public class SignUp extends AppCompatActivity {
     }
 
     public boolean signUp(){
-        boolean result = true;
         if(email.isEmpty()){
             ((TextView)findViewById(R.id.email)).setError("Missing Email");
-            result = false;
+            return false;
         }
         if (password.isEmpty()){
             ((TextView)findViewById(R.id.password)).setError("Missing Password");
-            result = false;
+            return false;
         }
-        return result;
+        return true;
     }
 
 }
