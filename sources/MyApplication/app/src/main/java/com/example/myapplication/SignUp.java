@@ -36,14 +36,6 @@ public class SignUp extends AppCompatActivity {
         setContentView(R.layout.signup_ui);
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser != null){
-            reload(currentUser);
-        }
-    }
 
     public void register(View v){
         getCred();
@@ -58,7 +50,6 @@ public class SignUp extends AppCompatActivity {
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
                         Log.d("signUp", "createUserWithEmail:success");
-                        FirebaseUser user = mAuth.getCurrentUser();
                         Intent intent = new Intent(SignUp.this, PersonalInformation.class);
                         startActivity(intent);
                     } else {
@@ -68,24 +59,7 @@ public class SignUp extends AppCompatActivity {
                     }
                 });
     }
-    private void reload(FirebaseUser user) {
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        CollectionReference usersRef = db.collection("users");
-        usersRef.whereEqualTo("userUID", user.getUid()).get()
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        for (QueryDocumentSnapshot document : task.getResult()) {
-                            Log.d("Firebase", document.getId() + " => " + document.getData());
-                            Intent intent = new Intent(SignUp.this, MoreUI.class);
-                            startActivity(intent);
-                        }
-                    } else {
-                        Log.d("Firebase", "Error getting documents: ", task.getException());
-                        Intent intent = new Intent(SignUp.this, PersonalInformation.class);
-                        startActivity(intent);
-                    }
-                });
-    }
+
     public void getCred(){
         email = ((TextView)findViewById(R.id.email)).getText().toString();
         password = ((TextView)findViewById(R.id.password)).getText().toString();

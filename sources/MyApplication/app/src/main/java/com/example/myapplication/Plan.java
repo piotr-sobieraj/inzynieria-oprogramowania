@@ -1,12 +1,14 @@
 package com.example.myapplication;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -16,11 +18,13 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Objects;
 
 public class Plan extends AppCompatActivity {
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +34,7 @@ public class Plan extends AppCompatActivity {
         setContentView(R.layout.plan_ui);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public void calculateCaloric(){
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         CollectionReference usersRef = db.collection("users");
@@ -41,7 +46,13 @@ public class Plan extends AppCompatActivity {
                             double bmr;
                             ObjectMapper objectMapper = new ObjectMapper();
                             User user = objectMapper.convertValue(document.getData(), User.class);
-                            String string = user.getWeight() + "kg -> " + (Double.parseDouble(user.getTargetWeight()) - Double.parseDouble(user.getWeight())) + " kg -> " + user.getTargetWeight() + " kg";
+                            double kilograms_to_reduce = Double.parseDouble(user.getTargetWeight()) - Double.parseDouble(user.getWeight());
+                            int days = (int)(Math.abs(kilograms_to_reduce)  * 7700)/500;
+                            LocalDate localDate = LocalDate.now();
+                            localDate = localDate.plusDays(days);
+                            String s = localDate.getDayOfMonth() + "/" + localDate.getMonthValue() + "/" + localDate.getYear();
+                            ((TextView)findViewById(R.id.reachGoalDate)).setText(s);
+                            String string = user.getWeight() + "kg -> " + kilograms_to_reduce + " kg -> " + user.getTargetWeight() + " kg";
                             ((TextView)findViewById(R.id.kilograms)).setText(string);
                             final Calendar c = Calendar.getInstance();
                             String[] date = user.getBirthDate().split("/");
