@@ -6,45 +6,172 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F5FBFF"
-    tools:context=".MainActivity">
+    tools:context=".PersonalInformation">
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="84dp"
+        android:layout_width="wrap_content"
         android:layout_height="84dp"
-        android:layout_marginStart="153dp"
-        android:layout_marginTop="73dp"
+        android:layout_marginTop="56dp"
         android:contentDescription="@string/avatar_image"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/avatar"
-        tools:srcCompat="@tools:sample/avatars" />
+        tools:srcCompat="@drawable/avatar" />
+
+    <EditText
+        android:id="@+id/editTextWzrost"
+        android:layout_width="0dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="38dp"
+        android:layout_marginTop="452dp"
+        android:layout_marginEnd="38dp"
+        android:background="@drawable/rectangle_border"
+        android:ems="10"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="LabelFor" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:layout_marginTop="296dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="0dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="38dp"
+        android:layout_marginTop="644dp"
+        android:layout_marginEnd="38dp"
+        android:background="@drawable/buttons"
+        android:fontFamily="@font/poppins_medium"
+        android:onClick="saveUserToDatabaseAndOpenAddingMeals"
+        android:text="@string/next"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="496dp"
+        android:fontFamily="@font/poppins"
+        android:text="@string/current_body_weight"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="560dp"
+        android:fontFamily="@font/poppins"
+        android:text="@string/target_body_weight"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editTextName"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="196dp"
+        android:layout_marginEnd="24dp"
+        android:ems="10"
+        android:fontFamily="@font/poppins"
+        android:hint="@string/name"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="LabelFor" />
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="388dp"
+        android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="181dp"
+        android:layout_marginTop="156dp"
         android:fontFamily="@font/poppins_medium"
         android:text="@string/who_are_you"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="#253858"
         android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editTextName"
-        android:layout_width="327dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="240dp"
+        android:id="@+id/editTextDocelowaWaga"
+        android:layout_width="0dp"
+        android:layout_height="26dp"
+        android:layout_marginStart="38dp"
+        android:layout_marginTop="584dp"
+        android:layout_marginEnd="38dp"
+        android:background="@drawable/rectangle_border"
         android:ems="10"
-        android:hint="@string/name"
         android:importantForAutofill="no"
         android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="LabelFor" />
+
+    <View
+        android:id="@+id/divider2"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:layout_marginTop="348dp"
+        android:background="?android:attr/listDivider"
+        android:backgroundTint="#939191"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editTextWaga"
+        android:layout_width="0dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="38dp"
+        android:layout_marginTop="516dp"
+        android:layout_marginEnd="38dp"
+        android:background="@drawable/rectangle_border"
+        android:ems="10"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="LabelFor" />
@@ -52,9 +179,9 @@
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="300dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="268dp"
         android:fontFamily="@font/poppins_medium"
         android:text="@string/female"
         android:textSize="16sp"
@@ -64,315 +191,81 @@
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="357dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="320dp"
         android:fontFamily="@font/poppins_medium"
         android:text="@string/male"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <View
-        android:id="@+id/divider"
-        android:layout_width="391dp"
-        android:layout_height="1dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="340dp"
-        android:background="?android:attr/listDivider"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <View
-        android:id="@+id/divider2"
-        android:layout_width="391dp"
-        android:layout_height="1dp"
-        android:layout_marginTop="390dp"
-        android:background="?android:attr/listDivider"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <Button
-        android:id="@+id/button"
-        android:layout_width="339dp"
-        android:layout_height="43dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="721dp"
-        android:background="@drawable/buttons"
-        android:fontFamily="@font/poppins_medium"
-        android:onClick="makeSummary"
-        android:text="@string/next"
-        android:textAllCaps="false"
-        android:textColor="#FFFFFF"
-        android:textSize="15sp"
+        android:id="@+id/pickDate"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="388dp"
+        android:background="#EDF5FC"
+        android:drawableEnd="@drawable/arrow_down"
+        android:text="@string/pick_date"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/editTextWzrost"
-        android:layout_width="108dp"
-        android:layout_height="26dp"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="511dp"
-        android:background="@drawable/rectangle_border"
-        android:ems="10"
-        android:inputType="text"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:importantForAutofill="no"
-        tools:ignore="LabelFor"/>
 
     <TextView
         android:id="@+id/textView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
-        android:layout_marginTop="488dp"
+        android:layout_marginTop="428dp"
         android:fontFamily="@font/poppins"
         android:text="@string/height"
         android:textSize="12sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textView9"
+    <RadioGroup
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="553dp"
-        android:fontFamily="@font/poppins"
-        android:text="@string/current_body_weight"
-        android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textView10"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="618dp"
-        android:fontFamily="@font/poppins"
-        android:text="@string/target_body_weight"
-        android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/editTextWaga"
-        android:layout_width="108dp"
-        android:layout_height="26dp"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="576dp"
-        android:background="@drawable/rectangle_border"
-        android:ems="10"
-        android:inputType="text"
-        android:minHeight="48dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:importantForAutofill="no"
-        tools:ignore="LabelFor"/>
-
-    <EditText
-        android:id="@+id/editTextDocelowaWaga"
-        android:layout_width="108dp"
-        android:layout_height="26dp"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="641dp"
-        android:background="@drawable/rectangle_border"
-        android:ems="10"
-        android:inputType="text"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:importantForAutofill="no"
-        tools:ignore="LabelFor" />
-
-    <RadioGroup
-        android:id="@+id/radioGroup3"
-        android:layout_width="159dp"
-        android:layout_height="27dp"
-        android:layout_marginStart="193dp"
-        android:layout_marginTop="510dp"
-        android:orientation="horizontal"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <RadioButton
-            android:id="@+id/radioButton8"
-            android:layout_width="53dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/rectagle_radiobuttons1"
-            android:button="@null"
-            android:checked="true"
-            android:clickable="true"
-            android:text="@string/cm"
-            android:textAlignment="center"
-            android:textColor="@color/white"
-            android:focusable="true" />
-
-        <RadioButton
-            android:id="@+id/radioButton10"
-            android:layout_width="53dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/rectagle_radiobuttons2"
-            android:button="@null"
-            android:checked="false"
-            android:clickable="true"
-            android:text="@string/ft_in"
-            android:textAlignment="center"
-            android:textColor="@color/white"
-            android:focusable="true" />
-
-        <RadioButton
-            android:id="@+id/radioButton11"
-            android:layout_width="53dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/rectagle_radiobuttons3"
-            android:button="@null"
-            android:clickable="true"
-            android:text="@string/in"
-            android:textAlignment="center"
-            android:textColor="@color/white"
-            android:focusable="true" />
-    </RadioGroup>
-
-    <RadioGroup
-        android:id="@+id/radioGroup4"
-        android:layout_width="159dp"
-        android:layout_height="27dp"
-        android:layout_marginStart="193dp"
-        android:layout_marginTop="575dp"
-        android:orientation="horizontal"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <RadioButton
-            android:id="@+id/radioButton12"
-            android:layout_width="53dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@drawable/rectagle_radiobuttons1"
-            android:button="@null"
-            android:checked="true"
-            android:clickable="true"
-            android:text="@string/kg"
-            android:textAlignment="center"
-            android:textColor="@color/white"
-            android:focusable="true" />
-
-        <RadioButton
-            android:id="@+id/radioButton14"
-            android:layout_width="53dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@drawable/rectagle_radiobuttons2"
-            android:button="@null"
-            android:clickable="true"
-            android:text="@string/st_lb"
-            android:textAlignment="center"
-            android:textColor="@color/white"
-            android:focusable="true" />
-
-        <RadioButton
-            android:id="@+id/radioButton15"
-            android:layout_width="53dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@drawable/rectagle_radiobuttons3"
-            android:button="@null"
-            android:clickable="true"
-            android:text="@string/lb"
-            android:textAlignment="center"
-            android:textColor="@color/white"
-            android:focusable="true" />
-
-    </RadioGroup>
-
-    <RadioGroup
-        android:layout_width="159dp"
-        android:layout_height="27dp"
-        android:layout_marginStart="193dp"
-        android:layout_marginTop="640dp"
-        android:orientation="horizontal"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <RadioButton
-            android:id="@+id/radioButton16"
-            android:layout_width="53dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@drawable/rectagle_radiobuttons1"
-            android:button="@null"
-            android:checked="true"
-            android:clickable="true"
-            android:text="@string/kg"
-            android:textAlignment="center"
-            android:textColor="@color/white"
-            android:focusable="true" />
-
-        <RadioButton
-            android:id="@+id/radioButton17"
-            android:layout_width="53dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@drawable/rectagle_radiobuttons2"
-            android:button="@null"
-            android:clickable="true"
-            android:text="@string/st_lb"
-            android:textAlignment="center"
-            android:textColor="@color/white"
-            android:focusable="true" />
-
-        <RadioButton
-            android:id="@+id/radioButton18"
-            android:layout_width="53dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@drawable/rectagle_radiobuttons3"
-            android:button="@null"
-            android:clickable="true"
-            android:text="@string/lb"
-            android:textAlignment="center"
-            android:textColor="@color/white"
-            android:focusable="true" />
-    </RadioGroup>
-
-    <RadioGroup
-        android:layout_width="48dp"
-        android:layout_height="98dp"
-        android:layout_marginStart="323dp"
-        android:layout_marginTop="292dp"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="260dp"
+        android:layout_marginEnd="36dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <RadioButton
             android:id="@+id/radioButtonFemale"
             android:layout_width="30dp"
             android:layout_height="30dp"
+            android:layout_marginBottom="20dp"
+            android:buttonTint="#3171FE"
             android:checked="true"
             android:clickable="true"
             android:focusable="true"
-            android:translationY="5dp" />
+            android:scaleX="1.4"
+            android:scaleY="1.4" />
 
         <RadioButton
-            android:id="@+id/radioButton20"
+            android:id="@+id/radioButtonMale"
             android:layout_width="30dp"
             android:layout_height="30dp"
+            android:buttonTint="#DADADA"
             android:clickable="true"
             android:focusable="true"
-            android:translationY="32dp" />
+            android:scaleX="1.4"
+            android:scaleY="1.4" />
     </RadioGroup>
 
-    <Button
-        android:id="@+id/pickDate"
+    <TextView
+        android:id="@+id/textView4"
         android:layout_width="wrap_content"
-        android:layout_height="36dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
-        android:layout_marginTop="446dp"
-        android:background="#EDF5FC"
-        android:drawableRight="@drawable/arrow_down"
-        android:text="@string/pick_date"
+        android:layout_marginTop="368dp"
+        android:fontFamily="@font/poppins"
+        android:text="@string/date_of_birth"
+        android:textSize="12sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

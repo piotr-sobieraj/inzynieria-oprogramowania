@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">FitApp</string>
     <string name="avatar_image">avatar image</string>
     <string name="who_are_you">Who are you?</string>
     <string name="female">Female</string>
@@ -13,7 +13,30 @@
     <string name="in">in</string>
     <string name="ft_in">ft/in</string>
     <string name="cm">cm</string>
-    <string name="target_body_weight">Target body weight</string>
-    <string name="current_body_weight">Current body weight</string>
-    <string name="height">Height</string>
+    <string name="date_of_birth">Date of birth</string>
+    <string name="target_body_weight">Target body weight in kg</string>
+    <string name="current_body_weight">Current body weight in kg</string>
+    <string name="height">Height in cm</string>
+    <string name="email">Email</string>
+    <string name="first_last_name"><![CDATA[First & Last name]]></string>
+    <string name="password">Password</string>
+    <string name="loginBtn">Login</string>
+    <string name="logo">FitApp</string>
+    <string name="logo_background">logo background</string>
+    <string name="name_login">Name</string>
+    <string name="login">Login</string>
+    <string name="options">Options</string>
+    <string name="delete_account">Delete account</string>
+    <string name="about_us">About us</string>
+    <string name="recipes">Recipes</string>
+    <string name="more">More</string>
+    <string name="menu">Menu</string>
+    <string name="i_already_have_an_account">I already have an account</string>
+    <string name="sign_up_with_email">Sign up with email</string>
+    <string name="logout">Logout</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="ok">OK</string>
+    <string name="start">Start</string>
+    <string name="daily_calorie_limit">daily calorie limit</string>
+    <string name="you_will_reach_your_goal_on">You will reach your goal on</string>
 </resources>
