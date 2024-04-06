@@ -52,6 +52,7 @@ public class PersonalInformation extends AppCompatActivity {
                     mYear, mMonth, mDay);
             datePickerDialog.show();
         });
+        ((TextView) findViewById(R.id.editTextName)).setText(SignUp.firstAndLastName);
     }
 
     @NonNull

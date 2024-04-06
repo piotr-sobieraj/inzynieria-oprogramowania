@@ -17,8 +17,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 public class SignUp extends AppCompatActivity {
-
-    private static final String TAG = "EmailPassword";
+    public static String firstAndLastName;
     private FirebaseAuth mAuth;
 
     private String email = "";
@@ -58,7 +57,7 @@ public class SignUp extends AppCompatActivity {
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
                         Log.d("signUp", "createUserWithEmail:success");
-                        FirebaseUser user = mAuth.getCurrentUser();
+                        firstAndLastName = ((TextView) findViewById(R.id.personalText)).getText().toString();
                         Intent intent = new Intent(SignUp.this, PersonalInformation.class);
                         startActivity(intent);
                     } else {

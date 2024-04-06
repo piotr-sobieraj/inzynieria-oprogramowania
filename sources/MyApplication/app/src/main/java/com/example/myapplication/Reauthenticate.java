@@ -10,11 +10,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
@@ -84,7 +81,7 @@ public class Reauthenticate extends AppCompatActivity {
                                 .addOnCompleteListener(task1 -> {
                                     if (task1.isSuccessful()) {
                                         Log.d(TAG, "User account deleted.");
-                                        Intent intent = new Intent(Reauthenticate.this, SignUp.class);
+                                        Intent intent = new Intent(Reauthenticate.this, Start.class);
                                         startActivity(intent);
                                     } else {
                                         Toast.makeText(Reauthenticate.this, "Authentication failed.",
