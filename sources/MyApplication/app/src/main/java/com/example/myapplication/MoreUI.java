@@ -55,4 +55,8 @@ public class MoreUI extends AppCompatActivity {
         Intent intent = new Intent(this, Reauthenticate.class);
         startActivity(intent);
     }
+    public void options(View v){
+        Intent intent = new Intent(this, Options.class);
+        startActivity(intent);
+    }
 }

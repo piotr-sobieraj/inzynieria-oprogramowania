@@ -39,4 +39,6 @@
     <string name="start">Start</string>
     <string name="daily_calorie_limit">daily calorie limit</string>
     <string name="you_will_reach_your_goal_on">You will reach your goal on</string>
+    <string name="profile">Profile</string>
+    <string name="save">Save</string>
 </resources>

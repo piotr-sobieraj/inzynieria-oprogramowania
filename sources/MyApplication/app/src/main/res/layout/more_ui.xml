@@ -19,6 +19,7 @@
         android:drawableStart="@drawable/options"
         android:focusable="true"
         android:fontFamily="@font/poppins_semibold"
+        android:onClick="options"
         android:text="@string/options"
         android:textColor="#616061"
         android:textSize="20sp"
