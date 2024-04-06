@@ -76,19 +76,22 @@ public class Reauthenticate extends AppCompatActivity {
                     });
             currentUser.reauthenticate(credential)
                     .addOnCompleteListener(task -> {
-                        Log.d(TAG, "User re-authenticated.");
-                        currentUser.delete()
-                                .addOnCompleteListener(task1 -> {
-                                    if (task1.isSuccessful()) {
-                                        Log.d(TAG, "User account deleted.");
-                                        Intent intent = new Intent(Reauthenticate.this, Start.class);
-                                        startActivity(intent);
-                                    } else {
-                                        Toast.makeText(Reauthenticate.this, "Authentication failed.",
-                                                Toast.LENGTH_SHORT).show();
-                                    }
-                                });
+                        if (task.isSuccessful()){
+                            Log.d(TAG, "User re-authenticated.");
+                            currentUser.delete()
+                                    .addOnCompleteListener(task1 -> {
+                                        if (task1.isSuccessful()) {
+                                            Log.d(TAG, "User account deleted.");
+                                            Intent intent = new Intent(Reauthenticate.this, Start.class);
+                                            startActivity(intent);
+                                        }
+                                    });
 
+                        }
+                        else{
+                            Toast.makeText(Reauthenticate.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                        }
                     });
 
 
