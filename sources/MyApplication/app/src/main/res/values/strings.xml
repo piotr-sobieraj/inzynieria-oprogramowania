@@ -41,4 +41,14 @@
     <string name="you_will_reach_your_goal_on">You will reach your goal on</string>
     <string name="profile">Profile</string>
     <string name="save">Save</string>
+    <string name="monday">Mon</string>
+    <string name="tuesday">Tue</string>
+    <string name="wednesday">Wed</string>
+    <string name="thursday">Thu</string>
+    <string name="friday">Fri</string>
+    <string name="saturday">Sat</string>
+    <string name="sunday">Sun</string>
+    <string name="kcal">Kcal</string>
+    <string name="breakfast">Breakfast</string>
+    <string name="sec_breakfast">Second Breakfast</string>
 </resources>

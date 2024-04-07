@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="1729dp"
+    android:fillViewport="true"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".Menu">
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="0dp"
+            android:layout_height="94dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/rectangle_blue" />
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="5dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/imageView4"
+            app:layout_constraintTop_toTopOf="@+id/imageView4"
+            app:layout_constraintVertical_bias="0.0">
+
+            <RadioButton
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/custom_radio_button"
+                android:button="@null"
+                android:checked="true"
+                android:clickable="true"
+                android:enabled="true"
+                android:focusable="true"
+                android:fontFamily="@font/poppins_medium"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+                android:text="@string/monday"
+                android:textAlignment="center"
+                android:textColor="@drawable/menu"
+                android:textSize="16sp" />
+
+            <RadioButton
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/custom_radio_button"
+                android:button="@null"
+                android:checked="false"
+                android:clickable="true"
+                android:enabled="true"
+                android:focusable="true"
+                android:fontFamily="@font/poppins_medium"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+                android:text="@string/tuesday"
+                android:textAlignment="center"
+                android:textColor="@drawable/menu"
+                android:textSize="16sp" />
+
+            <RadioButton
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/custom_radio_button"
+                android:button="@null"
+                android:checked="false"
+                android:clickable="true"
+                android:enabled="true"
+                android:focusable="true"
+                android:fontFamily="@font/poppins_medium"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+                android:text="@string/wednesday"
+                android:textAlignment="center"
+                android:textColor="@drawable/menu"
+                android:textSize="16sp" />
+
+            <RadioButton
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/custom_radio_button"
+                android:button="@null"
+                android:checked="false"
+                android:clickable="true"
+                android:enabled="true"
+                android:focusable="true"
+                android:fontFamily="@font/poppins_medium"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+                android:text="@string/thursday"
+                android:textAlignment="center"
+                android:textColor="@drawable/menu"
+                android:textSize="16sp" />
+
+            <RadioButton
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/custom_radio_button"
+                android:button="@null"
+                android:checked="false"
+                android:clickable="true"
+                android:enabled="true"
+                android:focusable="true"
+                android:fontFamily="@font/poppins_medium"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+                android:text="@string/friday"
+                android:textAlignment="center"
+                android:textColor="@drawable/menu"
+                android:textSize="16sp" />
+
+            <RadioButton
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/custom_radio_button"
+                android:button="@null"
+                android:checked="false"
+                android:clickable="true"
+                android:enabled="true"
+                android:focusable="true"
+                android:fontFamily="@font/poppins_medium"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+                android:text="@string/saturday"
+                android:textAlignment="center"
+                android:textColor="@drawable/menu"
+                android:textSize="16sp" />
+
+            <RadioButton
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/custom_radio_button"
+                android:button="@null"
+                android:checked="false"
+                android:clickable="true"
+                android:enabled="true"
+                android:focusable="true"
+                android:fontFamily="@font/poppins_medium"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+                android:text="@string/sunday"
+                android:textAlignment="center"
+                android:textColor="@drawable/menu"
+                android:textSize="16sp" />
+        </RadioGroup>
+
+        <EditText
+            android:id="@+id/editTextText5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="text"
+            android:text="Name"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:layout_editor_absoluteX="107dp" />
+
+        <EditText
+            android:id="@+id/editTextText6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="text"
+            android:text="Name"
+            tools:layout_editor_absoluteX="98dp"
+            tools:layout_editor_absoluteY="392dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
