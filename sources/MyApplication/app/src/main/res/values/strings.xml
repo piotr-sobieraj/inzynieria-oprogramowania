@@ -51,4 +51,6 @@
     <string name="kcal">Kcal</string>
     <string name="breakfast">Breakfast</string>
     <string name="sec_breakfast">Second Breakfast</string>
+    <string name="new_product">New product</string>
+    <string name="energy">Energy values</string>
 </resources>
