@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -71,9 +72,16 @@ public class NewProduct extends AppCompatActivity {
                                             }
                                             else {
                                                 Log.d("UPDATE", "Document update failed" + task2.getException());
+                                                Toast.makeText(this, "Document update failed",
+                                                        Toast.LENGTH_SHORT).show();
                                             }
                                         });
                                     }
+                                }
+                                else {
+                                    Log.d("SELECT", "Failed to search for user" + task1.getException());
+                                    Toast.makeText(this, "Failed to search for user",
+                                            Toast.LENGTH_SHORT).show();
                                 }
                             });
                         }
