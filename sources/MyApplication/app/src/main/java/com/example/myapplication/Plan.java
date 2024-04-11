@@ -29,7 +29,8 @@ public class Plan extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        Objects.requireNonNull(getSupportActionBar()).hide();
+        if (getSupportActionBar() != null)
+            Objects.requireNonNull(getSupportActionBar()).hide();
         calculateCaloric();
         setContentView(R.layout.plan_ui);
     }

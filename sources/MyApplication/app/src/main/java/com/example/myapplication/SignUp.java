@@ -61,17 +61,17 @@ public class SignUp extends AppCompatActivity {
     }
 
     public void getCred(){
-        email = ((TextView)findViewById(R.id.email)).getText().toString();
-        password = ((TextView)findViewById(R.id.password)).getText().toString();
+        email = ((TextView)findViewById(R.id.login_email)).getText().toString();
+        password = ((TextView)findViewById(R.id.login_password)).getText().toString();
     }
 
     public boolean signUp(){
         if(email.isEmpty()){
-            ((TextView)findViewById(R.id.email)).setError("Missing Email");
+            ((TextView)findViewById(R.id.login_email)).setError("Missing Email");
             return false;
         }
         if (password.isEmpty()){
-            ((TextView)findViewById(R.id.password)).setError("Missing Password");
+            ((TextView)findViewById(R.id.login_password)).setError("Missing Password");
             return false;
         }
         return true;

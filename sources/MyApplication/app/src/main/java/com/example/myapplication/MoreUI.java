@@ -19,7 +19,8 @@ public class MoreUI extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        Objects.requireNonNull(getSupportActionBar()).hide();
+        if (getSupportActionBar() != null)
+            Objects.requireNonNull(getSupportActionBar()).hide();
         setContentView(R.layout.more_ui);
         changeUI();
     }
@@ -31,7 +32,7 @@ public class MoreUI extends AppCompatActivity {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 Intent intent;
                 if (checkedId == R.id.Menu) {
-                    intent = new Intent(MoreUI.this, AddingMeals.class);
+                    intent = new Intent(MoreUI.this, Menu.class);
                     startActivity(intent);
                 } else if (checkedId == R.id.Recipes) {
                     intent = new Intent(MoreUI.this, RecipesUI.class);

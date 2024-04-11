@@ -9,16 +9,19 @@ import android.widget.RadioGroup;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 public class AddingMeals extends AppCompatActivity {
-    private User user;
-    final String documentId = "wgNYXUW3ot9njNv5zqfJ"; //<- dokument (user) na sztywno!!!
 
 
     @Override
@@ -35,27 +38,26 @@ public class AddingMeals extends AppCompatActivity {
         Intent intent = getIntent();
         if (intent != null) {
             // Próba odczytania obiektu User przekazanego z poprzedniej aktywności
-            user = (User) intent.getSerializableExtra("userKey");
+            User user = (User) intent.getSerializableExtra("userKey");
             if (user != null) {
                 Log.d("AddingMeals", user.getName());
             }
         }
     }
 
-    private void addMealDayToDatabase(MealDay newMealDay) {
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        addOrUpdateMeal(newMealDay);
-    }
 
     public void addMealToDatabase(View v) {
-        List<Meal> mealsForToday = Arrays.asList(
-                new Meal(1, "Śniadanie", 310),
-                new Meal(2, "Lunch", 250),
-                new Meal(3, "Podwieczorek", 500)
-        );
-
-        MealDay newMealDay = new MealDay("04/04/2024", mealsForToday);
-        addMealDayToDatabase(newMealDay); // Dodajemy nowy dzień posiłku do bazy
+        Map<String, List<Meal>> dayMeal = new HashMap<>();
+        List<Meal> meals = new ArrayList<>();
+        dayMeal.put("Breakfast", meals);
+        meals = new ArrayList<>();
+        meals.add(new Lunch("Kebab", 250));
+        dayMeal.put("Lunch", meals);
+        meals = new ArrayList<>();
+        meals.add(new Dinner("Biscuit", 500));
+        dayMeal.put("Dinner", meals);
+        MealDay newMealDay = new MealDay("04/04/2024", dayMeal);
+        addOrUpdateMeal(newMealDay); // Dodajemy nowy dzień posiłku do bazy
     }
 
         public void changeUI () {
@@ -81,31 +83,20 @@ public class AddingMeals extends AppCompatActivity {
 
     private void addOrUpdateMeal(MealDay newMealDay) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-        db.collection("users").document(documentId)
-            .collection("mealDays")
-            .get()
-            .addOnCompleteListener(task -> {
-                if (task.isSuccessful()) {
-                    QuerySnapshot querySnapshot = task.getResult();
-                    if (querySnapshot != null && !querySnapshot.isEmpty()) {
-
-                        // Pobierz pierwszy (i jedyny) dokument
-                        DocumentSnapshot document = querySnapshot.getDocuments().get(0);
-                        String documentId = document.getId();
-                        Log.d("AddingMeals", "Istnieje już lista posiłków, ID dokumentu: "
-                                + documentId);
-                    } else {
-                        Log.d("Informacja", "Dodaję nowy dokument z listą posiłków");
-
-                        db.collection("users").document(documentId)
-                                .collection("mealDays").add(newMealDay)
-                                .addOnSuccessListener(documentReference -> Log.d("AddingMeals",
-                                        "MealDay successfully added!"))
-                                .addOnFailureListener(e -> Log.e("AddingMeals", "Error adding MealDay", e));
+        CollectionReference usersRef = db.collection("users");
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        usersRef.whereEqualTo("userUID", Objects.requireNonNull(user).getUid()).get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            db.collection("users").document(document.getId())
+                                    .collection("mealDays").add(newMealDay)
+                                    .addOnSuccessListener(documentReference -> Log.d("AddingMeals",
+                                            "MealDay successfully added!"))
+                                    .addOnFailureListener(e -> Log.e("AddingMeals", "Error adding MealDay", e));
+                        }
                     }
-                }
-            });
+                });
     }
 
     }
