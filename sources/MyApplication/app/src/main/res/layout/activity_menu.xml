@@ -88,6 +88,7 @@
         app:srcCompat="@drawable/rectangle_blue" />
 
     <RadioGroup
+        android:id="@+id/radioGroup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
@@ -108,9 +109,7 @@
             android:layout_weight="1"
             android:background="@drawable/custom_radio_button"
             android:button="@null"
-            android:checked="true"
             android:clickable="true"
-            android:enabled="true"
             android:focusable="true"
             android:fontFamily="@font/poppins_medium"
             android:paddingTop="15dp"
@@ -126,9 +125,7 @@
             android:layout_weight="1"
             android:background="@drawable/custom_radio_button"
             android:button="@null"
-            android:checked="false"
             android:clickable="true"
-            android:enabled="true"
             android:focusable="true"
             android:fontFamily="@font/poppins_medium"
             android:paddingTop="15dp"
@@ -144,9 +141,7 @@
             android:layout_weight="1"
             android:background="@drawable/custom_radio_button"
             android:button="@null"
-            android:checked="false"
             android:clickable="true"
-            android:enabled="true"
             android:focusable="true"
             android:fontFamily="@font/poppins_medium"
             android:paddingTop="15dp"
@@ -162,9 +157,7 @@
             android:layout_weight="1"
             android:background="@drawable/custom_radio_button"
             android:button="@null"
-            android:checked="false"
             android:clickable="true"
-            android:enabled="true"
             android:focusable="true"
             android:fontFamily="@font/poppins_medium"
             android:paddingTop="15dp"
@@ -180,9 +173,7 @@
             android:layout_weight="1"
             android:background="@drawable/custom_radio_button"
             android:button="@null"
-            android:checked="false"
             android:clickable="true"
-            android:enabled="true"
             android:focusable="true"
             android:fontFamily="@font/poppins_medium"
             android:paddingTop="15dp"
@@ -198,9 +189,7 @@
             android:layout_weight="1"
             android:background="@drawable/custom_radio_button"
             android:button="@null"
-            android:checked="false"
             android:clickable="true"
-            android:enabled="true"
             android:focusable="true"
             android:fontFamily="@font/poppins_medium"
             android:paddingTop="15dp"
@@ -216,9 +205,7 @@
             android:layout_weight="1"
             android:background="@drawable/custom_radio_button"
             android:button="@null"
-            android:checked="false"
             android:clickable="true"
-            android:enabled="true"
             android:focusable="true"
             android:fontFamily="@font/poppins_medium"
             android:paddingTop="15dp"
@@ -236,7 +223,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="10dp"
-        android:layout_marginBottom="450dp"
+        android:layout_marginBottom="455dp"
         app:layout_constraintBottom_toTopOf="@+id/imageView3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -246,6 +233,7 @@
         app:srcCompat="@drawable/rectangle_gray" />
 
     <ScrollView
+        android:id="@+id/scrollView2"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="12dp"
@@ -285,7 +273,7 @@
                     android:layout_marginStart="12dp"
                     android:layout_marginTop="30dp"
                     android:fontFamily="@font/poppins"
-                    android:text="200 kcal"
+                    android:text="0 kcal"
                     android:textColor="#616061"
                     android:textSize="16sp" />
 
@@ -304,8 +292,6 @@
                     android:textAlignment="gravity"
                     android:textColor="#EDF5FC"
                     android:textSize="34sp" />
-
-
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
@@ -330,7 +316,7 @@
                     android:layout_marginStart="12dp"
                     android:layout_marginTop="30dp"
                     android:fontFamily="@font/poppins"
-                    android:text="200 kcal"
+                    android:text="0 kcal"
                     android:textColor="#616061"
                     android:textSize="16sp" />
 
