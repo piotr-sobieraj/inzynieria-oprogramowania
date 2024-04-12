@@ -24,8 +24,6 @@
 ---
 # 12 kwietnia
 ## Dodawanie posiłków
-![Dodawanie posiłków](/pictures/07.dodawanie.posilkow.jpg)
-
 <div style="text-align: center;">
     <img src="/pictures/07.dodawanie.posilkow.jpg" alt="Dodawanie posiłków" width="50%">
 </div>
@@ -34,9 +32,18 @@
 
 # 5 kwietnia
 ## Logowanie użytkowników do aplikacji
-![Wybór logowania](/pictures/06.logowanie.jpg)
-![Tworzenie nowego konta](/pictures/06-1.logowanie.jpg)
-![Logowanie na instniejące konto](/pictures/06-2.logowanie.jpg)
+<div style="text-align: center;">
+    <img src="/pictures/06.logowanie.jpg" alt="Logowanie" width="50%">
+</div>
+
+<div style="text-align: center;">
+    <img src="/pictures/06-1.logowanie.jpg" alt="Logowanie" width="50%">
+</div>
+
+<div style="text-align: center;">
+    <img src="/pictures//pictures/06-2.logowanie.jpg" alt="Logowanie" width="50%">
+</div>
+
 
 
 
