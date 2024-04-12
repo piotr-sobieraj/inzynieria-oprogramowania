@@ -1,5 +1,9 @@
 package com.example.myapplication;
 
+import static java.util.Calendar.DAY_OF_MONTH;
+import static java.util.Calendar.MONTH;
+import static java.util.Calendar.YEAR;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -7,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,8 +23,13 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
@@ -34,6 +44,7 @@ public class Menu extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_menu);
         changeUI();
+        getTypeOfDay();
         readMealDayFromDatabase();
     }
 
@@ -56,6 +67,14 @@ public class Menu extends AppCompatActivity {
                 }
             }
         });
+    }
+    public void getTypeOfDay(){
+        Calendar calendar = Calendar.getInstance();
+        Date date = calendar.getTime();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEE", new Locale("en"));
+        int radioButtonID = getResources().getIdentifier("radioButton" + simpleDateFormat.format(date), "id", getPackageName());
+        RadioButton radioButton = (RadioButton) findViewById(radioButtonID);
+        radioButton.setChecked(true);
     }
     public void deleteFromDatabase(String mealName, String nameProduct, String caloricValue){
         FirebaseFirestore db = FirebaseFirestore.getInstance();
