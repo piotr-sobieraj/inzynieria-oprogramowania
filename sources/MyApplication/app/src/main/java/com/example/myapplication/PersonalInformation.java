@@ -9,18 +9,14 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.RadioButton;
 import android.widget.TextView;
-
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
-
 import java.util.HashMap;
 import java.util.Objects;
 
@@ -114,7 +110,7 @@ public class PersonalInformation extends AppCompatActivity {
     }
 
     public void openMenu(){
-        Intent intent = new Intent(this, Menu.class);
+        Intent intent = new Intent(this, Plan.class);
         startActivity(intent);
     }
 

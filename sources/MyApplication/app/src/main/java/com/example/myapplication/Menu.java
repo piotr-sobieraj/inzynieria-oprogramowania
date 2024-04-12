@@ -146,16 +146,19 @@ public class Menu extends AppCompatActivity {
                                     }
                                 }
                                 else {
-                                    Log.d("SELECT", "Failed to search for meals" + task1.getException());
+                                    Log.d("SELECT", "Failed to search for meals " + task1.getException());
                                     Toast.makeText(this, "Failed to search for meals",
                                             Toast.LENGTH_SHORT).show();
                                 }
                             });
                         }
                     }
-                    Log.d("SELECT", "Failed to search for user" + task.getException());
-                    Toast.makeText(this, "Failed to search for user",
-                            Toast.LENGTH_SHORT).show();
+                    else {
+                        Log.d("SELECT", "Failed to search for user " + task.getException());
+                        Toast.makeText(this, "Failed to search for user",
+                                Toast.LENGTH_SHORT).show();
+                    }
+
                 });
     }
 

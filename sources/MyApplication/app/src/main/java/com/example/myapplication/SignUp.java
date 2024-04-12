@@ -6,15 +6,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 public class SignUp extends AppCompatActivity {
     public static String firstAndLastName;
@@ -50,7 +44,7 @@ public class SignUp extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         Log.d("signUp", "createUserWithEmail:success");
                         firstAndLastName = ((TextView) findViewById(R.id.personalText)).getText().toString();
-                        Intent intent = new Intent(SignUp.this, Plan.class);
+                        Intent intent = new Intent(SignUp.this, PersonalInformation.class);
                         startActivity(intent);
                     } else {
                         Log.w("signUp", "createUserWithEmail:failure", task.getException());

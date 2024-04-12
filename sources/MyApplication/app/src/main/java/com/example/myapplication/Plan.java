@@ -49,7 +49,7 @@ public class Plan extends AppCompatActivity {
                             User user = objectMapper.convertValue(document.getData(), User.class);
                             double reduce = Double.parseDouble(user.getTargetWeight()) - Double.parseDouble(user.getWeight());
                             LocalDate localDate = LocalDate.now();
-                            localDate.plusDays((long)(Math.abs(reduce)*7700/ 500));
+                            localDate = localDate.plusDays((long) (Math.abs(reduce)*7700/ 500));
                             String s = localDate.getDayOfMonth() + "/" + localDate.getMonthValue() + "/" + localDate.getYear();
                             ((TextView)findViewById(R.id.reachGoalDate)).setText(s);
                             String string = user.getWeight() + "kg -> " + reduce + " kg -> " + user.getTargetWeight() + " kg";
@@ -72,7 +72,7 @@ public class Plan extends AppCompatActivity {
     }
 
     public void start(View v){
-        Intent intent = new Intent(this, MoreUI.class);
+        Intent intent = new Intent(this, Menu.class);
         startActivity(intent);
     }
 }
