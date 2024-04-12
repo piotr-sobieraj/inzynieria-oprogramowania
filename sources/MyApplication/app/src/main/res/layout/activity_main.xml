@@ -22,7 +22,7 @@
         tools:srcCompat="@drawable/avatar" />
 
     <EditText
-        android:id="@+id/editTextWzrost"
+        android:id="@+id/editTextHeight"
         android:layout_width="0dp"
         android:layout_height="25dp"
         android:layout_marginStart="38dp"
@@ -159,7 +159,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editTextWaga"
+        android:id="@+id/editTextWeight"
         android:layout_width="0dp"
         android:layout_height="25dp"
         android:layout_marginStart="38dp"
