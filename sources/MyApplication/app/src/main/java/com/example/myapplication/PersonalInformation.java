@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
@@ -64,9 +63,9 @@ public class PersonalInformation extends AppCompatActivity {
     private String getSexFromView(){
         RadioButton radioButtonFemale = findViewById(R.id.radioButtonFemale);
         if(radioButtonFemale.isChecked())
-            return "K";
+            return "f";
         else
-            return "M";
+            return "m";
     }
 
     @NonNull
@@ -81,12 +80,12 @@ public class PersonalInformation extends AppCompatActivity {
 
     @NonNull
     private String getWeightFromView() {
-        return ((TextView)findViewById(R.id.editTextWaga)).getText().toString();
+        return ((TextView)findViewById(R.id.editTextWeight)).getText().toString();
     }
 
     @NonNull
     private String getHeightFromView() {
-        return ((TextView)findViewById(R.id.editTextWzrost)).getText().toString();
+        return ((TextView)findViewById(R.id.editTextHeight)).getText().toString();
     }
 
 
@@ -143,7 +142,7 @@ public class PersonalInformation extends AppCompatActivity {
             result = false;
         }
         else if (user.getHeight().matches("[a-zA-Z\\W]*[0-9]*[a-zA-Z\\W]+[0-9]*[a-zA-Z\\W]*")) {
-            ((TextView) findViewById(R.id.editTextWzrost)).setError("Height contains forbidden characters");
+            ((TextView) findViewById(R.id.editTextHeight)).setError("Height contains forbidden characters");
             result = false;
         }
         if (user.getSex() == null || Objects.equals(user.getSex(), ""))
@@ -157,19 +156,19 @@ public class PersonalInformation extends AppCompatActivity {
             result = false;
         }
         if (user.getHeight() == null || Objects.equals(user.getHeight(), "")) {
-            ((TextView) findViewById(R.id.editTextWzrost)).setError("Missing Height");
+            ((TextView) findViewById(R.id.editTextHeight)).setError("Missing Height");
             result = false;
         }
         else if (user.getHeight().matches("[a-zA-Z\\W]*[0-9]*[a-zA-Z\\W]+[0-9]*[a-zA-Z\\W]*")) {
-            ((TextView) findViewById(R.id.editTextWzrost)).setError("Height contains forbidden characters");
+            ((TextView) findViewById(R.id.editTextHeight)).setError("Height contains forbidden characters");
             result = false;
         }
         if (user.getWeight() == null || Objects.equals(user.getWeight(), "")) {
-            ((TextView) findViewById(R.id.editTextWaga)).setError("Missing Weight");
+            ((TextView) findViewById(R.id.editTextWeight)).setError("Missing Weight");
             result = false;
         }
         else if (user.getWeight().matches("[a-zA-Z\\W]*[0-9]*[a-zA-Z\\W]+[0-9]*[a-zA-Z\\W]*")) {
-            ((TextView) findViewById(R.id.editTextWaga)).setError("Weight contains forbidden characters");
+            ((TextView) findViewById(R.id.editTextWeight)).setError("Weight contains forbidden characters");
             result = false;
         }
         if (user.getTargetWeight() == null || Objects.equals(user.getTargetWeight(), "")) {
