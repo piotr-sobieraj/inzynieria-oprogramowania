@@ -53,4 +53,6 @@
     <string name="sec_breakfast">Second Breakfast</string>
     <string name="new_product">New product</string>
     <string name="energy">Energy values</string>
+    <string name="_0_kcal">0 kcal</string>
+    <string name="plus">+</string>
 </resources>

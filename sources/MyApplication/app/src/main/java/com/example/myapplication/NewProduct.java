@@ -1,13 +1,18 @@
 package com.example.myapplication;
 
+import android.app.Application;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -68,6 +73,9 @@ public class NewProduct extends AppCompatActivity {
                                             if (task2.isSuccessful()){
                                                 Log.d("UPDATE", "Update document successful");
                                                 Intent intent = new Intent(NewProduct.this, Menu.class);
+                                                intent.putExtra("createProductCard", true);
+                                                intent.putExtra("nameProduct", ((TextView)findViewById(R.id.editText)).getText().toString());
+                                                intent.putExtra("caloricProduct", ((TextView)findViewById(R.id.editText2)).getText().toString());
                                                 startActivity(intent);
                                             }
                                             else {
@@ -79,13 +87,20 @@ public class NewProduct extends AppCompatActivity {
                                     }
                                 }
                                 else {
-                                    Log.d("SELECT", "Failed to search for user" + task1.getException());
-                                    Toast.makeText(this, "Failed to search for user",
+                                    Log.d("SELECT", "Failed to search for meals" + task1.getException());
+                                    Toast.makeText(this, "Failed to search for meals",
                                             Toast.LENGTH_SHORT).show();
                                 }
                             });
                         }
                     }
+                    else
+                    {
+                        Log.d("SELECT", "Failed to search for user" + task.getException());
+                        Toast.makeText(this, "Failed to search for user",
+                                Toast.LENGTH_SHORT).show();
+                    }
                 });
     }
+
 }

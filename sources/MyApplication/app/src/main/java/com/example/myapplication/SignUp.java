@@ -50,7 +50,7 @@ public class SignUp extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         Log.d("signUp", "createUserWithEmail:success");
                         firstAndLastName = ((TextView) findViewById(R.id.personalText)).getText().toString();
-                        Intent intent = new Intent(SignUp.this, PersonalInformation.class);
+                        Intent intent = new Intent(SignUp.this, Plan.class);
                         startActivity(intent);
                     } else {
                         Log.w("signUp", "createUserWithEmail:failure", task.getException());

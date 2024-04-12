@@ -267,13 +267,13 @@
                     android:textSize="20sp" />
 
                 <TextView
-                    android:id="@+id/textView220"
+                    android:id="@+id/kcalBreakfast"
                     android:layout_width="wrap_content"
                     android:layout_height="29dp"
                     android:layout_marginStart="12dp"
                     android:layout_marginTop="30dp"
                     android:fontFamily="@font/poppins"
-                    android:text="0 kcal"
+                    android:text="@string/_0_kcal"
                     android:textColor="#616061"
                     android:textSize="16sp" />
 
@@ -287,13 +287,18 @@
                     android:fontFamily="@font/poppins"
                     android:gravity="center_horizontal|center_vertical"
                     android:includeFontPadding="false"
-                    android:text="+"
+                    android:text="@string/plus"
                     android:onClick="addProductBreakfast"
                     android:textAlignment="gravity"
                     android:textColor="#EDF5FC"
                     android:textSize="34sp" />
             </androidx.cardview.widget.CardView>
-
+            <LinearLayout
+                android:id="@+id/containerBreakfast"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+            </LinearLayout>
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -311,12 +316,13 @@
                     android:textSize="20sp" />
 
                 <TextView
+                    android:id="@+id/kcalSecondBreakfast"
                     android:layout_width="wrap_content"
                     android:layout_height="29dp"
                     android:layout_marginStart="12dp"
                     android:layout_marginTop="30dp"
                     android:fontFamily="@font/poppins"
-                    android:text="0 kcal"
+                    android:text="@string/_0_kcal"
                     android:textColor="#616061"
                     android:textSize="16sp" />
 
@@ -329,14 +335,18 @@
                     android:fontFamily="@font/poppins"
                     android:gravity="center_horizontal|center_vertical"
                     android:includeFontPadding="false"
-                    android:text="+"
+                    android:text="@string/plus"
                     android:onClick="addProductSecondBreakfast"
                     android:textAlignment="gravity"
                     android:textColor="#EDF5FC"
                     android:textSize="34sp" />
-
-
             </androidx.cardview.widget.CardView>
+            <LinearLayout
+                android:id="@+id/containerSecondBreakfast"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 

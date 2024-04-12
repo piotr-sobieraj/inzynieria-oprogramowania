@@ -113,19 +113,15 @@ public class PersonalInformation extends AppCompatActivity {
                 getWeightFromView(),getTargetWeightFromView(), null);
     }
 
-    public void openPlan(){
-        Intent intent = new Intent(this, Plan.class);
-        startActivity(intent);
-    }
-    public void openMore(){
-        Intent intent = new Intent(this, MoreUI.class);
+    public void openMenu(){
+        Intent intent = new Intent(this, Menu.class);
         startActivity(intent);
     }
 
     public void saveUserToDatabaseAndOpenAddingMeals(View v){
         if (validateUser(buildUserData())){
             saveUserToDatabase(buildUserData());
-            openPlan();
+            openMenu();
         }
     }
 
