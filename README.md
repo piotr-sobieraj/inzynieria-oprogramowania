@@ -1,5 +1,8 @@
 # Spis treści
 
+## 12 kwietnia
+- [Dodawanie posiłków](#oodawanie-posiłków)
+
 ## 5 kwietnia
 - [Logowanie użytkowników do aplikacji](#logowanie-użytkowników-do-aplikacji)
 
@@ -19,6 +22,16 @@
 
 
 ---
+# 12 kwietnia
+## Dodawanie posiłków
+![Dodawanie posiłków](/pictures/07.dodawanie.posilkow.jpg)
+
+<div style="text-align: center;">
+    <img src="/pictures/07.dodawanie.posilkow.jpg" alt="Dodawanie posiłków" width="50%">
+</div>
+
+
+
 # 5 kwietnia
 ## Logowanie użytkowników do aplikacji
 ![Wybór logowania](/pictures/06.logowanie.jpg)
