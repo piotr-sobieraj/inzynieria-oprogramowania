@@ -54,7 +54,12 @@
 
 # 14 marca
 ## Działająca pierwsza strona aplikacji
-![Pierwsza strona](/pictures/04.pierwsza.strona.png)
+
+<div style="text-align: center;">
+    <img src="/pictures/04.pierwsza.strona.png" alt="Pierwsza strona" width="30%">
+</div>
+
+
 
 ## Działająca pierwsza strona aplikacji II
 [![Filmik na yt](http://img.youtube.com/vi/M4exoZGWGHg/0.jpg)](http://www.youtube.com/watch?v=M4exoZGWGHg "Kliknij")
