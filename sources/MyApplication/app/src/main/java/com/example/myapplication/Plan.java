@@ -63,6 +63,8 @@ public class Plan extends AppCompatActivity {
                                 bmr = 655.1 + (9.563 * Double.parseDouble(user.getWeight()) + (1.85 * Integer.parseInt(user.getHeight())) - (4.676 * age));
                             }
                             ((TextView)findViewById(R.id.calorieLimit)).setText(String.valueOf((int)Math.floor(bmr)));
+
+                            saveCalorieLimitToDatabase(document, bmr);
                         }
                     } else {
                         Log.d("Firebase", "Error getting documents: ", task.getException());
@@ -70,8 +72,16 @@ public class Plan extends AppCompatActivity {
                 });
     }
 
+    private static void saveCalorieLimitToDatabase(QueryDocumentSnapshot document, double bmr) {
+        document.getReference().update("calorieLimit", (int)bmr)
+                .addOnSuccessListener(aVoid -> Log.d("Firebase", "Document successfully updated!"))
+                .addOnFailureListener(e -> Log.w("Firebase", "Error updating document", e));
+    }
+
     public void start(View v){
         Intent intent = new Intent(this, MoreUI.class);
         startActivity(intent);
     }
+
+
 }
