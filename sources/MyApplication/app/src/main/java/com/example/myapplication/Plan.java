@@ -54,8 +54,8 @@ public class Plan extends AppCompatActivity {
                             String s = localDate.getDayOfMonth() + "/" + localDate.getMonthValue() + "/" + localDate.getYear();
                             ((TextView)findViewById(R.id.reachGoalDate)).setText(s);
 
-                            user.setReachGoalDate(reachGoalDate);
-                            saveReachGoalDateToDatabase(document, reachGoalDate);
+                            user.setReachGoalDate(s);
+                            saveReachGoalDateToDatabase(document, s);
 
                             String string = user.getWeight() + "kg -> " + reduce + " kg -> " + user.getTargetWeight() + " kg";
                             ((TextView)findViewById(R.id.kilograms)).setText(string);
