@@ -1,7 +1,7 @@
 # Spis treści
 
 ## 12 kwietnia
-- [Dodawanie posiłków](#oodawanie-posiłków)
+- [Dodawanie posiłków](#dodawanie-posiłków)
 
 ## 5 kwietnia
 - [Logowanie użytkowników do aplikacji](#logowanie-użytkowników-do-aplikacji)
@@ -25,7 +25,7 @@
 # 12 kwietnia
 ## Dodawanie posiłków
 <div style="text-align: center;">
-    <img src="/pictures/07.dodawanie.posilkow.jpg" alt="Dodawanie posiłków" width="50%">
+    <img src="/pictures/07.dodawanie.posilkow.jpg" alt="Dodawanie posiłków" width="40%">
 </div>
 
 
@@ -33,15 +33,15 @@
 # 5 kwietnia
 ## Logowanie użytkowników do aplikacji
 <div style="text-align: center;">
-    <img src="/pictures/06.logowanie.jpg" alt="Logowanie" width="50%">
+    <img src="/pictures/06.logowanie.jpg" alt="Logowanie" width="40%">
 </div>
 
 <div style="text-align: center;">
-    <img src="/pictures/06-1.logowanie.jpg" alt="Logowanie" width="50%">
+    <img src="/pictures/06-1.logowanie.jpg" alt="Logowanie" width="40%">
 </div>
 
 <div style="text-align: center;">
-    <img src="/pictures//pictures/06-2.logowanie.jpg" alt="Logowanie" width="50%">
+    <img src="/pictures/06-2.logowanie.jpg" alt="Logowanie" width="40%">
 </div>
 
 
