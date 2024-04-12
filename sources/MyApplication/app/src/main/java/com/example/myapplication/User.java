@@ -1,13 +1,7 @@
 package com.example.myapplication;
 
-import android.annotation.SuppressLint;
-
-import androidx.annotation.NonNull;
-
 import java.io.Serializable;
 import java.util.List;
-
-import com.example.myapplication.MealDay;
 
 public class User implements Serializable {
 
@@ -18,6 +12,8 @@ public class User implements Serializable {
     private String height;
     private String weight;
     private String targetWeight;
+    private String calorieLimit;
+    private String reachGoalDate;
     private List<MealDay> mealCalendar;
 
     private User() {
@@ -32,6 +28,8 @@ public class User implements Serializable {
                 String height,
                 String weight,
                 String targetWeight,
+                String dailyCalorieLimit,
+                String reachGoalDate,
                 List<MealDay> mealCalendar
     ) {
         this.userUID = userUID;
@@ -41,6 +39,8 @@ public class User implements Serializable {
         this.height = height;
         this.weight = weight;
         this.targetWeight = targetWeight;
+        this.calorieLimit = dailyCalorieLimit;
+        this.reachGoalDate = reachGoalDate;
         this.mealCalendar = mealCalendar;
     }
 
@@ -50,6 +50,17 @@ public class User implements Serializable {
     public String getHeight() { return height; }
     public String getWeight() { return weight; }
     public String getTargetWeight() { return targetWeight; }
+    public String getDailyCalorieLimit() {
+        return calorieLimit;
+    }
+    public String getReachGoalDate() {
+        return reachGoalDate;
+    }
+
+
+    public String getUserUID() {
+        return userUID;
+    }
 
 
     public void setName(String name) { this.name = name; }
@@ -58,8 +69,7 @@ public class User implements Serializable {
     public void setHeight(String height) { this.height = height; }
     public void setWeight(String weight) { this.weight = weight; }
     public void setTargetWeight(String targetWeight) { this.targetWeight = targetWeight; }
+    public void setDailyCalorieLimit(String calorieLimit) { this.calorieLimit = calorieLimit; }
+    public void setReachGoalDate(String reachGoalDate) { this.reachGoalDate = reachGoalDate; }
 
-    public String getUserUID() {
-        return userUID;
-    }
 }

@@ -101,8 +101,16 @@ public class PersonalInformation extends AppCompatActivity {
     @NonNull
     private User buildUserData() {
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        return new User(Objects.requireNonNull(firebaseUser).getUid(),getNameFromView(),getSexFromView(),getBirthDateFromView(),getHeightFromView(),
-                getWeightFromView(),getTargetWeightFromView(), null);
+        return new User(Objects.requireNonNull(firebaseUser).getUid(),
+                        getNameFromView(),
+                        getSexFromView(),
+                        getBirthDateFromView(),
+                        getHeightFromView(),
+                        getWeightFromView(),
+                        getTargetWeightFromView(),
+              null,
+            null,
+            null);
     }
 
     public void openPlan(){
