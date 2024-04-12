@@ -29,7 +29,8 @@ public class Plan extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        Objects.requireNonNull(getSupportActionBar()).hide();
+        if (getSupportActionBar() != null)
+            Objects.requireNonNull(getSupportActionBar()).hide();
         calculateCaloric();
         setContentView(R.layout.plan_ui);
     }
@@ -48,9 +49,10 @@ public class Plan extends AppCompatActivity {
                             User user = objectMapper.convertValue(document.getData(), User.class);
                             double reduce = Double.parseDouble(user.getTargetWeight()) - Double.parseDouble(user.getWeight());
                             LocalDate localDate = LocalDate.now();
-                            localDate.plusDays((long)(Math.abs(reduce)*7700/ 500));
-                            String reachGoalDate = localDate.getDayOfMonth() + "/" + localDate.getMonthValue() + "/" + localDate.getYear();
-                            ((TextView)findViewById(R.id.reachGoalDate)).setText(reachGoalDate);
+
+                            localDate = localDate.plusDays((long) (Math.abs(reduce)*7700/ 500));
+                            String s = localDate.getDayOfMonth() + "/" + localDate.getMonthValue() + "/" + localDate.getYear();
+                            ((TextView)findViewById(R.id.reachGoalDate)).setText(s);
 
                             user.setReachGoalDate(reachGoalDate);
                             saveReachGoalDateToDatabase(document, reachGoalDate);
@@ -88,7 +90,7 @@ public class Plan extends AppCompatActivity {
     }
 
     public void start(View v){
-        Intent intent = new Intent(this, MoreUI.class);
+        Intent intent = new Intent(this, Menu.class);
         startActivity(intent);
     }
 

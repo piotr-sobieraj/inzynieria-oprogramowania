@@ -6,15 +6,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 public class SignUp extends AppCompatActivity {
     public static String firstAndLastName;
@@ -61,17 +55,17 @@ public class SignUp extends AppCompatActivity {
     }
 
     public void getCred(){
-        email = ((TextView)findViewById(R.id.email)).getText().toString();
-        password = ((TextView)findViewById(R.id.password)).getText().toString();
+        email = ((TextView)findViewById(R.id.login_email)).getText().toString();
+        password = ((TextView)findViewById(R.id.login_password)).getText().toString();
     }
 
     public boolean signUp(){
         if(email.isEmpty()){
-            ((TextView)findViewById(R.id.email)).setError("Missing Email");
+            ((TextView)findViewById(R.id.login_email)).setError("Missing Email");
             return false;
         }
         if (password.isEmpty()){
-            ((TextView)findViewById(R.id.password)).setError("Missing Password");
+            ((TextView)findViewById(R.id.login_password)).setError("Missing Password");
             return false;
         }
         return true;

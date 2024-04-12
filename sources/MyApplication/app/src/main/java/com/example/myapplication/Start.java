@@ -55,7 +55,7 @@ public class Start extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         for (QueryDocumentSnapshot document : task.getResult()) {
                             Log.d("Firebase", document.getId() + " => " + document.getData());
-                            Intent intent = new Intent(Start.this, MoreUI.class);
+                            Intent intent = new Intent(Start.this, Menu.class);
                             startActivity(intent);
                         }
                     }
