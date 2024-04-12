@@ -33,15 +33,15 @@
 # 5 kwietnia
 ## Logowanie użytkowników do aplikacji
 <div style="text-align: center;">
-    <img src="/pictures/06.logowanie.jpg" alt="Logowanie" width="40%">
+    <img src="/pictures/06.logowanie.jpg" alt="Logowanie" width="30%">
 </div>
 
 <div style="text-align: center;">
-    <img src="/pictures/06-1.logowanie.jpg" alt="Logowanie" width="40%">
+    <img src="/pictures/06-1.logowanie.jpg" alt="Logowanie" width="30%">
 </div>
 
 <div style="text-align: center;">
-    <img src="/pictures/06-2.logowanie.jpg" alt="Logowanie" width="40%">
+    <img src="/pictures/06-2.logowanie.jpg" alt="Logowanie" width="30%">
 </div>
 
 
