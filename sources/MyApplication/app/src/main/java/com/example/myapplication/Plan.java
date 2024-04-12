@@ -49,8 +49,12 @@ public class Plan extends AppCompatActivity {
                             double reduce = Double.parseDouble(user.getTargetWeight()) - Double.parseDouble(user.getWeight());
                             LocalDate localDate = LocalDate.now();
                             localDate.plusDays((long)(Math.abs(reduce)*7700/ 500));
-                            String s = localDate.getDayOfMonth() + "/" + localDate.getMonthValue() + "/" + localDate.getYear();
-                            ((TextView)findViewById(R.id.reachGoalDate)).setText(s);
+                            String reachGoalDate = localDate.getDayOfMonth() + "/" + localDate.getMonthValue() + "/" + localDate.getYear();
+                            ((TextView)findViewById(R.id.reachGoalDate)).setText(reachGoalDate);
+
+                            user.setReachGoalDate(reachGoalDate);
+                            saveReachGoalDateToDatabase(document, reachGoalDate);
+
                             String string = user.getWeight() + "kg -> " + reduce + " kg -> " + user.getTargetWeight() + " kg";
                             ((TextView)findViewById(R.id.kilograms)).setText(string);
                             final Calendar c = Calendar.getInstance();
@@ -62,20 +66,25 @@ public class Plan extends AppCompatActivity {
                             else {
                                 bmr = 655.1 + (9.563 * Double.parseDouble(user.getWeight()) + (1.85 * Integer.parseInt(user.getHeight())) - (4.676 * age));
                             }
-                            ((TextView)findViewById(R.id.calorieLimit)).setText(String.valueOf((int)Math.floor(bmr)));
+                            ((TextView)findViewById(R.id.dailyCalorieLimit)).setText(String.valueOf((int)Math.floor(bmr)));
 
-                            saveCalorieLimitToDatabase(document, bmr);
+                            user.setDailyCalorieLimit(String.valueOf(bmr));
+                            saveDailyCalorieLimitToDatabase(document, bmr);
                         }
                     } else {
                         Log.d("Firebase", "Error getting documents: ", task.getException());
                     }
                 });
     }
-
-    private static void saveCalorieLimitToDatabase(QueryDocumentSnapshot document, double bmr) {
-        document.getReference().update("calorieLimit", (int)bmr)
+    private static void saveReachGoalDateToDatabase(QueryDocumentSnapshot document, String reachGoalDate) {
+        document.getReference().update("reachGoalDate", reachGoalDate)
                 .addOnSuccessListener(aVoid -> Log.d("Firebase", "Document successfully updated!"))
-                .addOnFailureListener(e -> Log.w("Firebase", "Error updating document", e));
+                .addOnFailureListener(e -> Log.w("Firebase", "Error updating document - reachGoalDate", e));
+    }
+    private static void saveDailyCalorieLimitToDatabase(QueryDocumentSnapshot document, double bmr) {
+        document.getReference().update("dailyCalorieLimit", (int)bmr)
+                .addOnSuccessListener(aVoid -> Log.d("Firebase", "Document successfully updated!"))
+                .addOnFailureListener(e -> Log.w("Firebase", "Error updating document - dailyCalorieLimit", e));
     }
 
     public void start(View v){
