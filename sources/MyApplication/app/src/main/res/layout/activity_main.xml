@@ -22,7 +22,7 @@
         tools:srcCompat="@drawable/avatar" />
 
     <EditText
-        android:id="@+id/editTextWzrost"
+        android:id="@+id/editTextHeight"
         android:layout_width="0dp"
         android:layout_height="25dp"
         android:layout_marginStart="38dp"
@@ -52,9 +52,8 @@
     <Button
         android:id="@+id/button"
         android:layout_width="0dp"
-        android:layout_height="43dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="38dp"
-        android:layout_marginTop="644dp"
         android:layout_marginEnd="38dp"
         android:background="@drawable/buttons"
         android:fontFamily="@font/poppins_medium"
@@ -63,10 +62,12 @@
         android:textAllCaps="false"
         android:textColor="#FFFFFF"
         android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.927" />
 
     <TextView
         android:id="@+id/textView9"
@@ -159,7 +160,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editTextWaga"
+        android:id="@+id/editTextWeight"
         android:layout_width="0dp"
         android:layout_height="25dp"
         android:layout_marginStart="38dp"

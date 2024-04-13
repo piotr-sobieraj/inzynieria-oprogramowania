@@ -10,11 +10,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
@@ -50,7 +47,8 @@ public class Reauthenticate extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        Objects.requireNonNull(getSupportActionBar()).hide();
+        if (getSupportActionBar() != null)
+            Objects.requireNonNull(getSupportActionBar()).hide();
         setContentView(R.layout.reauthenticate);
     }
 
@@ -71,27 +69,69 @@ public class Reauthenticate extends AppCompatActivity {
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                db.collection("users").document(
-                                        document.getId()).delete().addOnCompleteListener(
-                                        task2 -> Log.d("Firebase", "Document successful deleted"));
+                                db.collection("users").document(document.getId()).collection("mealDays").get()
+                                        .addOnCompleteListener(task1 -> {
+                                            if (task1.isSuccessful()){
+                                                for (QueryDocumentSnapshot documentSnapshot : task1.getResult()){
+                                                    db.collection("users").document(document.getId()).collection("mealDays").document(documentSnapshot.getId()).delete()
+                                                            .addOnCompleteListener(task2 -> {
+                                                                if (task2.isSuccessful()){
+                                                                    Log.d("Firebase", "Document successful deleted");
+                                                                    db.collection("users").document(
+                                                                            document.getId()).delete().addOnCompleteListener(
+                                                                            task3 -> {
+                                                                                if (task3.isSuccessful()){
+                                                                                    Log.d("Firebase", "Document successful deleted");
+                                                                                }
+                                                                                else {
+                                                                                    Log.d("Firebase", "Document delete failed" + task3.getException());
+                                                                                    Toast.makeText(this, "Document delete failed",
+                                                                                            Toast.LENGTH_SHORT).show();
+                                                                                }
+                                                                            });
+                                                                }
+                                                                else {
+                                                                    Log.d("Firebase", "Document delete failed" + task2.getException());
+                                                                    Toast.makeText(this, "Document delete failed",
+                                                                            Toast.LENGTH_SHORT).show();
+                                                                }
+                                                            });
+                                                }
+                                            }
+                                            else
+                                            {
+                                                Log.d("SELECT", "Failed to search for meals" + task1.getException());
+                                                Toast.makeText(this, "Failed to search for meals",
+                                                        Toast.LENGTH_SHORT).show();
+                                            }
+                                        }
+                                );
                             }
                         }
+                        else {
+                            Log.d("SELECT", "Failed to search for user" + task.getException());
+                            Toast.makeText(this, "Failed to search for user",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+
                     });
             currentUser.reauthenticate(credential)
                     .addOnCompleteListener(task -> {
-                        Log.d(TAG, "User re-authenticated.");
-                        currentUser.delete()
-                                .addOnCompleteListener(task1 -> {
-                                    if (task1.isSuccessful()) {
-                                        Log.d(TAG, "User account deleted.");
-                                        Intent intent = new Intent(Reauthenticate.this, SignUp.class);
-                                        startActivity(intent);
-                                    } else {
-                                        Toast.makeText(Reauthenticate.this, "Authentication failed.",
-                                                Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-
+                        if(task.isSuccessful()){
+                            Log.d(TAG, "User re-authenticated.");
+                            currentUser.delete()
+                                    .addOnCompleteListener(task1 -> {
+                                        if (task1.isSuccessful()) {
+                                            Log.d(TAG, "User account deleted.");
+                                            Intent intent = new Intent(Reauthenticate.this, Start.class);
+                                            startActivity(intent);
+                                        }
+                                    });
+                        }
+                        else {
+                            Toast.makeText(Reauthenticate.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                        }
                     });
 
 

@@ -6,19 +6,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 public class SignUp extends AppCompatActivity {
-
-    private static final String TAG = "EmailPassword";
+    public static String firstAndLastName;
     private FirebaseAuth mAuth;
 
     private String email = "";
@@ -36,14 +29,6 @@ public class SignUp extends AppCompatActivity {
         setContentView(R.layout.signup_ui);
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser != null){
-            reload(currentUser);
-        }
-    }
 
     public void register(View v){
         getCred();
@@ -58,7 +43,7 @@ public class SignUp extends AppCompatActivity {
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
                         Log.d("signUp", "createUserWithEmail:success");
-                        FirebaseUser user = mAuth.getCurrentUser();
+                        firstAndLastName = ((TextView) findViewById(R.id.personalText)).getText().toString();
                         Intent intent = new Intent(SignUp.this, PersonalInformation.class);
                         startActivity(intent);
                     } else {
@@ -68,39 +53,21 @@ public class SignUp extends AppCompatActivity {
                     }
                 });
     }
-    private void reload(FirebaseUser user) {
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        CollectionReference usersRef = db.collection("users");
-        usersRef.whereEqualTo("userUID", user.getUid()).get()
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        for (QueryDocumentSnapshot document : task.getResult()) {
-                            Log.d("Firebase", document.getId() + " => " + document.getData());
-                            Intent intent = new Intent(SignUp.this, MoreUI.class);
-                            startActivity(intent);
-                        }
-                    } else {
-                        Log.d("Firebase", "Error getting documents: ", task.getException());
-                        Intent intent = new Intent(SignUp.this, PersonalInformation.class);
-                        startActivity(intent);
-                    }
-                });
-    }
+
     public void getCred(){
-        email = ((TextView)findViewById(R.id.email)).getText().toString();
-        password = ((TextView)findViewById(R.id.password)).getText().toString();
+        email = ((TextView)findViewById(R.id.login_email)).getText().toString();
+        password = ((TextView)findViewById(R.id.login_password)).getText().toString();
     }
 
     public boolean signUp(){
         if(email.isEmpty()){
-            ((TextView)findViewById(R.id.email)).setError("Missing Email");
+            ((TextView)findViewById(R.id.login_email)).setError("Missing Email");
             return false;
         }
         if (password.isEmpty()){
-            ((TextView)findViewById(R.id.password)).setError("Missing Password");
+            ((TextView)findViewById(R.id.login_password)).setError("Missing Password");
             return false;
         }
         return true;
     }
-
 }
