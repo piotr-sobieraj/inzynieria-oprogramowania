@@ -55,4 +55,11 @@
     <string name="energy">Energy values</string>
     <string name="_0_kcal">0 kcal</string>
     <string name="plus">+</string>
+    <string name="targets">Targets</string>
+    <string name="body_weight">Body weight</string>
+    <string name="rate_of_weight_change">Rate of weight change</string>
+    <string name="minus">-</string>
+    <string name="_0_5_kg">0,5 kg</string>
+    <string name="_0_1_0_7_kg_per_week_nrecommended_rate_of_weight_nchange_n_n0_8_1_kg_per_week_nhigh_rate_of_weight_change_can_be_nunhealthy">0.1-0.7 kg per week\nRecommended rate of weight\nchange\n\n0.8-1 kg per week\nHigh rate of weight change, can be\nunhealthy</string>
+    <string name="target_achievemnt_forecast">Target achievemnt forecast</string>
 </resources>

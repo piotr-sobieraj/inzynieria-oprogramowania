@@ -1,11 +1,13 @@
 package com.example.myapplication;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -34,18 +36,29 @@ public class Profile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.profile_ui);
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-            actionBar.setCustomView(R.layout.support_bar2);
-        }
-
         fillControls();
+        checkedRadioButton();
     }
 
     public void back(View v){
         Intent intent = new Intent(this, Options.class);
         startActivity(intent);
+    }
+
+    public void checkedRadioButton(){
+        RadioGroup radioGroup = findViewById(R.id.sexRadioGroup);
+        radioGroup.setOnCheckedChangeListener((group, checkedId) -> {
+            RadioButton rb = findViewById(checkedId);
+            if (checkedId == R.id.radioButtonFemale) {
+                rb.setButtonTintList(ColorStateList.valueOf(getColor(R.color.defaultColor)));
+                RadioButton rb2 = findViewById(R.id.radioButtonMale);
+                rb2.setButtonTintList(ColorStateList.valueOf(getColor(R.color.gray)));
+            } else if (checkedId == R.id.radioButtonMale) {
+                rb.setButtonTintList(ColorStateList.valueOf(getColor(R.color.defaultColor)));
+                RadioButton rb2 = findViewById(R.id.radioButtonFemale);
+                rb2.setButtonTintList(ColorStateList.valueOf(getColor(R.color.gray)));
+            }
+        });
     }
 
 

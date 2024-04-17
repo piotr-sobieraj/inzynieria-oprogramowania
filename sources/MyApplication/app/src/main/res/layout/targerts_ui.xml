@@ -5,13 +5,12 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Options">
+    tools:context=".Targets">
 
     <androidx.cardview.widget.CardView
         android:layout_width="415dp"
         android:layout_height="77dp"
         app:cardBackgroundColor="#3171FE"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -35,7 +34,7 @@
             android:layout_centerVertical="true"
             android:layout_gravity="center"
             android:fontFamily="@font/poppins_medium"
-            android:text="@string/options"
+            android:text="@string/targets"
             android:textColor="#FFFFFF"
             android:textSize="24sp" />
     </androidx.cardview.widget.CardView>
@@ -43,15 +42,15 @@
     <Button
         android:id="@+id/bodyWeightButton"
         android:layout_width="411dp"
-        android:layout_height="63dp"
+        android:layout_height="62dp"
         android:layout_marginTop="76dp"
         android:background="@null"
         android:fontFamily="@font/poppins_medium"
-        android:onClick="profile"
+        android:onClick="bodyWeight"
         android:paddingStart="20dp"
         android:paddingEnd="20dp"
-        android:paddingBottom="5dp"
-        android:text="@string/profile"
+        android:paddingBottom="20dp"
+        android:text="@string/body_weight"
         android:textAlignment="textStart"
         android:textAllCaps="false"
         android:textSize="20sp"
@@ -71,16 +70,16 @@
 
     <Button
         android:id="@+id/rateOfWeightButton"
-        android:layout_width="409dp"
-        android:layout_height="66dp"
+        android:layout_width="415dp"
+        android:layout_height="79dp"
         android:background="@null"
         android:fontFamily="@font/poppins_medium"
-        android:onClick="targets"
+        android:onClick="rateOfWeight"
         android:paddingStart="20dp"
         android:paddingEnd="20dp"
-        android:paddingBottom="5dp"
-        android:text="@string/targets"
-        android:textAlignment="textStart"
+        android:paddingBottom="20dp"
+        android:text="@string/rate_of_weight_change"
+        android:textAlignment="viewStart"
         android:textAllCaps="false"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -97,24 +96,27 @@
         app:layout_constraintTop_toBottomOf="@+id/rateOfWeightButton" />
 
     <TextView
-        android:id="@+id/textView23"
+        android:id="@+id/bodyWeightText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="115dp"
+        android:layout_marginTop="110dp"
         android:fontFamily="@font/poppins_medium"
-        android:text="{sex}, {dateBirthday}, {height}"
-        android:textSize="14sp"
+        android:text="{current weight} -> {Target weight}"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView24"
+        android:id="@+id/textView18"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="180dp"
-        android:text="{current weight} kg -> {target weight} kg, {rate} kg / week"
+        android:fontFamily="@font/poppins_medium"
+        android:text="{rate weight} kg / week"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
