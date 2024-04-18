@@ -13,6 +13,15 @@
         android:theme="@style/AppTheme"
         tools:targetApi="31">
         <activity
+            android:name=".TargetsRateWeight"
+            android:exported="false" />
+        <activity
+            android:name=".TargetsBodyWeight"
+            android:exported="false" />
+        <activity
+            android:name=".Targets"
+            android:exported="false" />
+        <activity
             android:name=".NewProduct"
             android:exported="false" />
         <activity
@@ -42,9 +51,6 @@
         </activity>
         <activity
             android:name=".PersonalInformation"
-            android:exported="true" />
-        <activity
-            android:name=".AddingMeals"
             android:exported="true" />
         <activity
             android:name=".MoreUI"

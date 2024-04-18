@@ -2,21 +2,25 @@ package com.example.myapplication;
 
 import static android.content.ContentValues.TAG;
 
-import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
+
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
+
 import java.util.HashMap;
 import java.util.Objects;
 
@@ -30,27 +34,41 @@ public class PersonalInformation extends AppCompatActivity {
 
     private void setUpUI() {
         EdgeToEdge.enable(this);
-        if (getSupportActionBar() != null)
-            Objects.requireNonNull(getSupportActionBar()).hide();
         setContentView(R.layout.activity_main);
+        checkedRadioButton();
         Button date = findViewById(R.id.pickDate);
         final Calendar c = Calendar.getInstance();
-        int mYear = c.get(Calendar.YEAR);
+        int mYear = c.get(Calendar.YEAR) - 15;
         int mMonth = c.get(Calendar.MONTH);
         int mDay = c.get(Calendar.DAY_OF_MONTH);
-        String date_string = mDay + "/" + (mMonth + 1) + "/" + (mYear - 15);
+        String date_string = mDay + "/" + (mMonth + 1) + "/" + mYear;
         date.setText(date_string);
         date.setOnClickListener(v -> {
-
-            DatePickerDialog datePickerDialog = new DatePickerDialog(PersonalInformation.this,
+            SpinnerDatePickerDialog datePickerDialog = new SpinnerDatePickerDialog(this,
                     (view, year, monthOfYear, dayOfMonth) -> {
-                        String date_s = dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
+                        String date_s = dayOfMonth + "/" + (monthOfYear + 1) + "/" + (year);
                         date.setText(date_s);
                     },
                     mYear, mMonth, mDay);
             datePickerDialog.show();
         });
         ((TextView) findViewById(R.id.editTextName)).setText(SignUp.firstAndLastName);
+    }
+
+    public void checkedRadioButton(){
+        RadioGroup radioGroup = findViewById(R.id.sexRadioGroup2);
+        radioGroup.setOnCheckedChangeListener((group, checkedId) -> {
+            RadioButton rb = findViewById(checkedId);
+            if (checkedId == R.id.radioButtonFemale) {
+                rb.setButtonTintList(ColorStateList.valueOf(getColor(R.color.defaultColor)));
+                RadioButton rb2 = findViewById(R.id.radioButtonMale);
+                rb2.setButtonTintList(ColorStateList.valueOf(getColor(R.color.gray)));
+            } else if (checkedId == R.id.radioButtonMale) {
+                rb.setButtonTintList(ColorStateList.valueOf(getColor(R.color.defaultColor)));
+                RadioButton rb2 = findViewById(R.id.radioButtonFemale);
+                rb2.setButtonTintList(ColorStateList.valueOf(getColor(R.color.gray)));
+            }
+        });
     }
 
     @NonNull
