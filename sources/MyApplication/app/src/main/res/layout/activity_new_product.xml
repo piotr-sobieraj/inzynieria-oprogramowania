@@ -7,6 +7,116 @@
     android:layout_height="match_parent"
     tools:context=".NewProduct">
 
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="140dp"
+        android:layout_marginEnd="40dp"
+        android:fontFamily="@font/poppins"
+        android:text="@string/carbs"
+        android:textAlignment="viewStart"
+        android:textColor="#616061"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@+id/editText2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView14" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="190dp"
+        android:layout_marginEnd="40dp"
+        android:fontFamily="@font/poppins"
+        android:text="@string/proteins"
+        android:textAlignment="viewStart"
+        android:textColor="#616061"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@+id/editText2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView14" />
+
+    <TextView
+        android:id="@+id/textView16"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="30dp"
+        android:fontFamily="@font/poppins"
+        android:text="@string/kcal"
+        android:textAlignment="viewEnd"
+        android:textAllCaps="false"
+        android:textColor="#616061"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/editText2"
+        app:layout_constraintTop_toBottomOf="@+id/textView14" />
+
+    <EditText
+        android:layout_width="0dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="225dp"
+        android:layout_marginTop="90dp"
+        android:layout_marginEnd="65dp"
+        android:background="@drawable/rectangle_border"
+        android:ems="10"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView14"
+        tools:ignore="LabelFor" />
+
+    <EditText
+        android:layout_width="0dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="225dp"
+        android:layout_marginTop="140dp"
+        android:layout_marginEnd="65dp"
+        android:background="@drawable/rectangle_border"
+        android:ems="10"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView14"
+        tools:ignore="LabelFor" />
+
+    <EditText
+        android:layout_width="0dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="225dp"
+        android:layout_marginTop="190dp"
+        android:layout_marginEnd="65dp"
+        android:background="@drawable/rectangle_border"
+        android:ems="10"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView14"
+        tools:ignore="LabelFor" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="90dp"
+        android:layout_marginEnd="40dp"
+        android:fontFamily="@font/poppins"
+        android:text="@string/fats"
+        android:textAlignment="viewStart"
+        android:textColor="#616061"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@+id/editText2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView14" />
+
     <ImageView
         android:id="@+id/imageView4"
         android:layout_width="0dp"
@@ -100,7 +210,7 @@
         android:layout_marginEnd="40dp"
         android:fontFamily="@font/poppins"
         android:text="@string/energy"
-        android:textAlignment="center"
+        android:textAlignment="viewStart"
         android:textColor="#616061"
         android:textSize="16sp"
         app:layout_constraintEnd_toStartOf="@+id/editText2"
@@ -125,15 +235,46 @@
         tools:ignore="LabelFor" />
 
     <TextView
-        android:id="@+id/textView16"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="90dp"
         android:layout_marginEnd="30dp"
         android:fontFamily="@font/poppins"
-        android:text="@string/kcal"
-        android:textAlignment="center"
+        android:text="@string/gram"
+        android:textAlignment="viewEnd"
+        android:textAllCaps="false"
+        android:textColor="#616061"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/editText2"
+        app:layout_constraintTop_toBottomOf="@+id/textView14" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="140dp"
+        android:layout_marginEnd="30dp"
+        android:fontFamily="@font/poppins"
+        android:text="@string/gram"
+        android:textAlignment="viewEnd"
+        android:textAllCaps="false"
+        android:textColor="#616061"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/editText2"
+        app:layout_constraintTop_toBottomOf="@+id/textView14" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="190dp"
+        android:layout_marginEnd="30dp"
+        android:fontFamily="@font/poppins"
+        android:text="@string/gram"
+        android:textAlignment="viewEnd"
         android:textAllCaps="false"
         android:textColor="#616061"
         android:textSize="16sp"

@@ -54,5 +54,13 @@
     <string name="new_product">New product</string>
     <string name="energy">Energy values</string>
     <string name="_0_kcal">0 kcal</string>
+    <string name="_0_g">0 g</string>
     <string name="plus">+</string>
+    <string name="fats">Fats</string>
+    <string name="fat">Fat</string>
+    <string name="carbs">Carbohydrates</string>
+    <string name="carb">Carbs</string>
+    <string name="proteins">Proteins</string>
+    <string name="protein">Protein</string>
+    <string name="gram">g</string>
 </resources>
