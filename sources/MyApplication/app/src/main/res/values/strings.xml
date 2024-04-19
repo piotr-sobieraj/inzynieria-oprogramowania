@@ -70,5 +70,8 @@
     <string name="_0_5_kg">0,5 kg</string>
     <string name="_0_1_0_7_kg_per_week_nrecommended_rate_of_weight_nchange_n_n0_8_1_kg_per_week_nhigh_rate_of_weight_change_can_be_nunhealthy">0.1-0.7 kg per week\nRecommended rate of weight\nchange\n\n0.8-1 kg per week\nHigh rate of weight change, can be\nunhealthy</string>
     <string name="target_achievemnt_forecast">Target achievemnt forecast</string>
+    <string name="time_to_weight_in">Time to weight in</string>
+    <string name="last_time_weighted">the last time you weighted yourself</string>
+    <string name="new_record">New record</string>
 
 </resources>
