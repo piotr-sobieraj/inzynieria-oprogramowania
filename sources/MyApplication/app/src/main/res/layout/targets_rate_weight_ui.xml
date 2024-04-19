@@ -25,7 +25,7 @@
         android:textColor="#EDF5FC"
         android:textSize="34sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView17"
+        app:layout_constraintStart_toEndOf="@+id/date"
         app:layout_constraintTop_toBottomOf="@+id/cardView" />
 
     <Button
@@ -45,7 +45,7 @@
         android:textAlignment="gravity"
         android:textColor="#EDF5FC"
         android:textSize="34sp"
-        app:layout_constraintEnd_toStartOf="@+id/textView17"
+        app:layout_constraintEnd_toStartOf="@+id/date"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView" />
 
@@ -120,7 +120,7 @@
     </androidx.cardview.widget.CardView>
 
     <TextView
-        android:id="@+id/textView17"
+        android:id="@+id/date"
         android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"

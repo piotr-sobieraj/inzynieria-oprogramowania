@@ -7,16 +7,16 @@ import static java.util.Calendar.YEAR;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -24,6 +24,7 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -35,7 +36,6 @@ import java.util.Objects;
 import java.util.Set;
 
 public class Menu extends AppCompatActivity {
-    public static String typeOfMeal;
 
 
     @Override
@@ -44,7 +44,7 @@ public class Menu extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_menu);
         changeUI();
-        getTypeOfDay();
+        setActualDate();
         readMealDayFromDatabase();
     }
 
@@ -68,14 +68,21 @@ public class Menu extends AppCompatActivity {
             }
         });
     }
-    public void getTypeOfDay(){
-        Calendar calendar = Calendar.getInstance();
-        Date date = calendar.getTime();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEE", new Locale("en"));
-        int radioButtonID = getResources().getIdentifier("radioButton" + simpleDateFormat.format(date), "id", getPackageName());
-        RadioButton radioButton = (RadioButton) findViewById(radioButtonID);
-        radioButton.setChecked(true);
+
+    public void setActualDate(){
+        if (getIntent().getStringExtra("date") == null){
+            TextView date = findViewById(R.id.date);
+            Calendar c = Calendar.getInstance();
+            String stringDate = c.get(DAY_OF_MONTH) + "/" + (c.get(MONTH) + 1) + "/" + c.get(YEAR);
+            date.setText(stringDate);
+        }
+        else {
+            TextView date = findViewById(R.id.date);
+            date.setText(getIntent().getStringExtra("date"));
+        }
     }
+
+
     public void deleteFromDatabase(String mealName, String nameProduct, String caloricValue){
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         CollectionReference usersRef = db.collection("users");
@@ -151,15 +158,19 @@ public class Menu extends AppCompatActivity {
                                     for (QueryDocumentSnapshot documentSnapshot : task1.getResult()) {
                                         ObjectMapper objectMapper = new ObjectMapper();
                                         MealDay mealDay = objectMapper.convertValue(documentSnapshot.getData(), MealDay.class);
-                                        Map<String, List<Meal>> map = mealDay.getMeals();
-                                        Set<String> keys = mealDay.getMeals().keySet();
-                                        for (String key: keys){
-                                            List<Meal> mealList = map.get(key);
-                                            if (mealList == null) {
-                                                mealList = new ArrayList<>();
-                                            }
-                                            for (Meal meal:mealList){
-                                                addCardProduct(key, meal.name, String.valueOf(meal.caloricValue));
+                                        TextView dateText = findViewById(R.id.date);
+                                        Log.d("DATE", dateText.getText().toString());
+                                        if (Objects.equals(mealDay.getDate(), dateText.getText().toString())){
+                                            Map<String, List<Meal>> map = mealDay.getMeals();
+                                            Set<String> keys = mealDay.getMeals().keySet();
+                                            for (String key: keys){
+                                                List<Meal> mealList = map.get(key);
+                                                if (mealList == null) {
+                                                    mealList = new ArrayList<>();
+                                                }
+                                                for (Meal meal:mealList){
+                                                    addCardProduct(key, meal.name, String.valueOf(meal.caloricValue));
+                                                }
                                             }
                                         }
                                     }
@@ -186,31 +197,74 @@ public class Menu extends AppCompatActivity {
         TextView product = view.findViewById(R.id.product);
         product.setText(productName);
         TextView calories = view.findViewById(R.id.calories);
-        calories.setText(caloricValue);
+        String tmp = caloricValue + " kcal";
+        calories.setText(tmp);
         Button delete = view.findViewById(R.id.delete);
         LinearLayout layout = findViewById(getResources().getIdentifier("container"+mealName, "id", getPackageName()));
         delete.setOnClickListener(v -> {
             layout.removeView(view);
             TextView cal = findViewById(getResources().getIdentifier("kcal"+mealName, "id", getPackageName()));
-            String s = (Integer.parseInt(cal.getText().toString().split(" ")[0]) - Integer.parseInt(Objects.requireNonNull(caloricValue))) + " kcal";
+            String[] splited = cal.getText().toString().split(" ");
+            String s = (Integer.parseInt(splited[0]) - Integer.parseInt(Objects.requireNonNull(caloricValue))) + " kcal " + splited[2] + " " + splited[3] + " " + splited[4];
             cal.setText(s);
             deleteFromDatabase(mealName, productName, caloricValue);
         });
         TextView cal = findViewById(getResources().getIdentifier("kcal"+mealName, "id", getPackageName()));
-        String s = (Integer.parseInt(cal.getText().toString().split(" ")[0]) + Integer.parseInt(Objects.requireNonNull(caloricValue))) + " kcal";
+        String[] splited = cal.getText().toString().split(" ");
+        String s = (Integer.parseInt(splited[0]) + Integer.parseInt(Objects.requireNonNull(caloricValue))) + " kcal " + splited[2] + " " + splited[3] + " " + splited[4];
         cal.setText(s);
         layout.addView(view);
     }
 
 
     public void addProductBreakfast(View v){
-        typeOfMeal = "Breakfast";
         Intent intent = new Intent(Menu.this, NewProduct.class);
+        TextView datetext = findViewById(R.id.date);
+        intent.putExtra("typeOfMeal", "Breakfast");
+        intent.putExtra("date", datetext.getText().toString());
         startActivity(intent);
     }
     public void addProductSecondBreakfast(View v){
-        typeOfMeal = "SecondBreakfast";
         Intent intent = new Intent(Menu.this, NewProduct.class);
+        TextView datetext = findViewById(R.id.date);
+        intent.putExtra("typeOfMeal", "SecondBreakfast");
+        intent.putExtra("date", datetext.getText().toString());
         startActivity(intent);
+    }
+
+    public void previousDay(View view) {
+        TextView date = findViewById(R.id.date);
+        SimpleDateFormat sdf = new SimpleDateFormat("d/M/yyyy", Locale.ENGLISH);
+        try {
+            Date dateDate = sdf.parse(date.getText().toString());
+            Calendar c = Calendar.getInstance();
+            if (dateDate != null)
+                c.setTime(dateDate);
+            c.add(DAY_OF_MONTH, -1);
+            String stringDate = c.get(DAY_OF_MONTH) + "/" + (c.get(MONTH) + 1) + "/" + c.get(YEAR);
+            Intent intent = new Intent(Menu.this, Menu.class);
+            intent.putExtra("date", stringDate);
+            startActivity(intent);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void nextDay(View view) {
+        TextView date = findViewById(R.id.date);
+        SimpleDateFormat sdf = new SimpleDateFormat("d/M/yyyy", Locale.ENGLISH);
+        try {
+            Date dateDate = sdf.parse(date.getText().toString());
+            Calendar c = Calendar.getInstance();
+            if (dateDate != null)
+                c.setTime(dateDate);
+            c.add(DAY_OF_MONTH, 1);
+            String stringDate = c.get(DAY_OF_MONTH) + "/" + (c.get(MONTH) + 1) + "/" + c.get(YEAR);
+            Intent intent = new Intent(Menu.this, Menu.class);
+            intent.putExtra("date", stringDate);
+            startActivity(intent);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
