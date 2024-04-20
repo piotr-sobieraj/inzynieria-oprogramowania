@@ -23,6 +23,9 @@ import java.util.Objects;
 
 public class Options extends AppCompatActivity {
 
+    private String currentToTargetWeight;
+    private String kgWeek;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +46,11 @@ public class Options extends AppCompatActivity {
 
     public void targets(View view) {
         Intent intent = new Intent(this, Targets.class);
+
+        // Przekazanie danych do wyswietlenia w labelkach
+        intent.putExtra("currentToTargetWeight", currentToTargetWeight);
+        intent.putExtra("kgWeek", kgWeek);
+
         startActivity(intent);
     }
 
@@ -73,11 +81,16 @@ public class Options extends AppCompatActivity {
                                     String.format("%s, %s, %s cm", sex, birthDate, height)
                             );
 
+
+                            currentToTargetWeight = String.format("%s kg -> %s kg", weight, targetWeight);
+
                             long weeksToGallDate = WeeksToDate(reachGoalDate);
                             if (weeksToGallDate != 0){
-                            float kgWeek = (Float.parseFloat(weight) - Float.parseFloat(targetWeight))/ (float) weeksToGallDate;
+                                float kgWeekValue = (Float.parseFloat(weight) - Float.parseFloat(targetWeight)) / (float) weeksToGallDate;
+
+                                kgWeek = String.format("%.2f kg / week", kgWeekValue);
                                 ((TextView)findViewById(R.id.textViewTargets)).setText(
-                                    String.format("%s kg -> %s kg, %.2f kg / week", weight, targetWeight, kgWeek));
+                                    String.format("%s, %s", currentToTargetWeight, kgWeek));
                             }
                         }
 
