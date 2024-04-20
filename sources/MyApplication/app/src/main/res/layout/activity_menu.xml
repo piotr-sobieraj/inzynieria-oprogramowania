@@ -129,7 +129,7 @@
         app:layout_constraintTop_toBottomOf="@+id/progressBar2" />
 
     <TextView
-        android:id="@+id/textView23"
+        android:id="@+id/textViewProfileInfo"
         android:layout_width="15dp"
         android:layout_height="17dp"
         android:layout_marginStart="2dp"
@@ -152,7 +152,7 @@
         android:textColor="#EDF5FC"
         android:textSize="12sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/textView24"
+        app:layout_constraintStart_toEndOf="@+id/textViewTargets"
         app:layout_constraintTop_toBottomOf="@+id/progressBar4" />
 
     <TextView
@@ -180,7 +180,7 @@
         app:layout_constraintTop_toBottomOf="@+id/progressBar3" />
 
     <TextView
-        android:id="@+id/textView24"
+        android:id="@+id/textViewTargets"
         android:layout_width="40dp"
         android:layout_height="16dp"
         android:layout_marginTop="4dp"
@@ -414,7 +414,7 @@
         android:textColor="#EDF5FC"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="@+id/progressBar4"
-        app:layout_constraintTop_toBottomOf="@+id/textView24" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewTargets" />
 
     <TextView
         android:id="@+id/date"
