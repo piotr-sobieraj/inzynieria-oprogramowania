@@ -36,12 +36,7 @@ public class Targets extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void rateOfWeight(View view) {
-        Intent intent = new Intent(this, TargetsRateWeight.class);
-        startActivity(intent);
-    }
-
-    private void fillControls(){
+      private void fillControls(){
         ((TextView) findViewById(R.id.bodyWeightText)).setText(currentToTargetWeight);
         ((TextView) findViewById(R.id.textViewRate)).setText(kgWeek);
     }
