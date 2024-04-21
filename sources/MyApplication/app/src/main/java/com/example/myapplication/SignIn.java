@@ -57,7 +57,7 @@ public class SignIn extends AppCompatActivity {
                     .addOnCompleteListener(this, task -> {
                         if (task.isSuccessful()) {
                             Log.d("signIn", "signInWithEmail:success");
-                            Intent intent = new Intent(SignIn.this, MoreUI.class);
+                            Intent intent = new Intent(SignIn.this, Menu.class);
                             startActivity(intent);
                         }
                         else {

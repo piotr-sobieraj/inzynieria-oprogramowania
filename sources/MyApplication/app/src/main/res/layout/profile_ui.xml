@@ -7,12 +7,64 @@
     android:layout_height="match_parent"
     tools:context=".Profile">
 
+    <androidx.cardview.widget.CardView
+        android:layout_width="407dp"
+        android:layout_height="66dp"
+        app:cardBackgroundColor="#3171FE"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <Button
+            android:id="@+id/backButton"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center|left"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="5dp"
+            android:background="@null"
+            android:drawableStart="@drawable/ic_arrow"
+            android:onClick="back" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="@font/poppins"
+            android:text="@string/profile"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            tools:layout_editor_absoluteX="165dp"
+            tools:layout_editor_absoluteY="16dp" />
+
+        <Button
+            android:id="@+id/saveButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center|right"
+            android:background="@null"
+            android:onClick="save"
+            android:text="@string/save"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="17sp"
+            tools:layout_editor_absoluteX="307dp"
+            tools:layout_editor_absoluteY="0dp" />
+
+    </androidx.cardview.widget.CardView>
+
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="96dp"
         android:fontFamily="@font/poppins_medium"
         android:text="@string/female"
         android:textSize="16sp"
@@ -23,10 +75,10 @@
         android:id="@+id/divider"
         android:layout_width="0dp"
         android:layout_height="2dp"
-        android:layout_marginTop="85dp"
+        android:layout_marginTop="136dp"
         android:background="?android:attr/listDivider"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -35,7 +87,7 @@
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="95dp"
+        android:layout_marginTop="152dp"
         android:fontFamily="@font/poppins_medium"
         android:text="@string/male"
         android:textSize="16sp"
@@ -46,7 +98,7 @@
         android:id="@+id/divider2"
         android:layout_width="0dp"
         android:layout_height="2dp"
-        android:layout_marginTop="135dp"
+        android:layout_marginTop="192dp"
         android:background="?android:attr/listDivider"
         android:backgroundTint="#939191"
         app:layout_constraintEnd_toEndOf="parent"
@@ -55,10 +107,11 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <RadioGroup
+        android:id="@+id/sexRadioGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="46dp"
-        android:layout_marginEnd="36dp"
+        android:layout_marginTop="96dp"
+        android:layout_marginEnd="52dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -67,8 +120,8 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginBottom="20dp"
-            android:buttonTint="#3171FE"
-            android:checked="true"
+            android:buttonTint="#DADADA"
+            android:checked="false"
             android:clickable="true"
             android:focusable="true"
             android:scaleX="1.4"
@@ -90,7 +143,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
-        android:layout_marginTop="225dp"
+        android:layout_marginTop="256dp"
         android:fontFamily="@font/poppins"
         android:text="@string/height"
         android:textSize="12sp"
@@ -103,14 +156,14 @@
         android:layout_width="0dp"
         android:layout_height="25dp"
         android:layout_marginStart="38dp"
-        android:layout_marginTop="245dp"
+        android:layout_marginTop="280dp"
         android:layout_marginEnd="38dp"
         android:background="@drawable/rectangle_border"
         android:ems="10"
         android:importantForAutofill="no"
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="LabelFor" />
@@ -120,7 +173,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
-        android:layout_marginTop="155dp"
+        android:layout_marginTop="204dp"
         android:fontFamily="@font/poppins"
         android:text="@string/current_body_weight"
         android:textSize="12sp"
@@ -133,7 +186,7 @@
         android:layout_width="0dp"
         android:layout_height="25dp"
         android:layout_marginStart="38dp"
-        android:layout_marginTop="175dp"
+        android:layout_marginTop="228dp"
         android:layout_marginEnd="38dp"
         android:background="@drawable/rectangle_border"
         android:ems="10"
