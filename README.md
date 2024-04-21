@@ -1,4 +1,5 @@
-# Spis treści
+## 21 kwietnia
+- [Bardziej funkcjonalny kalendarz posiłków](#bardziej-funkcjonalny-kalendarz-posiłków)
 
 ## 12 kwietnia
 - [Dodawanie posiłków](#dodawanie-posiłków)
@@ -22,6 +23,12 @@
 
 
 ---
+# 21 kwietnia
+## Bardziej funkcjonalny kalendarz posiłków
+<div style="text-align: center;">
+    <img src="/pictures/08.nowe.dodawanie.posilkow.jpg" alt="Dodawanie posiłków" width="40%">
+</div>
+
 # 12 kwietnia
 ## Dodawanie posiłków
 <div style="text-align: center;">
