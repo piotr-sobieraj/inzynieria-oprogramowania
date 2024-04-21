@@ -74,7 +74,6 @@
         android:layout_height="79dp"
         android:background="@null"
         android:fontFamily="@font/poppins_medium"
-        android:onClick="rateOfWeight"
         android:paddingStart="20dp"
         android:paddingEnd="20dp"
         android:paddingBottom="20dp"
