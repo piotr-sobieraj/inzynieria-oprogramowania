@@ -48,11 +48,6 @@ public class Options extends AppCompatActivity {
 
     public void targets(View view) {
         Intent intent = new Intent(this, Targets.class);
-
-        // Przekazanie danych do wyswietlenia w labelkach
-        intent.putExtra("currentToTargetWeight", currentToTargetWeight);
-        intent.putExtra("kgWeek", kgWeek);
-
         startActivity(intent);
     }
 
