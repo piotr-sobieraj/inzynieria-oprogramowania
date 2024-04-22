@@ -20,6 +20,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Objects;
 
+import com.example.myapplication.User;
+
 
 public class Options extends AppCompatActivity {
 
@@ -81,12 +83,12 @@ public class Options extends AppCompatActivity {
                                     String.format("%s, %s, %s cm", sex, birthDate, height)
                             );
 
-
                             currentToTargetWeight = String.format("%s kg -> %s kg", weight, targetWeight);
 
-                            long weeksToGallDate = WeeksToDate(reachGoalDate);
-                            if (weeksToGallDate != 0){
-                                float kgWeekValue = (Float.parseFloat(weight) - Float.parseFloat(targetWeight)) / (float) weeksToGallDate;
+                            //Obliczenie i ustawienie kg/week rate
+                            long weeksToGoalDate = User.WeeksToDate(reachGoalDate);
+                            if (weeksToGoalDate != 0){
+                                float kgWeekValue = User.kgWeekRate(reachGoalDate, weight, targetWeight);
 
                                 kgWeek = String.format("%.2f kg / week", kgWeekValue);
                                 ((TextView)findViewById(R.id.textViewTargets)).setText(
@@ -100,27 +102,7 @@ public class Options extends AppCompatActivity {
                 });
     }
 
-    private long WeeksToDate(String reachGoalDate){
-        @SuppressLint("SimpleDateFormat") SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        Date goalDate = null;
-        try {
-            goalDate = formatter.parse(reachGoalDate);
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }
-        Calendar today = Calendar.getInstance();
 
-        Calendar target = Calendar.getInstance();
-        if (goalDate != null) {
-            target.setTime(goalDate);
-        }
 
-        return WeeksBetween(today, target);
-    }
 
-    private static long WeeksBetween(Calendar startDate, Calendar endDate) {
-        long end = endDate.getTimeInMillis();
-        long start = startDate.getTimeInMillis();
-        return (end - start) / (24 * 60 * 60 * 1000 * 7);  // Milisekundy w tygodniu
-    }
 }
