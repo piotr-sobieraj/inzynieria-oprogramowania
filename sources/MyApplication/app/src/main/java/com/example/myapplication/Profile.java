@@ -74,6 +74,8 @@ public class Profile extends AppCompatActivity {
                             String height = document.getString("height");
                             String weight = document.getString("weight");
                             String sex = document.getString("sex").toLowerCase();
+                            String name = document.getString("name");
+
 
                             // Znajdź odpowiedni widok TextView i ustaw odczytaną wartość
                             TextView heightTextView = findViewById(R.id.editTextHeight);
@@ -81,6 +83,9 @@ public class Profile extends AppCompatActivity {
 
                             TextView weightTextView = findViewById(R.id.editTextWeight);
                             weightTextView.setText(weight);
+
+                            TextView nameTextView = findViewById(R.id.editTextName);
+                            nameTextView.setText(name);
 
                             switch(sex){
                                 case "f":
@@ -108,6 +113,8 @@ public class Profile extends AppCompatActivity {
     public void save(View v){
         String height = String.valueOf(((EditText)findViewById(R.id.editTextHeight)).getText());
         String weight = String.valueOf(((EditText)findViewById(R.id.editTextWeight)).getText());
+        String name = String.valueOf(((EditText)findViewById(R.id.editTextName)).getText());
+
         String sex;
 
         RadioButton radioButtonFemale = findViewById(R.id.radioButtonFemale);
@@ -132,6 +139,10 @@ public class Profile extends AppCompatActivity {
                             document.getReference().update("sex", sex)
                                     .addOnSuccessListener(aVoid -> Log.d("Firebase", "Document successfully updated!"))
                                     .addOnFailureListener(e -> Log.w("Firebase", "Error updating document - sex", e));
+
+                            document.getReference().update("name", name)
+                                    .addOnSuccessListener(aVoid -> Log.d("Firebase", "Document successfully updated!"))
+                                    .addOnFailureListener(e -> Log.w("Firebase", "Error updating document - name", e));
                         }
                     } else {
                         Log.d("Firebase", "Error getting documents: ", task.getException());
