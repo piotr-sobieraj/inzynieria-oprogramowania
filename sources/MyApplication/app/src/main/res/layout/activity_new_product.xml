@@ -55,6 +55,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
     <EditText
+        android:id="@+id/fatsText"
         android:layout_width="0dp"
         android:layout_height="25dp"
         android:layout_marginStart="225dp"
@@ -71,6 +72,7 @@
         tools:ignore="LabelFor" />
 
     <EditText
+        android:id="@+id/carbohydratesText"
         android:layout_width="0dp"
         android:layout_height="25dp"
         android:layout_marginStart="225dp"
@@ -87,6 +89,7 @@
         tools:ignore="LabelFor" />
 
     <EditText
+        android:id="@+id/proteinsText"
         android:layout_width="0dp"
         android:layout_height="25dp"
         android:layout_marginStart="225dp"

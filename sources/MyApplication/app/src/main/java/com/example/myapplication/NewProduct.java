@@ -62,7 +62,10 @@ public class NewProduct extends AppCompatActivity {
                                                        mealList = new ArrayList<>();
                                                    }
                                                    mealList.add(new Meal(((TextView)findViewById(R.id.editText)).getText().toString(),
-                                                           Integer.parseInt(((TextView)findViewById(R.id.editText2)).getText().toString())));
+                                                           Integer.parseInt(((TextView)findViewById(R.id.editText2)).getText().toString()),
+                                                                   Integer.parseInt(((TextView)findViewById(R.id.fatsText)).getText().toString()),
+                                                                           Integer.parseInt(((TextView)findViewById(R.id.carbohydratesText)).getText().toString()),
+                                                                                   Integer.parseInt(((TextView)findViewById(R.id.proteinsText)).getText().toString())));
                                                    Map<String, List<Meal>> mealMap = mealDay.getMeals();
                                                    mealMap.put(getIntent().getStringExtra("typeOfMeal"), mealList);
                                                    mealDay.setMeals(mealMap);
@@ -86,7 +89,10 @@ public class NewProduct extends AppCompatActivity {
                                                Map<String, List<Meal>> mealMap = new HashMap<>();
                                                List<Meal> mealList = new ArrayList<>();
                                                mealList.add(new Meal(((TextView)findViewById(R.id.editText)).getText().toString(),
-                                                       Integer.parseInt(((TextView)findViewById(R.id.editText2)).getText().toString())));
+                                                       Integer.parseInt(((TextView)findViewById(R.id.editText2)).getText().toString()),
+                                                       Integer.parseInt(((TextView)findViewById(R.id.fatsText)).getText().toString()),
+                                                       Integer.parseInt(((TextView)findViewById(R.id.carbohydratesText)).getText().toString()),
+                                                       Integer.parseInt(((TextView)findViewById(R.id.proteinsText)).getText().toString())));
                                                mealMap.put(getIntent().getStringExtra("typeOfMeal"),mealList);
                                                MealDay mealDay = new MealDay(getIntent().getStringExtra("date"), mealMap);
                                                db.collection("users").document(document.getId()).collection("mealDays").add(mealDay)
@@ -113,6 +119,7 @@ public class NewProduct extends AppCompatActivity {
 
     public void back(View view) {
         Intent intent = new Intent(NewProduct.this, Menu.class);
+        intent.putExtra("date", getIntent().getStringExtra("date"));
         startActivity(intent);
     }
 }
