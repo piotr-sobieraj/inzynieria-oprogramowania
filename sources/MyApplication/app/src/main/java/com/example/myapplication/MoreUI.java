@@ -35,7 +35,7 @@ public class MoreUI extends AppCompatActivity {
                     intent = new Intent(MoreUI.this, Menu.class);
                     startActivity(intent);
                 } else if (checkedId == R.id.Recipes) {
-                    intent = new Intent(MoreUI.this, RecipesUI.class);
+                    intent = new Intent(MoreUI.this, WeightCalendar.class);
                     startActivity(intent);
                 } else if (checkedId == R.id.More) {
                     intent = new Intent(MoreUI.this, MoreUI.class);

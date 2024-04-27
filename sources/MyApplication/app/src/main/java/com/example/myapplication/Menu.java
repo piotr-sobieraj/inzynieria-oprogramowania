@@ -58,8 +58,8 @@ public class Menu extends AppCompatActivity {
                 if (checkedId == R.id.Menu) {
                     intent = new Intent(Menu.this, Menu.class);
                     startActivity(intent);
-                } else if (checkedId == R.id.Recipes) {
-                    intent = new Intent(Menu.this, RecipesUI.class);
+                } else if (checkedId == R.id.WeightCalendar) {
+                    intent = new Intent(Menu.this, WeightCalendar.class);
                     startActivity(intent);
                 } else if (checkedId == R.id.More) {
                     intent = new Intent(Menu.this, MoreUI.class);

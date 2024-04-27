@@ -56,6 +56,9 @@
             android:name=".MoreUI"
             android:exported="true" />
         <activity
+            android:name=".WeightCalendar"
+            android:exported="true" />
+        <activity
             android:name=".SignUp"
             android:exported="false" />
         <activity android:name=".RecipesUI" />
