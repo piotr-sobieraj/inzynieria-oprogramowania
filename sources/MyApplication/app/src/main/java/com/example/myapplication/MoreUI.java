@@ -34,7 +34,7 @@ public class MoreUI extends AppCompatActivity {
                 if (checkedId == R.id.Menu) {
                     intent = new Intent(MoreUI.this, Menu.class);
                     startActivity(intent);
-                } else if (checkedId == R.id.Recipes) {
+                } else if (checkedId == R.id.WeightCalendar) {
                     intent = new Intent(MoreUI.this, WeightCalendar.class);
                     startActivity(intent);
                 } else if (checkedId == R.id.More) {
@@ -44,6 +44,7 @@ public class MoreUI extends AppCompatActivity {
             }
         });
     }
+
 
     public void logout(View v){
         FirebaseAuth.getInstance().signOut();

@@ -26,10 +26,7 @@ public class WeightCalendar extends AppCompatActivity {
             Objects.requireNonNull(getSupportActionBar()).hide();
         setContentView(R.layout.activity_weight_calendar);
     }
-    public void back(View v){
-        Intent intent = new Intent(this, Menu.class);
-        startActivity(intent);
-    }
+
     public void addWeightToDatabase(View v){
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         CollectionReference usersRef = db.collection("users");
