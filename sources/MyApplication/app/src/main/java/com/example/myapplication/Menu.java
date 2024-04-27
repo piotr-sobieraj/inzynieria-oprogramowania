@@ -192,26 +192,35 @@ public class Menu extends AppCompatActivity {
                 });
     }
 
-    public void addCardProduct(String mealName, String productName, String caloricValue, String fatsValue, String carbohydrates, String proteins){
+    public void addCardProduct(String mealName, String productName, String caloricValue, String fatsValue, String carbohydratesValue, String proteinsValue){
         View view = getLayoutInflater().inflate(R.layout.product_card, null);
         TextView product = view.findViewById(R.id.product);
         product.setText(productName);
         TextView calories = view.findViewById(R.id.calories);
         String tmp = caloricValue + " kcal";
         calories.setText(tmp);
+        TextView fats = view.findViewById(R.id.fats);
+        tmp = fatsValue + " g";
+        fats.setText(tmp);
+        TextView carbohydrates = view.findViewById(R.id.carbohydrates);
+        tmp = carbohydratesValue + " g";
+        carbohydrates.setText(tmp);
+        TextView proteins = view.findViewById(R.id.protein);
+        tmp = proteinsValue + " g";
+        proteins.setText(tmp);
         Button delete = view.findViewById(R.id.delete);
         LinearLayout layout = findViewById(getResources().getIdentifier("container"+mealName, "id", getPackageName()));
         delete.setOnClickListener(v -> {
             layout.removeView(view);
             TextView cal = findViewById(getResources().getIdentifier("kcal"+mealName, "id", getPackageName()));
             String[] splited = cal.getText().toString().split(" ");
-            String s = (Integer.parseInt(splited[0]) - Integer.parseInt(Objects.requireNonNull(caloricValue))) + " kcal " + (Integer.parseInt(splited[2]) - Integer.parseInt(Objects.requireNonNull(fatsValue))) + " g " + (Integer.parseInt(splited[4]) - Integer.parseInt(Objects.requireNonNull(carbohydrates))) + " g " + (Integer.parseInt(splited[6]) - Integer.parseInt(Objects.requireNonNull(proteins)))+ " g";
+            String s = (Integer.parseInt(splited[0]) - Integer.parseInt(Objects.requireNonNull(caloricValue))) + " kcal " + (Integer.parseInt(splited[2]) - Integer.parseInt(Objects.requireNonNull(fatsValue))) + " g " + (Integer.parseInt(splited[4]) - Integer.parseInt(Objects.requireNonNull(carbohydratesValue))) + " g " + (Integer.parseInt(splited[6]) - Integer.parseInt(Objects.requireNonNull(proteinsValue)))+ " g";
             cal.setText(s);
             deleteFromDatabase(mealName, productName, caloricValue);
         });
         TextView cal = findViewById(getResources().getIdentifier("kcal"+mealName, "id", getPackageName()));
         String[] splited = cal.getText().toString().split(" ");
-        String s = (Integer.parseInt(splited[0]) + Integer.parseInt(Objects.requireNonNull(caloricValue))) + " kcal " + (Integer.parseInt(splited[2]) + Integer.parseInt(Objects.requireNonNull(fatsValue))) + " g " + (Integer.parseInt(splited[4]) + Integer.parseInt(Objects.requireNonNull(carbohydrates))) + " g " + (Integer.parseInt(splited[6]) + Integer.parseInt(Objects.requireNonNull(proteins)))+ " g";
+        String s = (Integer.parseInt(splited[0]) + Integer.parseInt(Objects.requireNonNull(caloricValue))) + " kcal " + (Integer.parseInt(splited[2]) + Integer.parseInt(Objects.requireNonNull(fatsValue))) + " g " + (Integer.parseInt(splited[4]) + Integer.parseInt(Objects.requireNonNull(carbohydratesValue))) + " g " + (Integer.parseInt(splited[6]) + Integer.parseInt(Objects.requireNonNull(proteinsValue)))+ " g";
         cal.setText(s);
         layout.addView(view);
     }
