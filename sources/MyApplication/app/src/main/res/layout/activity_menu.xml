@@ -104,56 +104,53 @@
         app:srcCompat="@drawable/rectangle_gray" />
 
     <TextView
-        android:id="@+id/textView11"
+        android:id="@+id/calorieLimit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins"
-        android:text="/1500 kcal"
         android:textColor="#EDF5FC"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="@+id/textView6"
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
     <TextView
-        android:id="@+id/textView21"
-        android:layout_width="15dp"
+        android:id="@+id/currentProtein"
+        android:layout_width="wrap_content"
         android:layout_height="17dp"
         android:layout_marginStart="2dp"
         android:layout_marginTop="4dp"
         android:fontFamily="@font/poppins_semibold"
-        android:text="30"
         android:textColor="#EDF5FC"
         android:textSize="12sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/textView19"
-        app:layout_constraintTop_toBottomOf="@+id/progressBar2" />
+        app:layout_constraintTop_toBottomOf="@+id/proteinProgres" />
 
     <TextView
-        android:id="@+id/textViewProfileInfo"
-        android:layout_width="15dp"
+        android:id="@+id/currentFats"
+        android:layout_width="wrap_content"
         android:layout_height="17dp"
         android:layout_marginStart="2dp"
         android:layout_marginTop="4dp"
         android:fontFamily="@font/poppins_semibold"
-        android:text="30"
         android:textColor="#EDF5FC"
         android:textSize="12sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/textView22"
-        app:layout_constraintTop_toBottomOf="@+id/progressBar3" />
+        app:layout_constraintTop_toBottomOf="@+id/fatsProgres" />
 
     <TextView
-        android:layout_width="15dp"
+        android:id="@+id/currentCarbs"
+        android:layout_width="wrap_content"
         android:layout_height="17dp"
         android:layout_marginStart="2dp"
         android:layout_marginTop="4dp"
         android:fontFamily="@font/poppins_semibold"
-        android:text="30"
         android:textColor="#EDF5FC"
         android:textSize="12sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/textViewTargets"
-        app:layout_constraintTop_toBottomOf="@+id/progressBar4" />
+        app:layout_constraintTop_toBottomOf="@+id/carbsProgres" />
 
     <TextView
         android:id="@+id/textView19"
@@ -164,8 +161,8 @@
         android:text="@string/protein"
         android:textColor="#EDF5FC"
         android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="@+id/progressBar2"
-        app:layout_constraintTop_toBottomOf="@+id/progressBar2" />
+        app:layout_constraintStart_toStartOf="@+id/proteinProgres"
+        app:layout_constraintTop_toBottomOf="@+id/proteinProgres" />
 
     <TextView
         android:id="@+id/textView22"
@@ -176,8 +173,8 @@
         android:text="@string/fat"
         android:textColor="#EDF5FC"
         android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="@+id/progressBar3"
-        app:layout_constraintTop_toBottomOf="@+id/progressBar3" />
+        app:layout_constraintStart_toStartOf="@+id/fatsProgres"
+        app:layout_constraintTop_toBottomOf="@+id/fatsProgres" />
 
     <TextView
         android:id="@+id/textViewTargets"
@@ -188,41 +185,38 @@
         android:text="@string/carb"
         android:textColor="#EDF5FC"
         android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="@+id/progressBar4"
-        app:layout_constraintTop_toBottomOf="@+id/progressBar4" />
+        app:layout_constraintStart_toStartOf="@+id/carbsProgres"
+        app:layout_constraintTop_toBottomOf="@+id/carbsProgres" />
 
     <ProgressBar
-        android:id="@+id/progressBar2"
+        android:id="@+id/proteinProgres"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="65dp"
         android:layout_height="11dp"
         android:layout_marginStart="112dp"
         android:layout_marginTop="10dp"
-        android:progress="50"
         android:progressDrawable="@drawable/custom_progressbar_bg"
         app:layout_constraintStart_toStartOf="@+id/imageView5"
         app:layout_constraintTop_toTopOf="@+id/imageView5" />
 
     <ProgressBar
-        android:id="@+id/progressBar3"
+        android:id="@+id/fatsProgres"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="65dp"
         android:layout_height="11dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="112dp"
-        android:progress="50"
         android:progressDrawable="@drawable/custom_progressbar_bg"
         app:layout_constraintEnd_toEndOf="@+id/imageView5"
         app:layout_constraintTop_toTopOf="@+id/imageView5" />
 
     <ProgressBar
-        android:id="@+id/progressBar4"
+        android:id="@+id/carbsProgres"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="65dp"
         android:layout_height="11dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="15dp"
-        android:progress="50"
         android:progressDrawable="@drawable/custom_progressbar_bg"
         app:layout_constraintEnd_toEndOf="@+id/imageView5"
         app:layout_constraintTop_toTopOf="@+id/imageView5" />
@@ -347,13 +341,13 @@
     </ScrollView>
 
     <ProgressBar
-        android:id="@+id/progressBar"
+        android:id="@+id/calorieProgres"
         style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="65dp"
+        android:layout_width="wrap_content"
         android:layout_height="11dp"
         android:layout_marginStart="15dp"
         android:layout_marginTop="10dp"
-        android:progress="50"
+        android:progress="0"
         android:progressDrawable="@drawable/custom_progressbar_bg"
         app:layout_constraintStart_toStartOf="@+id/imageView5"
         app:layout_constraintTop_toTopOf="@+id/imageView5" />
@@ -367,53 +361,50 @@
         android:text="@string/kcal"
         android:textColor="#EDF5FC"
         android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="@+id/progressBar"
-        app:layout_constraintTop_toBottomOf="@+id/progressBar" />
+        app:layout_constraintStart_toStartOf="@+id/calorieProgres"
+        app:layout_constraintTop_toBottomOf="@+id/calorieProgres" />
 
     <TextView
-        android:id="@+id/textView7"
-        android:layout_width="22dp"
+        android:id="@+id/currentCalorie"
+        android:layout_width="wrap_content"
         android:layout_height="17dp"
         android:layout_marginStart="2dp"
         android:layout_marginTop="4dp"
         android:fontFamily="@font/poppins_semibold"
-        android:text="100"
         android:textColor="#EDF5FC"
         android:textSize="12sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/textView6"
-        app:layout_constraintTop_toBottomOf="@+id/progressBar" />
+        app:layout_constraintTop_toBottomOf="@+id/calorieProgres" />
 
     <TextView
-        android:id="@+id/textViewRate"
+        android:id="@+id/proteinLimit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins"
-        android:text="/45-75 g"
         android:textColor="#EDF5FC"
         android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="@+id/progressBar2"
+        app:layout_constraintStart_toStartOf="@+id/proteinProgres"
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
     <TextView
-        android:id="@+id/textView25"
+        android:id="@+id/fatLimit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins"
-        android:text="/42-50 g"
         android:textColor="#EDF5FC"
         android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="@+id/progressBar3"
+        app:layout_constraintStart_toStartOf="@+id/fatsProgres"
         app:layout_constraintTop_toBottomOf="@+id/textView22" />
 
     <TextView
+        android:id="@+id/carbsLimit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins"
-        android:text="/169-250 g"
         android:textColor="#EDF5FC"
         android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="@+id/progressBar4"
+        app:layout_constraintStart_toStartOf="@+id/carbsProgres"
         app:layout_constraintTop_toBottomOf="@+id/textViewTargets" />
 
     <TextView
