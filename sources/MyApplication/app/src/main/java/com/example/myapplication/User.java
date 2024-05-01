@@ -20,7 +20,6 @@ public class User implements Serializable {
     private String targetWeight;
     private String calorieLimit;
     private String reachGoalDate;
-    private List<MealDay> mealCalendar;
 
     private User() {
         // Konstruktor domyślny wymagany dla operacji Firebase
@@ -35,9 +34,7 @@ public class User implements Serializable {
                 String weight,
                 String targetWeight,
                 String dailyCalorieLimit,
-                String reachGoalDate,
-                List<MealDay> mealCalendar
-    ) {
+                String reachGoalDate) {
         this.userUID = userUID;
         this.name = name;
         this.sex = sex;
@@ -47,7 +44,6 @@ public class User implements Serializable {
         this.targetWeight = targetWeight;
         this.calorieLimit = dailyCalorieLimit;
         this.reachGoalDate = reachGoalDate;
-        this.mealCalendar = mealCalendar;
     }
 
     public String getName() { return name; }

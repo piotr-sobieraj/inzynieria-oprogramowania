@@ -115,7 +115,9 @@ public class PersonalInformation extends AppCompatActivity {
                     final Calendar c = Calendar.getInstance();
                     String date = c.get(Calendar.DAY_OF_MONTH) + "/" + (c.get(Calendar.MONTH) + 1) + "/" + c.get(Calendar.YEAR);
                     MealDay mealDay = new MealDay(date, new HashMap<>());
+                    RecentMeal recentMeal = new RecentMeal(new HashMap<>());
                     db.collection("users").document(documentReference.getId()).collection("mealDays").add(mealDay).addOnSuccessListener(task -> Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId()));
+                    db.collection("users").document(documentReference.getId()).collection("recentMeal").add(recentMeal).addOnSuccessListener(task -> Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId()));
                 })
                 .addOnFailureListener(e -> Log.w(TAG, "Error adding document", e));
     }
@@ -131,7 +133,6 @@ public class PersonalInformation extends AppCompatActivity {
                         getWeightFromView(),
                         getTargetWeightFromView(),
               null,
-            null,
             null);
     }
 

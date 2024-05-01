@@ -185,7 +185,6 @@ public class Menu extends AppCompatActivity {
                                         ObjectMapper objectMapper = new ObjectMapper();
                                         MealDay mealDay = objectMapper.convertValue(documentSnapshot.getData(), MealDay.class);
                                         TextView dateText = findViewById(R.id.date);
-                                        Log.d("DATE", dateText.getText().toString());
                                         if (Objects.equals(mealDay.getDate(), dateText.getText().toString())){
                                             Map<String, List<Meal>> map = mealDay.getMeals();
                                             Set<String> keys = mealDay.getMeals().keySet();
@@ -246,17 +245,17 @@ public class Menu extends AppCompatActivity {
 
 
     public void addProductBreakfast(View v){
-        Intent intent = new Intent(Menu.this, NewProduct.class);
-        TextView datetext = findViewById(R.id.date);
+        Intent intent = new Intent(Menu.this, AddingProduct.class);
+        TextView dateText = findViewById(R.id.date);
         intent.putExtra("typeOfMeal", "Breakfast");
-        intent.putExtra("date", datetext.getText().toString());
+        intent.putExtra("date", dateText.getText().toString());
         startActivity(intent);
     }
     public void addProductSecondBreakfast(View v){
-        Intent intent = new Intent(Menu.this, NewProduct.class);
-        TextView datetext = findViewById(R.id.date);
+        Intent intent = new Intent(Menu.this, AddingProduct.class);
+        TextView dateText = findViewById(R.id.date);
         intent.putExtra("typeOfMeal", "SecondBreakfast");
-        intent.putExtra("date", datetext.getText().toString());
+        intent.putExtra("date", dateText.getText().toString());
         startActivity(intent);
     }
 
