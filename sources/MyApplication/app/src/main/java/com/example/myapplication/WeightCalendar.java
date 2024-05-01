@@ -22,9 +22,8 @@ public class WeightCalendar extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        if (getSupportActionBar() != null)
-            Objects.requireNonNull(getSupportActionBar()).hide();
         setContentView(R.layout.activity_weight_calendar);
+        changeUI();
     }
 
     public void addWeightToDatabase(View v){
@@ -47,5 +46,25 @@ public class WeightCalendar extends AppCompatActivity {
                     }
                 });
 
+    }
+
+    public void changeUI() {
+        RadioGroup radioGroup = findViewById(R.id.mainMenu);
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                Intent intent;
+                if (checkedId == R.id.Menu) {
+                    intent = new Intent(WeightCalendar.this, Menu.class);
+                    startActivity(intent);
+                } else if (checkedId == R.id.WeightCalendar) {
+                    intent = new Intent(WeightCalendar.this, WeightCalendar.class);
+                    startActivity(intent);
+                } else if (checkedId == R.id.More) {
+                    intent = new Intent(WeightCalendar.this, MoreUI.class);
+                    startActivity(intent);
+                }
+            }
+        });
     }
 }
