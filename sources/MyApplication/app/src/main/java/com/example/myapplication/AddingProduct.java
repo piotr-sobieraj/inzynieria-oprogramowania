@@ -30,6 +30,7 @@ import java.util.Objects;
 public class AddingProduct extends AppCompatActivity {
 
     private TextView titleTextView;
+    private List<Meal> mealList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,6 +90,7 @@ public class AddingProduct extends AppCompatActivity {
                                             RecentMeal recentMeal = objectMapper.convertValue(documentSnapshot.getData(), RecentMeal.class);
                                             Map<String, List<Meal>> map = recentMeal.getMeals();
                                             List<Meal> list = map.get(getIntent().getStringExtra("typeOfMeal"));
+                                            mealList = list;
                                             if (list != null) {
                                                 for(Meal meal: list){
                                                     addRecentMeal(meal.name, meal.caloricValue, meal.fatsValue, meal.carbohydratesValue, meal.proteinsValue);
@@ -267,31 +269,12 @@ public class AddingProduct extends AppCompatActivity {
     }
 
     public void search(String searchString){
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        CollectionReference usersRef = db.collection("users");
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        usersRef.whereEqualTo("userUID", Objects.requireNonNull(user).getUid()).get()
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()){
-                        for (QueryDocumentSnapshot document: task.getResult()){
-                            db.collection("users").document(document.getId()).collection("recentMeal").get()
-                                    .addOnCompleteListener(task1 -> {
-                                        for (QueryDocumentSnapshot documentSnapshot: task1.getResult()){
-                                            ObjectMapper objectMapper = new ObjectMapper();
-                                            RecentMeal recentMeal = objectMapper.convertValue(documentSnapshot.getData(), RecentMeal.class);
-                                            Map<String, List<Meal>> map = recentMeal.getMeals();
-                                            List<Meal> list = map.get(getIntent().getStringExtra("typeOfMeal"));
-                                            if (list != null) {
-                                                for(Meal meal: list){
-                                                    if (meal.name.matches(searchString + "[A-z]*")){
-                                                        addRecentMeal(meal.name, meal.caloricValue, meal.fatsValue, meal.carbohydratesValue, meal.proteinsValue);
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    });
-                        }
-                    }
-                });
+        if (mealList != null) {
+            for(Meal meal: mealList){
+                if (meal.name.matches(searchString + "[A-z]*")){
+                    addRecentMeal(meal.name, meal.caloricValue, meal.fatsValue, meal.carbohydratesValue, meal.proteinsValue);
+                }
+            }
+        }
     }
 }
