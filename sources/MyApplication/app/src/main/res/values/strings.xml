@@ -73,5 +73,6 @@
     <string name="last_time_weighted">the last time you weighted yourself</string>
     <string name="new_record">New record</string>
     <string name="weight_calendar">Weight</string>
+    <string name="recently_eaten">Recently eaten</string>
 
 </resources>
