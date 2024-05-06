@@ -36,6 +36,7 @@ public class PersonalInformation extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
         checkedRadioButton();
+
         Button date = findViewById(R.id.pickDate);
         final Calendar c = Calendar.getInstance();
         int mYear = c.get(Calendar.YEAR) - 15;
