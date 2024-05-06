@@ -123,7 +123,7 @@ public class Profile extends AppCompatActivity {
         String height = String.valueOf(((EditText)findViewById(R.id.editTextHeight)).getText());
         String weight = String.valueOf(((EditText)findViewById(R.id.editTextWeight)).getText());
         String name = String.valueOf(((EditText)findViewById(R.id.editTextName)).getText());
-
+        String birtDate = ((Button)findViewById(R.id.pickDate)).getText().toString();
         String sex;
 
         RadioButton radioButtonFemale = findViewById(R.id.radioButtonFemale);
@@ -151,6 +151,10 @@ public class Profile extends AppCompatActivity {
                             document.getReference().update("name", name)
                                     .addOnSuccessListener(aVoid -> Log.d("Firebase", "Document successfully updated!"))
                                     .addOnFailureListener(e -> Log.w("Firebase", "Error updating document - name", e));
+
+                            document.getReference().update("birthDate", birtDate)
+                                    .addOnSuccessListener(aVoid -> Log.d("Firebase", "Document successfully updated!"))
+                                    .addOnFailureListener(e -> Log.w("Firebase", "Error updating document - birthDate", e));
                         }
                     } else {
                         Log.d("Firebase", "Error getting documents: ", task.getException());
@@ -189,5 +193,4 @@ public class Profile extends AppCompatActivity {
             datePickerDialog.show();
         });
     }
-
 }
