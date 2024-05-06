@@ -7,6 +7,30 @@
     android:layout_height="match_parent"
     tools:context=".Profile">
 
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/poppins"
+        android:text="@string/date_of_birth"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider2" />
+
+    <Button
+        android:id="@+id/pickDate"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:layout_marginStart="36dp"
+        android:background="#EDF5FC"
+        android:drawableEnd="@drawable/arrow_down"
+        android:text="@string/pick_date"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView2"
         android:layout_width="407dp"
@@ -60,29 +84,25 @@
 
     </androidx.cardview.widget.CardView>
 
-    <EditText
-        android:id="@+id/editTextHeight"
-        android:layout_width="0dp"
-        android:layout_height="25dp"
-        android:layout_marginStart="38dp"
-        android:layout_marginTop="344dp"
-        android:layout_marginEnd="38dp"
-        android:background="@drawable/rectangle_border"
-        android:ems="10"
-        android:importantForAutofill="no"
-        android:inputType="text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="392dp"
+        android:fontFamily="@font/poppins"
+        android:text="@string/height"
+        android:textSize="12sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="LabelFor" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
-        android:layout_marginTop="268dp"
+        android:layout_marginTop="340dp"
         android:fontFamily="@font/poppins"
         android:text="@string/current_body_weight"
         android:textSize="12sp"
@@ -91,11 +111,28 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
+        android:id="@+id/editTextHeight"
+        android:layout_width="0dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="38dp"
+        android:layout_marginTop="416dp"
+        android:layout_marginEnd="38dp"
+        android:background="@drawable/rectangle_border"
+        android:ems="10"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="LabelFor" />
+
+    <EditText
         android:id="@+id/editTextWeight"
         android:layout_width="0dp"
         android:layout_height="25dp"
         android:layout_marginStart="38dp"
-        android:layout_marginTop="292dp"
+        android:layout_marginTop="364dp"
         android:layout_marginEnd="38dp"
         android:background="@drawable/rectangle_border"
         android:ems="10"
@@ -103,23 +140,10 @@
         android:inputType="text"
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="LabelFor" />
-
-    <TextView
-        android:id="@+id/textView8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="320dp"
-        android:fontFamily="@font/poppins"
-        android:text="@string/height"
-        android:textSize="12sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView2"
