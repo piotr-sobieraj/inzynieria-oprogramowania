@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 public class User implements Serializable {
 
@@ -47,7 +48,7 @@ public class User implements Serializable {
     }
 
     public String getName() { return name; }
-    public String getSex() { return sex; }
+    public String getSex() { return sex.toLowerCase(); }
     public String getBirthDate() { return birthDate; }
     public String getHeight() { return height; }
     public String getWeight() { return weight; }
@@ -105,4 +106,28 @@ public class User implements Serializable {
         else return -1;
     }
 
+    public String calculateDailyCalorieLimit(){
+        double bmr;
+        String bmr_s;
+        String[] date = getBirthDate().split("/");
+        int birthYear = Integer.parseInt(date[2]);
+
+        // Pobierz aktualny rok
+        Calendar c = Calendar.getInstance();
+        int currentYear = c.get(Calendar.YEAR);
+
+        // Oblicz wiek
+        int age = currentYear - birthYear;
+
+        if (Objects.equals(getSex(), "m")){
+            bmr = 66.473 + (13.752 * Double.parseDouble(getWeight()) + (5.003 * Integer.parseInt(getHeight())) - (6.775 * age));
+        }
+        else {
+            bmr = 655.1 + (9.563 * Double.parseDouble(getWeight()) + (1.85 * Integer.parseInt(getHeight())) - (4.676 * age));
+        }
+
+        bmr_s = String.valueOf((int)Math.round(bmr));
+        calorieLimit = bmr_s;
+        return bmr_s;
+    }
 }

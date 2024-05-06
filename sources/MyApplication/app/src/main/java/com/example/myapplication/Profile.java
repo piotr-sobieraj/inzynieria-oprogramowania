@@ -36,6 +36,7 @@ import java.util.Objects;
 
 public class Profile extends AppCompatActivity {
 
+    User user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,7 +82,8 @@ public class Profile extends AppCompatActivity {
                             String sex = document.getString("sex").toLowerCase();
                             String name = document.getString("name");
                             String birthDate = document.getString("birthDate");
-
+                            String targetWeight = document.getString("targetWeight");
+                            String dailyCalorieLimit;
 
                             // Znajdź odpowiedni widok TextView i ustaw odczytaną wartość
                             TextView heightTextView = findViewById(R.id.editTextHeight);
@@ -93,6 +95,20 @@ public class Profile extends AppCompatActivity {
                             TextView nameTextView = findViewById(R.id.editTextName);
                             nameTextView.setText(name);
 
+                            //Ustawienie pól lokalnego w aktywności usera
+                            user = new User(firebaseUser.getUid(),
+                                    name,
+                                    sex,
+                                    birthDate,
+                                    height,
+                                    weight,
+                                    targetWeight,
+                                    "0",
+                                    "");
+
+                            user.setDailyCalorieLimit(user.calculateDailyCalorieLimit());
+
+                            //Ustawienie kontrolki od płci
                             switch(sex){
                                 case "f":
                                     RadioButton female = findViewById(R.id.radioButtonFemale);
@@ -129,6 +145,13 @@ public class Profile extends AppCompatActivity {
         RadioButton radioButtonFemale = findViewById(R.id.radioButtonFemale);
         sex = radioButtonFemale.isChecked() ? "f" : "m";
 
+        user.setHeight(height);
+        user.setWeight(weight);
+        user.setBirthDate(birtDate);
+        user.setSex(sex);
+        user.setDailyCalorieLimit(user.calculateDailyCalorieLimit());
+
+
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         CollectionReference usersRef = db.collection("users");
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -155,6 +178,10 @@ public class Profile extends AppCompatActivity {
                             document.getReference().update("birthDate", birtDate)
                                     .addOnSuccessListener(aVoid -> Log.d("Firebase", "Document successfully updated!"))
                                     .addOnFailureListener(e -> Log.w("Firebase", "Error updating document - birthDate", e));
+
+                            document.getReference().update("dailyCalorieLimit", user.getDailyCalorieLimit())
+                                    .addOnSuccessListener(aVoid -> Log.d("Firebase", "Document successfully updated!"))
+                                    .addOnFailureListener(e -> Log.w("Firebase", "Error updating document - dailyCalorieLimit", e));
                         }
                     } else {
                         Log.d("Firebase", "Error getting documents: ", task.getException());
