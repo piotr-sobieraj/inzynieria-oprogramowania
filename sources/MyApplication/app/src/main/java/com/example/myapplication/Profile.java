@@ -141,10 +141,16 @@ public class Profile extends AppCompatActivity {
         String name = String.valueOf(((EditText)findViewById(R.id.editTextName)).getText());
         String birtDate = ((Button)findViewById(R.id.pickDate)).getText().toString();
         String sex;
-        user.setDailyCalorieLimit(user.calculateDailyCalorieLimit());
 
         RadioButton radioButtonFemale = findViewById(R.id.radioButtonFemale);
         sex = radioButtonFemale.isChecked() ? "f" : "m";
+
+        user.setHeight(height);
+        user.setWeight(weight);
+        user.setBirthDate(birtDate);
+        user.setSex(sex);
+        user.setDailyCalorieLimit(user.calculateDailyCalorieLimit());
+
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         CollectionReference usersRef = db.collection("users");
