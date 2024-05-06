@@ -108,6 +108,7 @@ public class User implements Serializable {
 
     public String calculateDailyCalorieLimit(){
         double bmr;
+        String bmr_s;
         String[] date = getBirthDate().split("/");
         int birthYear = Integer.parseInt(date[2]);
 
@@ -125,6 +126,8 @@ public class User implements Serializable {
             bmr = 655.1 + (9.563 * Double.parseDouble(getWeight()) + (1.85 * Integer.parseInt(getHeight())) - (4.676 * age));
         }
 
-        return String.valueOf((int)Math.round(bmr));
+        bmr_s = String.valueOf((int)Math.round(bmr));
+        calorieLimit = bmr_s;
+        return bmr_s;
     }
 }
