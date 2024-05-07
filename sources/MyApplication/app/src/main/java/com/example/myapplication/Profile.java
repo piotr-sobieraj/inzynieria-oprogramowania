@@ -83,7 +83,6 @@ public class Profile extends AppCompatActivity {
                             String name = document.getString("name");
                             String birthDate = document.getString("birthDate");
                             String targetWeight = document.getString("targetWeight");
-                            String dailyCalorieLimit;
 
                             // Znajdź odpowiedni widok TextView i ustaw odczytaną wartość
                             TextView heightTextView = findViewById(R.id.editTextHeight);
