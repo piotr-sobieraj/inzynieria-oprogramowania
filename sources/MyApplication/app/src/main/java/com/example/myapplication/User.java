@@ -133,6 +133,7 @@ public class User implements Serializable {
     }
 
     public String calculateAndSetReachGoalDate(){
+        //Aby użyć, ustaw weight i targetWeight
         double reduce = Double.parseDouble(getTargetWeight()) - Double.parseDouble(getWeight());
         LocalDate localDate = LocalDate.now();
 
