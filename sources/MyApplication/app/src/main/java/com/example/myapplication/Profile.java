@@ -13,24 +13,18 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Locale;
-import java.util.Map;
 import java.util.Objects;
 
 
@@ -105,7 +99,7 @@ public class Profile extends AppCompatActivity {
                                     "0",
                                     "");
 
-                            user.setDailyCalorieLimit(user.calculateDailyCalorieLimit());
+                            user.setDailyCalorieLimit(user.calculateAndSetDailyCalorieLimit());
 
                             //Ustawienie kontrolki od płci
                             switch(sex){
@@ -148,7 +142,7 @@ public class Profile extends AppCompatActivity {
         user.setWeight(weight);
         user.setBirthDate(birtDate);
         user.setSex(sex);
-        user.setDailyCalorieLimit(user.calculateDailyCalorieLimit());
+        user.setDailyCalorieLimit(user.calculateAndSetDailyCalorieLimit());
 
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();

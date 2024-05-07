@@ -41,7 +41,7 @@ public class TargetsBodyWeight extends AppCompatActivity {
 
         //Jedyny parametr potrzebny do dailyCalorieLimit, który się zmienia w tej aktywności
         user.setWeight(weight);
-        String dailyCalorieLimit = user.calculateDailyCalorieLimit();
+        String dailyCalorieLimit = user.calculateAndSetDailyCalorieLimit();
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         CollectionReference usersRef = db.collection("users");
