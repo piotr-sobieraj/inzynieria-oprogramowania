@@ -5,9 +5,9 @@ import android.annotation.SuppressLint;
 import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 import java.util.Objects;
 
 public class User implements Serializable {
@@ -106,7 +106,7 @@ public class User implements Serializable {
         else return -1;
     }
 
-    public String calculateDailyCalorieLimit(){
+    public String calculateAndSetDailyCalorieLimit(){
         //Muszą być ustawione: birthDate, sex, weight i height
         double bmr;
         String bmr_s;
@@ -130,5 +130,17 @@ public class User implements Serializable {
         bmr_s = String.valueOf((int)Math.round(bmr));
         calorieLimit = bmr_s;
         return bmr_s;
+    }
+
+    public String calculateAndSetReachGoalDate(){
+        //Aby użyć, ustaw weight i targetWeight
+        double reduce = Double.parseDouble(getTargetWeight()) - Double.parseDouble(getWeight());
+        LocalDate localDate = LocalDate.now();
+
+        localDate = localDate.plusDays((long) (Math.abs(reduce) * 7700 / 500));
+        String s = localDate.getDayOfMonth() + "/" + localDate.getMonthValue() + "/" + localDate.getYear();
+        setReachGoalDate(s);
+
+        return s;
     }
 }

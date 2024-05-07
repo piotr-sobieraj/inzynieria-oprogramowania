@@ -18,8 +18,6 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
-import java.time.LocalDate;
-import java.util.Calendar;
 import java.util.Objects;
 
 public class Plan extends AppCompatActivity {
@@ -47,20 +45,19 @@ public class Plan extends AppCompatActivity {
                             String bmr;
                             ObjectMapper objectMapper = new ObjectMapper();
                             User user = objectMapper.convertValue(document.getData(), User.class);
-                            double reduce = Double.parseDouble(user.getTargetWeight()) - Double.parseDouble(user.getWeight());
-                            LocalDate localDate = LocalDate.now();
 
-                            localDate = localDate.plusDays((long) (Math.abs(reduce) * 7700 / 500));
-                            String s = localDate.getDayOfMonth() + "/" + localDate.getMonthValue() + "/" + localDate.getYear();
+                            String s = user.calculateAndSetReachGoalDate();
+
                             ((TextView)findViewById(R.id.reachGoalDate)).setText(s);
 
-                            user.setReachGoalDate(s);
                             saveReachGoalDateToDatabase(document, s);
+
+                            double reduce = Double.parseDouble(user.getTargetWeight()) - Double.parseDouble(user.getWeight());
 
                             String string = user.getWeight() + "kg -> " + reduce + " kg -> " + user.getTargetWeight() + " kg";
                             ((TextView)findViewById(R.id.kilograms)).setText(string);
 
-                            bmr = user.calculateDailyCalorieLimit();
+                            bmr = user.calculateAndSetDailyCalorieLimit();
                             ((TextView)findViewById(R.id.dailyCalorieLimit)).setText(bmr);
 
                             user.setDailyCalorieLimit(bmr);
