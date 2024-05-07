@@ -143,7 +143,7 @@ public class Profile extends AppCompatActivity {
         user.setBirthDate(birtDate);
         user.setSex(sex);
         user.setDailyCalorieLimit(user.calculateAndSetDailyCalorieLimit());
-
+        user.calculateAndSetReachGoalDate();
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         CollectionReference usersRef = db.collection("users");
@@ -175,6 +175,10 @@ public class Profile extends AppCompatActivity {
                             document.getReference().update("dailyCalorieLimit", user.getDailyCalorieLimit())
                                     .addOnSuccessListener(aVoid -> Log.d("Firebase", "Document successfully updated!"))
                                     .addOnFailureListener(e -> Log.w("Firebase", "Error updating document - dailyCalorieLimit", e));
+
+                            document.getReference().update("reachGoalDate", user.getReachGoalDate())
+                                    .addOnSuccessListener(aVoid -> Log.d("Firebase", "Document successfully updated!"))
+                                    .addOnFailureListener(e -> Log.w("Firebase", "Error updating document - reachGoalDate", e));
                         }
                     } else {
                         Log.d("Firebase", "Error getting documents: ", task.getException());
