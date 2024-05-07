@@ -107,6 +107,7 @@ public class User implements Serializable {
     }
 
     public String calculateDailyCalorieLimit(){
+        //Muszą być ustawione: birthDate, sex, weight i height
         double bmr;
         String bmr_s;
         String[] date = getBirthDate().split("/");
