@@ -1,6 +1,12 @@
+## 9 maja
+- [Ulepszenia w dodawaniu posiłków](#ulepszenia-w-dodawaniu-posiłków)
+- [Przeliczanie daty osiągnięcia celu i limitu kalorii w reakcji na zmianę parametrów](##przeliczanie-daty-osiągnięcia–celu–i-limitu-kalorii-w-reakcji-na-zmianę-parametrów)
+- [Poprawki](#poprawki)
+
+
 ## 21 kwietnia
 - [Bardziej funkcjonalny kalendarz posiłków](#bardziej-funkcjonalny-kalendarz-posiłków)
-- [Nowe opcje dostępne do edycji](#Nowe-opcje-dostępne-do-edycji)
+- [Nowe opcje dostępne do edycji](#nowe-opcje-dostępne-do-edycji)
 
 ## 12 kwietnia
 - [Dodawanie posiłków](#dodawanie-posiłków)
@@ -24,6 +30,11 @@
 
 
 ---
+# 9 maja
+## Ulepszenia w dodawaniu posiłków
+## Przeliczanie daty osiągnięcia celu i limitu kalorii w reakcji na zmianę parametrów
+## Poprawki
+
 # 21 kwietnia
 ## Bardziej funkcjonalny kalendarz posiłków
 <div style="text-align: center;">
