@@ -32,6 +32,10 @@ public class Plan extends AppCompatActivity {
         calculateCaloric();
         setContentView(R.layout.plan_ui);
     }
+    @Override
+    public void onBackPressed() {
+        // super.onBackPressed();
+    }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void calculateCaloric(){
