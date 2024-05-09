@@ -32,6 +32,11 @@ public class PersonalInformation extends AppCompatActivity {
         setUpUI();
     }
 
+    @Override
+    public void onBackPressed() {
+        // super.onBackPressed();
+    }
+
     private void setUpUI() {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);

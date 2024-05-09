@@ -21,21 +21,12 @@ public class Start extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-            actionBar.setCustomView(R.layout.action_bar);
-        }
-        setContentView(R.layout.start);
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if(currentUser != null){
             reload(currentUser);
         }
+        else
+            setContentView(R.layout.start);
     }
 
     public void loginUI(View v){
