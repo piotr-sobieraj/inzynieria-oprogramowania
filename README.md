@@ -1,6 +1,6 @@
 ## 9 maja
 - [Ulepszenia w dodawaniu posiłków](#ulepszenia-w-dodawaniu-posiłków)
-- [Przeliczanie daty osiągnięcia celu i limitu kalorii w reakcji na zmianę parametrów](##przeliczanie-daty-osiągnięcia–celu–i-limitu-kalorii-w-reakcji-na-zmianę-parametrów)
+- [Przeliczanie daty osiągnięcia celu i limitu kalorii w reakcji na zmianę parametrów](#przeliczanie-daty-osiągnięcia–celu–i-limitu-kalorii-w-reakcji-na-zmianę-parametrów)
 - [Poprawki](#poprawki)
 
 
