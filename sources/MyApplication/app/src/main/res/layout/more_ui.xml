@@ -8,6 +8,75 @@
     android:background="@null"
     tools:context=".MoreUI">
 
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="0dp"
+        android:layout_height="105dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/rectangle_black" />
+
+    <RadioGroup
+        android:id="@+id/mainMenu"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView3">
+
+        <RadioButton
+            android:id="@+id/Menu"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@null"
+            android:checked="false"
+            android:clickable="true"
+            android:enabled="true"
+            android:focusable="true"
+            android:fontFamily="@font/poppins"
+            android:text="@string/menu"
+            android:textAlignment="center"
+            android:textColor="@drawable/menu"
+            android:textSize="16sp" />
+
+        <RadioButton
+            android:id="@+id/WeightCalendar"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@null"
+            android:checked="false"
+            android:clickable="true"
+            android:enabled="true"
+            android:focusable="true"
+            android:fontFamily="@font/poppins"
+            android:text="@string/weight_calendar"
+            android:textAlignment="center"
+            android:textColor="@drawable/menu"
+            android:textSize="16sp" />
+
+        <RadioButton
+            android:id="@+id/More"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@null"
+            android:checked="true"
+            android:clickable="true"
+            android:enabled="true"
+            android:focusable="true"
+            android:fontFamily="@font/poppins"
+            android:text="@string/more"
+            android:textAlignment="center"
+            android:textColor="@drawable/menu"
+            android:textSize="16sp" />
+    </RadioGroup>
+
     <Button
         android:id="@+id/optionsButton"
         android:layout_width="156dp"
@@ -55,68 +124,6 @@
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button5" />
-
-    <RadioGroup
-        android:id="@+id/mainMenu"
-        android:layout_width="0dp"
-        android:layout_height="86dp"
-        android:layout_marginBottom="60dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <RadioButton
-            android:id="@+id/Menu"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="#3D3D3D"
-            android:button="@null"
-            android:checked="false"
-            android:clickable="true"
-            android:enabled="true"
-            android:focusable="true"
-            android:fontFamily="@font/poppins"
-            android:text="@string/menu"
-            android:textAlignment="center"
-            android:textColor="@drawable/menu"
-            android:textSize="16sp" />
-
-        <RadioButton
-            android:id="@+id/Recipes"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="#3D3D3D"
-            android:button="@null"
-            android:checked="false"
-            android:clickable="true"
-            android:enabled="true"
-            android:focusable="true"
-            android:fontFamily="@font/poppins"
-            android:text="@string/recipes"
-            android:textAlignment="center"
-            android:textColor="@drawable/menu"
-            android:textSize="16sp" />
-
-        <RadioButton
-            android:id="@+id/More"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="#3D3D3D"
-            android:button="@null"
-            android:checked="true"
-            android:clickable="true"
-            android:enabled="true"
-            android:focusable="true"
-            android:fontFamily="@font/poppins"
-            android:text="@string/more"
-            android:textAlignment="center"
-            android:textColor="@drawable/menu"
-            android:textSize="16sp" />
-    </RadioGroup>
 
     <Button
         android:id="@+id/button5"

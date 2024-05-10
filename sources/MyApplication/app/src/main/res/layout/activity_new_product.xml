@@ -55,6 +55,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
     <EditText
+        android:id="@+id/fatsText"
         android:layout_width="0dp"
         android:layout_height="25dp"
         android:layout_marginStart="225dp"
@@ -68,9 +69,10 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView14"
-        tools:ignore="LabelFor" />
+        tools:ignore="LabelFor,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     <EditText
+        android:id="@+id/carbohydratesText"
         android:layout_width="0dp"
         android:layout_height="25dp"
         android:layout_marginStart="225dp"
@@ -84,9 +86,10 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView14"
-        tools:ignore="LabelFor" />
+        tools:ignore="LabelFor,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     <EditText
+        android:id="@+id/proteinsText"
         android:layout_width="0dp"
         android:layout_height="25dp"
         android:layout_marginStart="225dp"
@@ -100,7 +103,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView14"
-        tools:ignore="LabelFor" />
+        tools:ignore="LabelFor,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     <TextView
         android:layout_width="0dp"
@@ -121,6 +124,7 @@
         android:id="@+id/imageView4"
         android:layout_width="0dp"
         android:layout_height="94dp"
+        android:importantForAccessibility="no"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -133,11 +137,13 @@
         android:layout_height="20dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="12dp"
+        android:importantForAccessibility="no"
         android:onClick="back"
         app:layout_constraintBottom_toBottomOf="@+id/imageView4"
         app:layout_constraintStart_toStartOf="@+id/imageView4"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/arrow_left" />
+        app:srcCompat="@drawable/arrow_left"
+        tools:ignore="TouchTargetSizeCheck" />
 
     <TextView
         android:id="@+id/textView13"
@@ -160,15 +166,16 @@
         android:layout_marginEnd="20dp"
         android:background="#00FFFFFF"
         android:fontFamily="@font/poppins_medium"
-        android:text="@string/save"
         android:onClick="addProductToDatabase"
+        android:text="@string/save"
         android:textAlignment="center"
         android:textAllCaps="false"
         android:textColor="#FFFFFF"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView4"
         app:layout_constraintEnd_toEndOf="@+id/imageView4"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="TouchTargetSizeCheck,TextContrastCheck,TextSizeCheck" />
 
     <TextView
         android:id="@+id/textView14"
@@ -200,7 +207,7 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="LabelFor" />
+        tools:ignore="LabelFor,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     <TextView
         android:id="@+id/textView15"
@@ -233,7 +240,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView14"
-        tools:ignore="LabelFor" />
+        tools:ignore="LabelFor,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     <TextView
         android:layout_width="0dp"
@@ -283,22 +290,4 @@
         app:layout_constraintStart_toEndOf="@+id/editText2"
         app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
-    <Button
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="120dp"
-        android:layout_marginEnd="120dp"
-        android:background="@drawable/buttons"
-        android:fontFamily="@font/poppins_medium"
-        android:onClick="addProductToDatabase"
-        android:text="@string/save"
-        android:textAllCaps="false"
-        android:textColor="#FFFFFF"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.542"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.921" />
 </androidx.constraintlayout.widget.ConstraintLayout>

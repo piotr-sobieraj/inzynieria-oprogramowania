@@ -3,10 +3,16 @@ package com.example.myapplication;
 public class Meal {
     protected String name = "";
      protected int caloricValue = 0;
+     protected int fatsValue = 0;
+    protected int carbohydratesValue = 0;
+     protected int proteinsValue = 0;
      public Meal() {}
-     public Meal(String name, int caloricValue) {
+     public Meal(String name, int caloricValue, int fatsValue, int carbohydratesValue, int proteinsValue) {
         this.name = name;
         this.caloricValue = caloricValue;
+        this.fatsValue = fatsValue;
+        this.carbohydratesValue = carbohydratesValue;
+        this.proteinsValue = proteinsValue;
     }
 
     public String getName() {
@@ -22,6 +28,29 @@ public class Meal {
     }
     public void setCaloricValue(int caloricValue) {
         this.caloricValue = caloricValue;
+    }
+    public int getFatsValue() {
+        return fatsValue;
+    }
+
+    public void setFatsValue(int fatsValue) {
+        this.fatsValue = fatsValue;
+    }
+
+    public int getCarbohydratesValue() {
+        return carbohydratesValue;
+    }
+
+    public void setCarbohydratesValue(int carbohydratesValue) {
+        this.carbohydratesValue = carbohydratesValue;
+    }
+
+    public int getProteinsValue() {
+        return proteinsValue;
+    }
+
+    public void setProteinsValue(int proteinsValue) {
+        this.proteinsValue = proteinsValue;
     }
 }
 

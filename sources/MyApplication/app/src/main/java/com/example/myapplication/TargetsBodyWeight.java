@@ -20,6 +20,7 @@ import java.util.Objects;
 
 public class TargetsBodyWeight extends AppCompatActivity {
 
+    User user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +39,15 @@ public class TargetsBodyWeight extends AppCompatActivity {
         String weight = String.valueOf(((EditText)findViewById(R.id.editTextCurrentWeight)).getText());
         String targetWeight = String.valueOf(((EditText)findViewById(R.id.editTextTargetWeight)).getText());
 
+        //Jedyny parametr potrzebny do dailyCalorieLimit, który się zmienia w tej aktywności
+        user.setWeight(weight);
+        String dailyCalorieLimit = user.calculateAndSetDailyCalorieLimit();
+
+        //Potrzebne do calculateReachGoalDate
+        user.setWeight(weight);
+        user.setTargetWeight(targetWeight);
+        String reachGoalDate = user.calculateAndSetReachGoalDate();
+
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         CollectionReference usersRef = db.collection("users");
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -52,6 +62,14 @@ public class TargetsBodyWeight extends AppCompatActivity {
                             document.getReference().update("targetWeight", targetWeight)
                                     .addOnSuccessListener(aVoid -> Log.d("Firebase", "Document successfully updated!"))
                                     .addOnFailureListener(e -> Log.w("Firebase", "Error updating document - targetWeight", e));
+
+                            document.getReference().update("dailyCalorieLimit", dailyCalorieLimit)
+                                    .addOnSuccessListener(aVoid -> Log.d("Firebase", "Document successfully updated!"))
+                                    .addOnFailureListener(e -> Log.w("Firebase", "Error updating document - dailyCalorieLimit", e));
+
+                            document.getReference().update("reachGoalDate", reachGoalDate)
+                                    .addOnSuccessListener(aVoid -> Log.d("Firebase", "Document successfully updated!"))
+                                    .addOnFailureListener(e -> Log.w("Firebase", "Error updating document - reachGoalDate", e));
                         }
                     } else {
                         Log.d("Firebase", "Error getting documents: ", task.getException());
@@ -71,6 +89,22 @@ public class TargetsBodyWeight extends AppCompatActivity {
 
                             String weight = document.getString("weight");
                             String targetWeight = document.getString("targetWeight");
+                            String birthDate = document.getString("birthDate");
+                            String sex = document.getString("sex").toLowerCase();
+                            String height = document.getString("height");
+
+                            //Do obliczeń w calculateDailyCalorieLimit
+                            user = new User(
+                                    firebaseUser.getUid(),
+                                    "",
+                                    sex,
+                                    birthDate,
+                                    height,
+                                    weight,
+                                    targetWeight,
+                                    "0",
+                                    ""
+                            );
 
                             ((TextView)findViewById(R.id.editTextCurrentWeight)).setText(weight);
                             ((TextView)findViewById(R.id.editTextTargetWeight)).setText(targetWeight);

@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,14 +37,39 @@ import java.util.Objects;
 import java.util.Set;
 
 public class Menu extends AppCompatActivity {
+    private TextView currentCalorie;
+    private TextView calorieLimit;
+    private TextView currentProtein;
+    private TextView proteinLimit;
+    private TextView currentFats;
+    private TextView fatsLimit;
+    private TextView currentCarbs;
+    private TextView carbsLimit;
+    private ProgressBar calorieProgressBar;
+    private ProgressBar proteinProgressBar;
 
+    private ProgressBar fatsProgressBar;
+    private ProgressBar carbsProgressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_menu);
+        currentCalorie = findViewById(R.id.currentCalorie);
+        calorieLimit = findViewById(R.id.calorieLimit);
+        proteinLimit = findViewById(R.id.proteinLimit);
+        currentProtein = findViewById(R.id.currentProtein);
+        currentFats = findViewById(R.id.currentFats);
+        fatsLimit = findViewById(R.id.fatLimit);
+        currentCarbs = findViewById(R.id.currentCarbs);
+        carbsLimit = findViewById(R.id.carbsLimit);
+        calorieProgressBar = findViewById(R.id.calorieProgres);
+        proteinProgressBar = findViewById(R.id.proteinProgres);
+        fatsProgressBar = findViewById(R.id.fatsProgres);
+        carbsProgressBar = findViewById(R.id.carbsProgres);
         changeUI();
+        fillLimits();
         setActualDate();
         readMealDayFromDatabase();
     }
@@ -58,8 +84,8 @@ public class Menu extends AppCompatActivity {
                 if (checkedId == R.id.Menu) {
                     intent = new Intent(Menu.this, Menu.class);
                     startActivity(intent);
-                } else if (checkedId == R.id.Recipes) {
-                    intent = new Intent(Menu.this, RecipesUI.class);
+                } else if (checkedId == R.id.WeightCalendar) {
+                    intent = new Intent(Menu.this, WeightCalendar.class);
                     startActivity(intent);
                 } else if (checkedId == R.id.More) {
                     intent = new Intent(Menu.this, MoreUI.class);
@@ -159,7 +185,6 @@ public class Menu extends AppCompatActivity {
                                         ObjectMapper objectMapper = new ObjectMapper();
                                         MealDay mealDay = objectMapper.convertValue(documentSnapshot.getData(), MealDay.class);
                                         TextView dateText = findViewById(R.id.date);
-                                        Log.d("DATE", dateText.getText().toString());
                                         if (Objects.equals(mealDay.getDate(), dateText.getText().toString())){
                                             Map<String, List<Meal>> map = mealDay.getMeals();
                                             Set<String> keys = mealDay.getMeals().keySet();
@@ -169,7 +194,7 @@ public class Menu extends AppCompatActivity {
                                                     mealList = new ArrayList<>();
                                                 }
                                                 for (Meal meal:mealList){
-                                                    addCardProduct(key, meal.name, String.valueOf(meal.caloricValue));
+                                                    addCardProduct(key, meal.name, String.valueOf(meal.caloricValue), String.valueOf(meal.fatsValue), String.valueOf(meal.carbohydratesValue), String.valueOf(meal.proteinsValue));
                                                 }
                                             }
                                         }
@@ -192,43 +217,45 @@ public class Menu extends AppCompatActivity {
                 });
     }
 
-    public void addCardProduct(String mealName, String productName, String caloricValue){
+    public void addCardProduct(String mealName, String productName, String caloricValue, String fatsValue, String carbohydratesValue, String proteinsValue){
         View view = getLayoutInflater().inflate(R.layout.product_card, null);
-        TextView product = view.findViewById(R.id.product);
-        product.setText(productName);
-        TextView calories = view.findViewById(R.id.calories);
-        String tmp = caloricValue + " kcal";
-        calories.setText(tmp);
+        setProduct(view, productName, caloricValue, fatsValue, carbohydratesValue, proteinsValue);
         Button delete = view.findViewById(R.id.delete);
+        int calValueLimit = Integer.parseInt(calorieLimit.getText().toString().split(" ")[0].substring(1));
+        int proValueLimit = Integer.parseInt(proteinLimit.getText().toString().split(" ")[0].substring(1).split("-")[1]);
+        int fatsValueLimit = Integer.parseInt(fatsLimit.getText().toString().split(" ")[0].substring(1));
+        int carbsValueLimit = Integer.parseInt(carbsLimit.getText().toString().split(" ")[0].substring(1).split("-")[1]);
         LinearLayout layout = findViewById(getResources().getIdentifier("container"+mealName, "id", getPackageName()));
         delete.setOnClickListener(v -> {
             layout.removeView(view);
+            setProgressOnDeleteProduct(calValueLimit, caloricValue, proValueLimit, proteinsValue, fatsValueLimit, fatsValue, carbsValueLimit, carbohydratesValue);
             TextView cal = findViewById(getResources().getIdentifier("kcal"+mealName, "id", getPackageName()));
             String[] splited = cal.getText().toString().split(" ");
-            String s = (Integer.parseInt(splited[0]) - Integer.parseInt(Objects.requireNonNull(caloricValue))) + " kcal " + splited[2] + " " + splited[3] + " " + splited[4];
+            String s = (Integer.parseInt(splited[0]) - Integer.parseInt(Objects.requireNonNull(caloricValue))) + " kcal " + (Integer.parseInt(splited[2]) - Integer.parseInt(Objects.requireNonNull(fatsValue))) + " g " + (Integer.parseInt(splited[4]) - Integer.parseInt(Objects.requireNonNull(carbohydratesValue))) + " g " + (Integer.parseInt(splited[6]) - Integer.parseInt(Objects.requireNonNull(proteinsValue)))+ " g";
             cal.setText(s);
             deleteFromDatabase(mealName, productName, caloricValue);
         });
+        setProgressOnAddProduct(calValueLimit, caloricValue, proValueLimit, proteinsValue, fatsValueLimit, fatsValue, carbsValueLimit, carbohydratesValue);
         TextView cal = findViewById(getResources().getIdentifier("kcal"+mealName, "id", getPackageName()));
         String[] splited = cal.getText().toString().split(" ");
-        String s = (Integer.parseInt(splited[0]) + Integer.parseInt(Objects.requireNonNull(caloricValue))) + " kcal " + splited[2] + " " + splited[3] + " " + splited[4];
+        String s = (Integer.parseInt(splited[0]) + Integer.parseInt(Objects.requireNonNull(caloricValue))) + " kcal " + (Integer.parseInt(splited[2]) + Integer.parseInt(Objects.requireNonNull(fatsValue))) + " g " + (Integer.parseInt(splited[4]) + Integer.parseInt(Objects.requireNonNull(carbohydratesValue))) + " g " + (Integer.parseInt(splited[6]) + Integer.parseInt(Objects.requireNonNull(proteinsValue)))+ " g";
         cal.setText(s);
         layout.addView(view);
     }
 
 
     public void addProductBreakfast(View v){
-        Intent intent = new Intent(Menu.this, NewProduct.class);
-        TextView datetext = findViewById(R.id.date);
+        Intent intent = new Intent(Menu.this, AddingProduct.class);
+        TextView dateText = findViewById(R.id.date);
         intent.putExtra("typeOfMeal", "Breakfast");
-        intent.putExtra("date", datetext.getText().toString());
+        intent.putExtra("date", dateText.getText().toString());
         startActivity(intent);
     }
     public void addProductSecondBreakfast(View v){
-        Intent intent = new Intent(Menu.this, NewProduct.class);
-        TextView datetext = findViewById(R.id.date);
+        Intent intent = new Intent(Menu.this, AddingProduct.class);
+        TextView dateText = findViewById(R.id.date);
         intent.putExtra("typeOfMeal", "SecondBreakfast");
-        intent.putExtra("date", datetext.getText().toString());
+        intent.putExtra("date", dateText.getText().toString());
         startActivity(intent);
     }
 
@@ -266,5 +293,74 @@ public class Menu extends AppCompatActivity {
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
+    }
+    public void setProduct(View view, String productName, String caloricValue, String fatsValue, String carbohydratesValue, String proteinsValue){
+        TextView product = view.findViewById(R.id.product);
+        product.setText(productName);
+        TextView calories = view.findViewById(R.id.calories);
+        String tmp = caloricValue + " kcal";
+        calories.setText(tmp);
+        TextView fats = view.findViewById(R.id.fats);
+        tmp = fatsValue + " g";
+        fats.setText(tmp);
+        TextView carbohydrates = view.findViewById(R.id.carbohydrates);
+        tmp = carbohydratesValue + " g";
+        carbohydrates.setText(tmp);
+        TextView proteins = view.findViewById(R.id.protein);
+        tmp = proteinsValue + " g";
+        proteins.setText(tmp);
+    }
+    public void setProgressOnDeleteProduct(int calValueLimit, String caloricValue, int proValueLimit, String proteinsValue, int fatsValueLimit, String fatsValue, int carbsValueLimit, String carbsValue){
+        currentCalorie.setText(String.valueOf(Integer.parseInt(currentCalorie.getText().toString()) - Integer.parseInt(Objects.requireNonNull(caloricValue))));
+        calorieProgressBar.setProgress((int)((Double.parseDouble(currentCalorie.getText().toString())/calValueLimit) * 100));
+        currentProtein.setText(String.valueOf(Integer.parseInt(currentProtein.getText().toString()) - Integer.parseInt(Objects.requireNonNull(proteinsValue))));
+        proteinProgressBar.setProgress((int)((Double.parseDouble(currentProtein.getText().toString())/proValueLimit) * 100));
+        currentFats.setText(String.valueOf(Integer.parseInt(currentFats.getText().toString()) - Integer.parseInt(Objects.requireNonNull(fatsValue))));
+        fatsProgressBar.setProgress((int)((Double.parseDouble(currentFats.getText().toString())/fatsValueLimit) * 100));
+        currentCarbs.setText(String.valueOf(Integer.parseInt(currentCarbs.getText().toString()) - Integer.parseInt(Objects.requireNonNull(carbsValue))));
+        carbsProgressBar.setProgress((int)((Double.parseDouble(currentCarbs.getText().toString())/carbsValueLimit) * 100));
+    }
+    public void setProgressOnAddProduct(int calValueLimit, String caloricValue, int proValueLimit, String proteinsValue, int fatsValueLimit, String fatsValue, int carbsValueLimit, String carbsValue){
+        currentCalorie.setText(String.valueOf(Integer.parseInt(currentCalorie.getText().toString()) + Integer.parseInt(Objects.requireNonNull(caloricValue))));
+        calorieProgressBar.setProgress((int)((Double.parseDouble(currentCalorie.getText().toString())/calValueLimit) * 100));
+        currentProtein.setText(String.valueOf(Integer.parseInt(currentProtein.getText().toString()) + Integer.parseInt(Objects.requireNonNull(proteinsValue))));
+        proteinProgressBar.setProgress((int)((Double.parseDouble(currentProtein.getText().toString())/proValueLimit) * 100));
+        currentFats.setText(String.valueOf(Integer.parseInt(currentFats.getText().toString()) + Integer.parseInt(Objects.requireNonNull(fatsValue))));
+        fatsProgressBar.setProgress((int)((Double.parseDouble(currentFats.getText().toString())/fatsValueLimit) * 100));
+        currentCarbs.setText(String.valueOf(Integer.parseInt(currentCarbs.getText().toString()) + Integer.parseInt(Objects.requireNonNull(carbsValue))));
+        carbsProgressBar.setProgress((int)((Double.parseDouble(currentCarbs.getText().toString())/carbsValueLimit) * 100));
+    }
+    public void fillLimits(){
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        CollectionReference usersRef = db.collection("users");
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        usersRef.whereEqualTo("userUID", Objects.requireNonNull(user).getUid()).get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()){
+                        for (QueryDocumentSnapshot documentSnapshot : task.getResult()){
+                            ObjectMapper objectMapper = new ObjectMapper();
+                            User userDB = objectMapper.convertValue(documentSnapshot.getData(), User.class);
+                            currentCalorie.setText("0");
+                            String calLim = "/" + userDB.getDailyCalorieLimit() + " kcal";
+                            calorieLimit.setText(calLim);
+                            currentProtein.setText("0");
+                            if (Objects.equals(userDB.getSex(), "f")){
+                                String proLim = "/" + (int)(0.45 * Integer.parseInt(userDB.getWeight())) + "-" + (int)(0.75 * Integer.parseInt(userDB.getWeight())) + " g";
+                                proteinLimit.setText(proLim);
+                            }
+                            else {
+                                String proLim = "/" + (int)(0.55 * Integer.parseInt(userDB.getWeight())) + "-" + (int)(0.85 * Integer.parseInt(userDB.getWeight())) + " g";
+                                proteinLimit.setText(proLim);
+                            }
+                            currentFats.setText("0");
+                            String fatLim = "/" + (int)(0.8 * Integer.parseInt(userDB.getWeight())) + " g";
+                            fatsLimit.setText(fatLim);
+                            currentCarbs.setText("0");
+                            String carbsLim = "/" + (int)(0.45 * Integer.parseInt(userDB.getDailyCalorieLimit())/4) + "-" + (int)(0.65 * Integer.parseInt(userDB.getDailyCalorieLimit())/4) + " g";
+                            carbsLimit.setText(carbsLim);
+                        }
+                    }
+                });
     }
 }

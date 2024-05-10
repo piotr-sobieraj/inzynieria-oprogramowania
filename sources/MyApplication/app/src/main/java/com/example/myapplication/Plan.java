@@ -18,8 +18,6 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
-import java.time.LocalDate;
-import java.util.Calendar;
 import java.util.Objects;
 
 public class Plan extends AppCompatActivity {
@@ -34,6 +32,10 @@ public class Plan extends AppCompatActivity {
         calculateCaloric();
         setContentView(R.layout.plan_ui);
     }
+    @Override
+    public void onBackPressed() {
+        // super.onBackPressed();
+    }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void calculateCaloric(){
@@ -44,33 +46,25 @@ public class Plan extends AppCompatActivity {
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         for (QueryDocumentSnapshot document : task.getResult()) {
-                            double bmr;
+                            String bmr;
                             ObjectMapper objectMapper = new ObjectMapper();
                             User user = objectMapper.convertValue(document.getData(), User.class);
-                            double reduce = Double.parseDouble(user.getTargetWeight()) - Double.parseDouble(user.getWeight());
-                            LocalDate localDate = LocalDate.now();
 
-                            localDate = localDate.plusDays((long) (Math.abs(reduce)*7700/ 500));
-                            String s = localDate.getDayOfMonth() + "/" + localDate.getMonthValue() + "/" + localDate.getYear();
+                            String s = user.calculateAndSetReachGoalDate();
+
                             ((TextView)findViewById(R.id.reachGoalDate)).setText(s);
 
-                            user.setReachGoalDate(s);
                             saveReachGoalDateToDatabase(document, s);
+
+                            double reduce = Double.parseDouble(user.getTargetWeight()) - Double.parseDouble(user.getWeight());
 
                             String string = user.getWeight() + "kg -> " + reduce + " kg -> " + user.getTargetWeight() + " kg";
                             ((TextView)findViewById(R.id.kilograms)).setText(string);
-                            final Calendar c = Calendar.getInstance();
-                            String[] date = user.getBirthDate().split("/");
-                            int age = c.get(Calendar.YEAR) - Integer.parseInt(date[2]);
-                            if (Objects.equals(user.getSex(), "M")){
-                                bmr = 66.473 + (13.752 * Double.parseDouble(user.getWeight()) + (5.003 * Integer.parseInt(user.getHeight())) - (6.775 * age));
-                            }
-                            else {
-                                bmr = 655.1 + (9.563 * Double.parseDouble(user.getWeight()) + (1.85 * Integer.parseInt(user.getHeight())) - (4.676 * age));
-                            }
-                            ((TextView)findViewById(R.id.dailyCalorieLimit)).setText(String.valueOf((int)Math.floor(bmr)));
 
-                            user.setDailyCalorieLimit(String.valueOf(bmr));
+                            bmr = user.calculateAndSetDailyCalorieLimit();
+                            ((TextView)findViewById(R.id.dailyCalorieLimit)).setText(bmr);
+
+                            user.setDailyCalorieLimit(bmr);
                             saveDailyCalorieLimitToDatabase(document, bmr);
                         }
                     } else {
@@ -83,8 +77,8 @@ public class Plan extends AppCompatActivity {
                 .addOnSuccessListener(aVoid -> Log.d("Firebase", "Document successfully updated!"))
                 .addOnFailureListener(e -> Log.w("Firebase", "Error updating document - reachGoalDate", e));
     }
-    private static void saveDailyCalorieLimitToDatabase(QueryDocumentSnapshot document, double bmr) {
-        document.getReference().update("dailyCalorieLimit", (int)bmr)
+    private static void saveDailyCalorieLimitToDatabase(QueryDocumentSnapshot document, String bmr) {
+        document.getReference().update("dailyCalorieLimit", bmr)
                 .addOnSuccessListener(aVoid -> Log.d("Firebase", "Document successfully updated!"))
                 .addOnFailureListener(e -> Log.w("Firebase", "Error updating document - dailyCalorieLimit", e));
     }
@@ -93,6 +87,4 @@ public class Plan extends AppCompatActivity {
         Intent intent = new Intent(this, Menu.class);
         startActivity(intent);
     }
-
-
 }

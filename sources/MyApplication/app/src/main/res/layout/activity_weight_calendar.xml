@@ -7,6 +7,16 @@
 
 
     <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="0dp"
+        android:layout_height="105dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/rectangle_black" />
+
+    <ImageView
         android:id="@+id/imageView9"
         android:layout_width="0dp"
         android:layout_height="94dp"
@@ -18,7 +28,7 @@
         tools:ignore="MissingConstraints" />
 
     <ImageView
-        android:id="@+id/imageView8"
+        android:id="@+id/backButton"
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:layout_marginStart="20dp"
@@ -26,9 +36,11 @@
         app:layout_constraintBottom_toBottomOf="@+id/imageView9"
         app:layout_constraintStart_toStartOf="@+id/imageView9"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/arrow_left" />
+        app:srcCompat="@drawable/arrow_left"
+        android:onClick="back" />
 
     <TextView
+        android:id="@+id/textView17"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -36,7 +48,7 @@
         android:text="@string/logo"
         android:textAlignment="center"
         android:textColor="#FFFFFF"
-        android:textSize="30dp"
+        android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView9"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -47,13 +59,15 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="450dp"
+        android:layout_marginTop="350dp"
         android:layout_marginEnd="30dp"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="130dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView9"
+        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/rectangle_gray" />
 
     <TextView
@@ -81,31 +95,97 @@
         app:layout_constraintTop_toTopOf="@+id/imageView10"
         app:srcCompat="@drawable/rectangle_white" />
 
-    <ImageView
-        android:id="@+id/imageView12"
+    <Button
+        android:id="@+id/button10"
         android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="100dp"
-        android:layout_marginEnd="100dp"
-        android:layout_marginBottom="10dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView10"
-        app:layout_constraintEnd_toEndOf="@+id/imageView10"
-        app:layout_constraintStart_toStartOf="@+id/imageView10"
-        app:srcCompat="@drawable/buttons" />
+        android:layout_height="wrap_content"
+        android:layout_marginStart="120dp"
+        android:layout_marginEnd="120dp"
+        android:background="@drawable/buttons"
+        android:fontFamily="@font/poppins_medium"
+        android:onClick="addWeightToDatabase"
+        android:text="@string/save"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.793" />
 
-    <TextView
-        android:id="@+id/textView31"
+    <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:fontFamily="@font/poppins_medium"
-        android:text="@string/save"
-        android:textAlignment="center"
-        android:gravity="center"
-        android:textColor="#fff"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView12"
-        app:layout_constraintEnd_toEndOf="@+id/imageView12"
-        app:layout_constraintStart_toStartOf="@+id/imageView12"
-        app:layout_constraintTop_toTopOf="@+id/imageView12" />
+        app:layout_constraintBottom_toTopOf="@+id/imageView10"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView9">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+    </ScrollView>
+
+    <RadioGroup
+        android:id="@+id/mainMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <RadioButton
+            android:id="@+id/Menu"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@null"
+            android:checked="false"
+            android:clickable="true"
+            android:enabled="true"
+            android:focusable="true"
+            android:fontFamily="@font/poppins"
+            android:text="@string/menu"
+            android:textAlignment="center"
+            android:textColor="@drawable/menu"
+            android:textSize="16sp" />
+
+        <RadioButton
+            android:id="@+id/WeightCalendar"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@null"
+            android:checked="true"
+            android:clickable="true"
+            android:enabled="true"
+            android:focusable="true"
+            android:fontFamily="@font/poppins"
+            android:text="@string/weight_calendar"
+            android:textAlignment="center"
+            android:textColor="@drawable/menu"
+            android:textSize="16sp" />
+
+        <RadioButton
+            android:id="@+id/More"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@null"
+            android:checked="false"
+            android:clickable="true"
+            android:enabled="true"
+            android:focusable="true"
+            android:fontFamily="@font/poppins"
+            android:text="@string/more"
+            android:textAlignment="center"
+            android:textColor="@drawable/menu"
+            android:textSize="16sp" />
+    </RadioGroup>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

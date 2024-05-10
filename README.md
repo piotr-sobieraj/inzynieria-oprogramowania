@@ -1,4 +1,12 @@
-# Spis treści
+## 9 maja
+- [Ulepszenia w dodawaniu posiłków](#ulepszenia-w-dodawaniu-posiłków)
+- [Przeliczanie daty osiągnięcia celu i limitu kalorii w reakcji na zmianę parametrów](#przeliczanie-daty-osiągnięcia–celu–i-limitu-kalorii-w-reakcji-na-zmianę-parametrów)
+- [Poprawki](#poprawki)
+
+
+## 21 kwietnia
+- [Bardziej funkcjonalny kalendarz posiłków](#bardziej-funkcjonalny-kalendarz-posiłków)
+- [Nowe opcje dostępne do edycji](#nowe-opcje-dostępne-do-edycji)
 
 ## 12 kwietnia
 - [Dodawanie posiłków](#dodawanie-posiłków)
@@ -22,6 +30,38 @@
 
 
 ---
+# 9 maja
+## Ulepszenia w dodawaniu posiłków
+## Przeliczanie daty osiągnięcia celu i limitu kalorii w reakcji na zmianę parametrów
+## Poprawki
+
+# 21 kwietnia
+## Bardziej funkcjonalny kalendarz posiłków
+<div style="text-align: center;">
+    <img src="/pictures/08.nowe.dodawanie.posilkow.jpg" alt="Dodawanie posiłków" width="40%">
+</div>
+
+## Nowe opcje dostępne do edycji
+<div style="text-align: center;">
+    <img src="/pictures/09.opcje.jpg" alt="Opcje" width="40%">
+</div>
+
+<div style="text-align: center;">
+    <img src="/pictures/10.targets.jpg" alt="Cele" width="40%">
+</div>
+
+<div style="text-align: center;">
+    <img src="/pictures/11.targets.body.weight.jpg" alt="Cele - waga i docelowa waga" width="40%">
+</div>
+
+
+
+
+
+
+
+
+
 # 12 kwietnia
 ## Dodawanie posiłków
 <div style="text-align: center;">
