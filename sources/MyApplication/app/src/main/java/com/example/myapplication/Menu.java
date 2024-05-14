@@ -37,6 +37,9 @@ import java.util.Objects;
 import java.util.Set;
 
 public class Menu extends AppCompatActivity {
+    private User user;
+    private ArrayList<MealDay> listOfMealDays;
+    private RecentMeal recentMeal;
     private TextView currentCalorie;
     private TextView calorieLimit;
     private TextView currentProtein;
@@ -56,6 +59,9 @@ public class Menu extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_menu);
+        user =(User) getIntent().getSerializableExtra("userObject");
+        listOfMealDays =(ArrayList<MealDay>) getIntent().getSerializableExtra("listOfMealDayObjects");
+        recentMeal = (RecentMeal) getIntent().getSerializableExtra("recentMealObject");
         currentCalorie = findViewById(R.id.currentCalorie);
         calorieLimit = findViewById(R.id.calorieLimit);
         proteinLimit = findViewById(R.id.proteinLimit);
@@ -69,28 +75,34 @@ public class Menu extends AppCompatActivity {
         fatsProgressBar = findViewById(R.id.fatsProgres);
         carbsProgressBar = findViewById(R.id.carbsProgres);
         changeUI();
-        fillLimits();
+        fillLimitsFromObject();
         setActualDate();
-        readMealDayFromDatabase();
+        readMealDayFromObject();
     }
 
 
     public void changeUI() {
         RadioGroup radioGroup = findViewById(R.id.mainMenu);
-        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                Intent intent;
-                if (checkedId == R.id.Menu) {
-                    intent = new Intent(Menu.this, Menu.class);
-                    startActivity(intent);
-                } else if (checkedId == R.id.WeightCalendar) {
-                    intent = new Intent(Menu.this, WeightCalendar.class);
-                    startActivity(intent);
-                } else if (checkedId == R.id.More) {
-                    intent = new Intent(Menu.this, MoreUI.class);
-                    startActivity(intent);
-                }
+        radioGroup.setOnCheckedChangeListener((group, checkedId) -> {
+            Intent intent;
+            if (checkedId == R.id.Menu) {
+                intent = new Intent(Menu.this, Menu.class);
+                intent.putExtra("userObject", user);
+                intent.putExtra("listOfMealDayObjects", listOfMealDays);
+                intent.putExtra("recentMealObject", recentMeal);
+                startActivity(intent);
+            } else if (checkedId == R.id.WeightCalendar) {
+                intent = new Intent(Menu.this, WeightCalendar.class);
+                intent.putExtra("userObject", user);
+                intent.putExtra("listOfMealDayObjects", listOfMealDays);
+                intent.putExtra("recentMealObject", recentMeal);
+                startActivity(intent);
+            } else if (checkedId == R.id.More) {
+                intent = new Intent(Menu.this, MoreUI.class);
+                intent.putExtra("userObject", user);
+                intent.putExtra("listOfMealDayObjects", listOfMealDays);
+                intent.putExtra("recentMealObject", recentMeal);
+                startActivity(intent);
             }
         });
     }
@@ -107,6 +119,7 @@ public class Menu extends AppCompatActivity {
             date.setText(getIntent().getStringExtra("date"));
         }
     }
+
 
 
     public void deleteFromDatabase(String mealName, String nameProduct, String caloricValue){
@@ -171,6 +184,25 @@ public class Menu extends AppCompatActivity {
                     }
                 });
     }
+
+    public void readMealDayFromObject(){
+        TextView dateText = findViewById(R.id.date);
+        for(MealDay mealDay: listOfMealDays){
+            if (Objects.equals(mealDay.getDate(), dateText.getText().toString())){
+                Map<String, List<Meal>> mapMeals = mealDay.getMeals();
+                Set<String> keys = mealDay.getMeals().keySet();
+                for (String key: keys){
+                    List<Meal> mealList = mapMeals.get(key);
+                    if (mealList == null) {
+                        mealList = new ArrayList<>();
+                    }
+                    for (Meal meal:mealList){
+                        addCardProduct(key, meal.name, String.valueOf(meal.caloricValue), String.valueOf(meal.fatsValue), String.valueOf(meal.carbohydratesValue), String.valueOf(meal.proteinsValue));
+                    }
+                }
+            }
+        }
+    }
     public void readMealDayFromDatabase(){
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         CollectionReference usersRef = db.collection("users");
@@ -221,6 +253,7 @@ public class Menu extends AppCompatActivity {
         View view = getLayoutInflater().inflate(R.layout.product_card, null);
         setProduct(view, productName, caloricValue, fatsValue, carbohydratesValue, proteinsValue);
         Button delete = view.findViewById(R.id.delete);
+        Log.d("CALLIM", calorieLimit.getText().toString());
         int calValueLimit = Integer.parseInt(calorieLimit.getText().toString().split(" ")[0].substring(1));
         int proValueLimit = Integer.parseInt(proteinLimit.getText().toString().split(" ")[0].substring(1).split("-")[1]);
         int fatsValueLimit = Integer.parseInt(fatsLimit.getText().toString().split(" ")[0].substring(1));
@@ -329,6 +362,26 @@ public class Menu extends AppCompatActivity {
         fatsProgressBar.setProgress((int)((Double.parseDouble(currentFats.getText().toString())/fatsValueLimit) * 100));
         currentCarbs.setText(String.valueOf(Integer.parseInt(currentCarbs.getText().toString()) + Integer.parseInt(Objects.requireNonNull(carbsValue))));
         carbsProgressBar.setProgress((int)((Double.parseDouble(currentCarbs.getText().toString())/carbsValueLimit) * 100));
+    }
+    public void fillLimitsFromObject(){
+        currentCalorie.setText("0");
+        String calLim = "/" + user.getDailyCalorieLimit() + " kcal";
+        calorieLimit.setText(calLim);
+        currentProtein.setText("0");
+        if (Objects.equals(user.getSex(), "f")){
+            String proLim = "/" + (int)(0.45 * Integer.parseInt(user.getWeight())) + "-" + (int)(0.75 * Integer.parseInt(user.getWeight())) + " g";
+            proteinLimit.setText(proLim);
+        }
+        else {
+            String proLim = "/" + (int)(0.55 * Integer.parseInt(user.getWeight())) + "-" + (int)(0.85 * Integer.parseInt(user.getWeight())) + " g";
+            proteinLimit.setText(proLim);
+        }
+        currentFats.setText("0");
+        String fatLim = "/" + (int)(0.8 * Integer.parseInt(user.getWeight())) + " g";
+        fatsLimit.setText(fatLim);
+        currentCarbs.setText("0");
+        String carbsLim = "/" + (int)(0.45 * Integer.parseInt(user.getDailyCalorieLimit())/4) + "-" + (int)(0.65 * Integer.parseInt(user.getDailyCalorieLimit())/4) + " g";
+        carbsLimit.setText(carbsLim);
     }
     public void fillLimits(){
 
