@@ -1,6 +1,8 @@
 package com.example.myapplication;
 
-public class Meal {
+import java.io.Serializable;
+
+public class Meal implements Serializable {
     protected String name = "";
      protected int caloricValue = 0;
      protected int fatsValue = 0;

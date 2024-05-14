@@ -1,9 +1,10 @@
 package com.example.myapplication;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
-public class MealDay {
+public class MealDay implements Serializable {
     private String date;
     private Map<String, List<Meal>> meals;
 
