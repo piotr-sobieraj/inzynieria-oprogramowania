@@ -28,16 +28,65 @@ import java.util.Objects;
 
 public class NewProduct extends AppCompatActivity {
 
+    private User user;
+    private ArrayList<MealDay> listOfMealDays;
+    private RecentMeal recentMeal;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
+        user =(User) getIntent().getSerializableExtra("userObject");
+        listOfMealDays =(ArrayList<MealDay>) getIntent().getSerializableExtra("listOfMealDayObjects");
+        recentMeal = (RecentMeal) getIntent().getSerializableExtra("recentMealObject");
         setContentView(R.layout.activity_new_product);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+    }
+
+    public void addProductToObject(View v){
+        for (MealDay mealDay:listOfMealDays){
+            if (Objects.equals(mealDay.getDate(), getIntent().getStringExtra("date"))){
+                List<Meal> mealList = mealDay.getMeals().get(getIntent().getStringExtra("typeOfMeal"));
+                if (mealList == null){
+                    mealList = new ArrayList<>();
+                }
+                mealList.add(new Meal(((TextView)findViewById(R.id.editText)).getText().toString(),
+                        Integer.parseInt(((TextView)findViewById(R.id.editText2)).getText().toString()),
+                        Integer.parseInt(((TextView)findViewById(R.id.fatsText)).getText().toString()),
+                        Integer.parseInt(((TextView)findViewById(R.id.carbohydratesText)).getText().toString()),
+                        Integer.parseInt(((TextView)findViewById(R.id.proteinsText)).getText().toString())));
+                Map<String, List<Meal>> mealMap = mealDay.getMeals();
+                mealMap.put(getIntent().getStringExtra("typeOfMeal"), mealList);
+                mealDay.setMeals(mealMap);
+            }
+        }
+        boolean find = false;
+        Map<String, List<Meal>> map = recentMeal.getMeals();
+        List<Meal> list = map.get(getIntent().getStringExtra("typeOfMeal"));
+        if (list != null) {
+            for (Meal meal: list){
+                if (Objects.equals(meal.name, ((TextView) findViewById(R.id.editText)).getText().toString()) && meal.caloricValue == Integer.parseInt(((TextView) findViewById(R.id.editText2)).getText().toString()) && meal.fatsValue == Integer.parseInt(((TextView) findViewById(R.id.fatsText)).getText().toString()) && meal.carbohydratesValue == Integer.parseInt(((TextView) findViewById(R.id.carbohydratesText)).getText().toString()) && meal.proteinsValue == Integer.parseInt(((TextView) findViewById(R.id.proteinsText)).getText().toString())){
+                    find = true;
+                }
+            }
+        }
+        else {
+            list = new ArrayList<>();
+        }
+        if (!find) {
+            list.add(new Meal(((TextView) findViewById(R.id.editText)).getText().toString(),
+                    Integer.parseInt(((TextView) findViewById(R.id.editText2)).getText().toString()),
+                    Integer.parseInt(((TextView) findViewById(R.id.fatsText)).getText().toString()),
+                    Integer.parseInt(((TextView) findViewById(R.id.carbohydratesText)).getText().toString()),
+                    Integer.parseInt(((TextView) findViewById(R.id.proteinsText)).getText().toString())));
+            map.put(getIntent().getStringExtra("typeOfMeal"), list);
+            recentMeal.setMeals(map);
+        }
+        Intent intent = new Intent(NewProduct.this, Menu.class);
+        intent.putExtra("date", getIntent().getStringExtra("date"));
+        intent.putExtra("userObject", user);
+        intent.putExtra("listOfMealDayObjects", listOfMealDays);
+        intent.putExtra("recentMealObject", recentMeal);
+        startActivity(intent);
     }
 
     public void addProductToDatabase(View v){

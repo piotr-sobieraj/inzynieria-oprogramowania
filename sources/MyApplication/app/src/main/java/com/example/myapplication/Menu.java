@@ -120,7 +120,33 @@ public class Menu extends AppCompatActivity {
         }
     }
 
-
+    public void deleteFromObject(String mealName, String nameProduct, String caloricValue, String fatsValue, String carbsValue, String proteinValue){
+        for (MealDay mealDay:listOfMealDays){
+            if (Objects.equals(mealDay.getDate(), getIntent().getStringExtra("date"))){
+                List<Meal> mealList = mealDay.getMeals().get(mealName);
+                if (mealList == null) {
+                    mealList = new ArrayList<>();
+                }
+                for(Meal meal:mealList){
+                    if (Objects.equals(meal.name, nameProduct) && meal.caloricValue == Integer.parseInt(caloricValue) && meal.fatsValue == Integer.parseInt(fatsValue) && meal.proteinsValue == Integer.parseInt(proteinValue) && meal.carbohydratesValue == Integer.parseInt(carbsValue)){
+                        mealList.remove(meal);
+                        break;
+                    }
+                }
+                Map<String, List<Meal>> mealMap = mealDay.getMeals();
+                Set<String> keys = mealMap.keySet();
+                for (String key: keys){
+                    if (Objects.equals(key, mealName)){
+                        mealMap.put(key, mealList);
+                    }
+                    else {
+                        mealMap.put(key, mealMap.get(key));
+                    }
+                }
+                mealDay.setMeals(mealMap);
+            }
+        }
+    }
 
     public void deleteFromDatabase(String mealName, String nameProduct, String caloricValue){
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -266,7 +292,7 @@ public class Menu extends AppCompatActivity {
             String[] splited = cal.getText().toString().split(" ");
             String s = (Integer.parseInt(splited[0]) - Integer.parseInt(Objects.requireNonNull(caloricValue))) + " kcal " + (Integer.parseInt(splited[2]) - Integer.parseInt(Objects.requireNonNull(fatsValue))) + " g " + (Integer.parseInt(splited[4]) - Integer.parseInt(Objects.requireNonNull(carbohydratesValue))) + " g " + (Integer.parseInt(splited[6]) - Integer.parseInt(Objects.requireNonNull(proteinsValue)))+ " g";
             cal.setText(s);
-            deleteFromDatabase(mealName, productName, caloricValue);
+            deleteFromObject(mealName, productName, caloricValue, fatsValue, carbohydratesValue, proteinsValue);
         });
         setProgressOnAddProduct(calValueLimit, caloricValue, proValueLimit, proteinsValue, fatsValueLimit, fatsValue, carbsValueLimit, carbohydratesValue);
         TextView cal = findViewById(getResources().getIdentifier("kcal"+mealName, "id", getPackageName()));
@@ -282,6 +308,9 @@ public class Menu extends AppCompatActivity {
         TextView dateText = findViewById(R.id.date);
         intent.putExtra("typeOfMeal", "Breakfast");
         intent.putExtra("date", dateText.getText().toString());
+        intent.putExtra("userObject", user);
+        intent.putExtra("listOfMealDayObjects", listOfMealDays);
+        intent.putExtra("recentMealObject", recentMeal);
         startActivity(intent);
     }
     public void addProductSecondBreakfast(View v){
@@ -289,6 +318,9 @@ public class Menu extends AppCompatActivity {
         TextView dateText = findViewById(R.id.date);
         intent.putExtra("typeOfMeal", "SecondBreakfast");
         intent.putExtra("date", dateText.getText().toString());
+        intent.putExtra("userObject", user);
+        intent.putExtra("listOfMealDayObjects", listOfMealDays);
+        intent.putExtra("recentMealObject", recentMeal);
         startActivity(intent);
     }
 
@@ -304,6 +336,9 @@ public class Menu extends AppCompatActivity {
             String stringDate = c.get(DAY_OF_MONTH) + "/" + (c.get(MONTH) + 1) + "/" + c.get(YEAR);
             Intent intent = new Intent(Menu.this, Menu.class);
             intent.putExtra("date", stringDate);
+            intent.putExtra("userObject", user);
+            intent.putExtra("listOfMealDayObjects", listOfMealDays);
+            intent.putExtra("recentMealObject", recentMeal);
             startActivity(intent);
         } catch (ParseException e) {
             throw new RuntimeException(e);
@@ -322,6 +357,9 @@ public class Menu extends AppCompatActivity {
             String stringDate = c.get(DAY_OF_MONTH) + "/" + (c.get(MONTH) + 1) + "/" + c.get(YEAR);
             Intent intent = new Intent(Menu.this, Menu.class);
             intent.putExtra("date", stringDate);
+            intent.putExtra("userObject", user);
+            intent.putExtra("listOfMealDayObjects", listOfMealDays);
+            intent.putExtra("recentMealObject", recentMeal);
             startActivity(intent);
         } catch (ParseException e) {
             throw new RuntimeException(e);

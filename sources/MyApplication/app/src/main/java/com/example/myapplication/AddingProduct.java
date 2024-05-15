@@ -29,6 +29,9 @@ import java.util.Objects;
 
 public class AddingProduct extends AppCompatActivity {
 
+    private User user;
+    private ArrayList<MealDay> listOfMealDays;
+    private RecentMeal recentMeal;
     private TextView titleTextView;
     private List<Meal> mealList;
 
@@ -36,8 +39,11 @@ public class AddingProduct extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
+        user =(User) getIntent().getSerializableExtra("userObject");
+        listOfMealDays =(ArrayList<MealDay>) getIntent().getSerializableExtra("listOfMealDayObjects");
+        recentMeal = (RecentMeal) getIntent().getSerializableExtra("recentMealObject");
         setContentView(R.layout.adding_product);
-        readFromDatabase();
+        readFromObject();
         titleTextView = findViewById(R.id.typeOfMealTextView);
         titleTextView.setText(getIntent().getStringExtra("typeOfMeal"));
         TextView search = findViewById(R.id.searchProduct);
@@ -66,15 +72,30 @@ public class AddingProduct extends AppCompatActivity {
         Intent intent = new Intent(AddingProduct.this, NewProduct.class);
         intent.putExtra("typeOfMeal", titleTextView.getText().toString());
         intent.putExtra("date", getIntent().getStringExtra("date"));
+        intent.putExtra("userObject", user);
+        intent.putExtra("listOfMealDayObjects", listOfMealDays);
+        intent.putExtra("recentMealObject", recentMeal);
         startActivity(intent);
     }
 
     public void back(View view) {
         Intent intent = new Intent(AddingProduct.this, Menu.class);
         intent.putExtra("date", getIntent().getStringExtra("date"));
+        intent.putExtra("userObject", user);
+        intent.putExtra("listOfMealDayObjects", listOfMealDays);
+        intent.putExtra("recentMealObject", recentMeal);
         startActivity(intent);
     }
-
+    public void readFromObject(){
+        Map<String, List<Meal>> map = recentMeal.getMeals();
+        List<Meal> list = map.get(getIntent().getStringExtra("typeOfMeal"));
+        mealList = list;
+        if (list != null) {
+            for(Meal meal: list){
+                addRecentMeal(meal.name, meal.caloricValue, meal.fatsValue, meal.carbohydratesValue, meal.proteinsValue);
+            }
+        }
+    }
     public void readFromDatabase(){
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         CollectionReference usersRef = db.collection("users");
@@ -107,7 +128,7 @@ public class AddingProduct extends AppCompatActivity {
         View view = getLayoutInflater().inflate(R.layout.recent_product_card, null);
         LinearLayout layout = findViewById(R.id.container);
         Button add = view.findViewById(R.id.button11);
-        add.setOnClickListener(v -> addProductToDatabase(nameProduct, cal, fatsValue, carbsValue, proteinValue));
+        add.setOnClickListener(v -> addProductToObject(nameProduct, cal, fatsValue, carbsValue, proteinValue));
         TextView name = view.findViewById(R.id.product);
         name.setText(nameProduct);
         TextView calorie = view.findViewById(R.id.calories);
@@ -125,6 +146,37 @@ public class AddingProduct extends AppCompatActivity {
         layout.addView(view);
     }
 
+    public void addProductToObject(String nameProduct, int cal, int fatsValue, int carbsValue, int proteinValue){
+        for (MealDay mealDay:listOfMealDays){
+            if (Objects.equals(mealDay.getDate(), getIntent().getStringExtra("date"))){
+                Map<String, List<Meal>> mapMeal = mealDay.getMeals();
+                List<Meal> list = mapMeal.get(getIntent().getStringExtra("typeOfMeal"));
+                if (list != null) {
+                    list.add(new Meal(nameProduct, cal, fatsValue, carbsValue, proteinValue));
+                }
+                else {
+                    list = new ArrayList<>();
+                    list.add(new Meal(nameProduct, cal, fatsValue, carbsValue, proteinValue));
+                }
+                mapMeal.put(getIntent().getStringExtra("typeOfMeal"), list);
+                mealDay.setMeals(mapMeal);
+            }
+            else {
+                List<Meal> list = new ArrayList<>();
+                Map<String, List<Meal>> map = new HashMap<>();
+                list.add(new Meal(nameProduct, cal, fatsValue, carbsValue, proteinValue));
+                map.put(getIntent().getStringExtra("typeOfMeal"), list);
+                listOfMealDays.add(new MealDay(getIntent().getStringExtra("date"),map));
+                break;
+            }
+        }
+        Intent intent = new Intent(AddingProduct.this, Menu.class);
+        intent.putExtra("date", getIntent().getStringExtra("date"));
+        intent.putExtra("userObject", user);
+        intent.putExtra("listOfMealDayObjects", listOfMealDays);
+        intent.putExtra("recentMealObject", recentMeal);
+        startActivity(intent);
+    }
     public void addProductToDatabase(String nameProduct, int cal, int fatsValue, int carbsValue, int proteinValue){
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         CollectionReference usersRef = db.collection("users");
