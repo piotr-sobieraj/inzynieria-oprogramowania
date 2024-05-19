@@ -21,6 +21,7 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
+import java.math.BigInteger;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -129,6 +130,9 @@ public class Profile extends AppCompatActivity {
 
 
     public void save(View v){
+
+        if(!isInputDataCorrect()) return;
+
         String height = String.valueOf(((EditText)findViewById(R.id.editTextHeight)).getText());
         String weight = String.valueOf(((EditText)findViewById(R.id.editTextWeight)).getText());
         String name = String.valueOf(((EditText)findViewById(R.id.editTextName)).getText());
@@ -216,5 +220,63 @@ public class Profile extends AppCompatActivity {
                     mYear, mMonth, mDay);
             datePickerDialog.show();
         });
+    }
+
+    private boolean isWeightCorrect(){
+        try {
+            String weight_s = String.valueOf(((EditText)findViewById(R.id.editTextWeight)).getText());
+            BigInteger weight = new BigInteger(weight_s);
+
+            if(weight_s.isEmpty()){
+                ((TextView) findViewById(R.id.editTextWeight)).setError("Missing Weight value.");
+                return false;
+            }
+
+            if (weight.compareTo(BigInteger.ZERO) <= 0 ||
+                    weight.compareTo(BigInteger.valueOf(10000)) > 0) {
+
+                ((TextView) findViewById(R.id.editTextWeight)).setError("Weight must be greater than 0 and lower than 10000.");
+                return false;
+            }
+
+        } catch (NumberFormatException e) {//Literki wyłapie
+            ((TextView) findViewById(R.id.editTextWeight)).setError("Invalid Weight value.");
+            return false;
+        }
+
+        return true;
+    }
+
+
+    private boolean isHeightCorrect(){
+        try {
+            String height_s = String.valueOf(((EditText)findViewById(R.id.editTextHeight)).getText());
+            BigInteger height = new BigInteger(height_s);
+
+            if(height_s.isEmpty()){
+                ((TextView) findViewById(R.id.editTextHeight)).setError("Missing Height value.");
+                return false;
+            }
+
+            if (height.compareTo(BigInteger.ZERO) <= 0 ||
+                    height.compareTo(BigInteger.valueOf(500)) > 0) {
+
+                ((TextView) findViewById(R.id.editTextHeight)).setError("Height must be greater than 0 and lower than 500.");
+                return false;
+            }
+
+        } catch (NumberFormatException e) {//Literki wyłapie
+            ((TextView) findViewById(R.id.editTextHeight)).setError("Invalid Weight value.");
+            return false;
+        }
+
+        return true;
+    }
+
+    private boolean isInputDataCorrect(){
+        boolean isHeightCorrect = isHeightCorrect();
+        boolean isWeightCorrect = isWeightCorrect();
+
+        return isHeightCorrect && isWeightCorrect;
     }
 }
