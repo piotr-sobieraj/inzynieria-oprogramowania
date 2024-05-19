@@ -16,6 +16,7 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
+import java.math.BigInteger;
 import java.util.Objects;
 
 public class TargetsBodyWeight extends AppCompatActivity {
@@ -36,6 +37,9 @@ public class TargetsBodyWeight extends AppCompatActivity {
     }
 
     public void save(View view) {
+
+        if(!isInputDataCorrect()) return;
+
         String weight = String.valueOf(((EditText)findViewById(R.id.editTextCurrentWeight)).getText());
         String targetWeight = String.valueOf(((EditText)findViewById(R.id.editTextTargetWeight)).getText());
 
@@ -114,4 +118,63 @@ public class TargetsBodyWeight extends AppCompatActivity {
                     }
                 });
     }
+
+    private boolean isWeightCorrect(){
+        try {
+            String weight_s = String.valueOf(((EditText)findViewById(R.id.editTextCurrentWeight)).getText());
+            BigInteger weight = new BigInteger(weight_s);
+
+            if(weight_s.isEmpty()){
+                ((TextView) findViewById(R.id.editTextCurrentWeight)).setError("Missing Weight value.");
+                return false;
+            }
+
+            if (weight.compareTo(BigInteger.ZERO) <= 0 ||
+                    weight.compareTo(BigInteger.valueOf(10000)) > 0) {
+
+                ((TextView) findViewById(R.id.editTextCurrentWeight)).setError("Weight must be greater than 0 and lower than 10000.");
+                return false;
+            }
+
+        } catch (NumberFormatException e) {//Literki wyłapie
+            ((TextView) findViewById(R.id.editTextCurrentWeight)).setError("Invalid Weight value.");
+            return false;
+        }
+
+        return true;
+    }
+
+
+    private boolean isTargetWeightCorrect(){
+        try {
+            String weight_s = String.valueOf(((EditText)findViewById(R.id.editTextTargetWeight)).getText());
+            BigInteger weight = new BigInteger(weight_s);
+
+            if(weight_s.isEmpty()){
+                ((TextView) findViewById(R.id.editTextTargetWeight)).setError("Missing Target Weight value.");
+                return false;
+            }
+
+            if (weight.compareTo(BigInteger.ZERO) <= 0 ||
+                    weight.compareTo(BigInteger.valueOf(10000)) > 0) {
+
+                ((TextView) findViewById(R.id.editTextTargetWeight)).setError("Target Weight must be greater than 0 and lower than 10000.");
+                return false;
+            }
+
+        } catch (NumberFormatException e) {//Literki wyłapie
+            ((TextView) findViewById(R.id.editTextTargetWeight)).setError("Invalid Target Weight value.");
+            return false;
+        }
+
+        return true;
+    }
+
+    private boolean isInputDataCorrect(){
+        boolean isWeightCorrect = isWeightCorrect();
+        boolean isTargetWeightCorrect = isTargetWeightCorrect();
+
+        return isWeightCorrect && isTargetWeightCorrect;
+    }
+
 }
