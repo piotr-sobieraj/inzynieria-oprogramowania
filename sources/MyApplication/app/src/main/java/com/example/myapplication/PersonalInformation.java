@@ -34,7 +34,7 @@ public class PersonalInformation extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        // super.onBackPressed();
+//         super.onBackPressed();
     }
 
     private void setUpUI() {
@@ -170,10 +170,6 @@ public class PersonalInformation extends AppCompatActivity {
             result = false;
         if (user.getName() == null || Objects.equals(user.getName(), "")){
             ((TextView) findViewById(R.id.editTextName)).setError("Missing Name");
-            result = false;
-        }
-        else if (user.getName().matches("\\W*[a-zA-Z0-9]*\\W+[a-zA-Z0-9]*\\W*")) {
-            ((TextView) findViewById(R.id.editTextName)).setError("Name contains forbidden characters");
             result = false;
         }
 
