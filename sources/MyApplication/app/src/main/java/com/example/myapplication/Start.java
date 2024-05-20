@@ -44,9 +44,14 @@ public class Start extends AppCompatActivity {
         usersRef.whereEqualTo("userUID", user.getUid()).get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        for (QueryDocumentSnapshot document : task.getResult()) {
-                            Log.d("Firebase", document.getId() + " => " + document.getData());
+                        if (!task.getResult().isEmpty()){
+                            Log.d("Firebase", "Successful logged user");
                             Intent intent = new Intent(Start.this, Menu.class);
+                            startActivity(intent);
+                        }
+                        else {
+                            Log.d("Firebase", "User without document");
+                            Intent intent = new Intent(Start.this, PersonalInformation.class);
                             startActivity(intent);
                         }
                     }
