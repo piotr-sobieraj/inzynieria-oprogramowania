@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
@@ -10,17 +10,23 @@
 
     <ImageView
         android:id="@+id/imageView3"
-        android:layout_width="0dp"
-        android:layout_height="105dp"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="0dp"
+        android:alpha="1"
+        android:importantForAccessibility="no"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/rectangle_black" />
+
     <RadioGroup
         android:id="@+id/mainMenu"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -79,154 +85,202 @@
 
     <ImageView
         android:id="@+id/imageView4"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="94dp"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/rectangle_blue" />
 
     <ImageView
         android:id="@+id/imageView5"
-        android:layout_width="0dp"
-        android:layout_height="65dp"
+        android:layout_width="wrap_content"
+        android:layout_height="70dp"
+        android:layout_below="@+id/imageView4"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="0dp"
         android:layout_marginEnd="10dp"
-        android:layout_marginBottom="455dp"
-        app:layout_constraintBottom_toTopOf="@+id/imageView3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView4"
-        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/rectangle_gray" />
 
     <TextView
         android:id="@+id/calorieLimit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/textView6"
+        android:layout_alignStart="@+id/imageView5"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="6dp"
         android:fontFamily="@font/poppins"
+        android:text="7"
         android:textColor="#EDF5FC"
         android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="@+id/textView6"
+        app:layout_constraintEnd_toStartOf="@+id/proteinLimit"
+        app:layout_constraintStart_toStartOf="@+id/imageView5"
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
     <TextView
         android:id="@+id/currentProtein"
-        android:layout_width="wrap_content"
+        android:layout_width="8dp"
         android:layout_height="17dp"
-        android:layout_marginStart="2dp"
+        android:layout_below="@+id/proteinProgres"
+        android:layout_alignEnd="@+id/proteinProgres"
+        android:layout_marginStart="1dp"
         android:layout_marginTop="4dp"
+        android:layout_marginEnd="-10dp"
+        android:layout_toEndOf="@+id/textView19"
         android:fontFamily="@font/poppins_semibold"
+        android:text="7"
         android:textColor="#EDF5FC"
         android:textSize="12sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/textView19"
+        app:layout_constraintEnd_toStartOf="@+id/textView22"
         app:layout_constraintTop_toBottomOf="@+id/proteinProgres" />
 
     <TextView
         android:id="@+id/currentFats"
         android:layout_width="wrap_content"
         android:layout_height="17dp"
-        android:layout_marginStart="2dp"
+        android:layout_below="@+id/fatsProgres"
+        android:layout_alignEnd="@+id/fatsProgres"
+        android:layout_marginStart="1dp"
         android:layout_marginTop="4dp"
+        android:layout_marginEnd="0dp"
+        android:layout_toEndOf="@+id/textView22"
         android:fontFamily="@font/poppins_semibold"
+        android:text="7"
         android:textColor="#EDF5FC"
         android:textSize="12sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/textView22"
+        app:layout_constraintEnd_toStartOf="@+id/textViewTargets"
         app:layout_constraintTop_toBottomOf="@+id/fatsProgres" />
 
     <TextView
         android:id="@+id/currentCarbs"
-        android:layout_width="wrap_content"
+        android:layout_width="8dp"
         android:layout_height="17dp"
-        android:layout_marginStart="2dp"
+        android:layout_below="@+id/carbsProgres"
+        android:layout_alignEnd="@+id/carbsProgres"
+        android:layout_marginStart="1dp"
         android:layout_marginTop="4dp"
+        android:layout_marginEnd="-5dp"
+        android:layout_toEndOf="@+id/textViewTargets"
         android:fontFamily="@font/poppins_semibold"
+        android:text="7"
         android:textColor="#EDF5FC"
         android:textSize="12sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/textViewTargets"
+        app:layout_constraintEnd_toEndOf="@+id/imageView5"
         app:layout_constraintTop_toBottomOf="@+id/carbsProgres" />
 
     <TextView
         android:id="@+id/textView19"
-        android:layout_width="45dp"
+        android:layout_width="wrap_content"
         android:layout_height="16dp"
+        android:layout_below="@+id/proteinProgres"
+        android:layout_marginStart="37dp"
         android:layout_marginTop="4dp"
+        android:layout_marginEnd="5dp"
+        android:layout_toEndOf="@+id/currentCalorie"
         android:fontFamily="@font/poppins"
         android:text="@string/protein"
         android:textColor="#EDF5FC"
         android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="@+id/proteinProgres"
+        app:layout_constraintEnd_toStartOf="@+id/currentProtein"
         app:layout_constraintTop_toBottomOf="@+id/proteinProgres" />
 
     <TextView
         android:id="@+id/textView22"
-        android:layout_width="22dp"
+        android:layout_width="wrap_content"
         android:layout_height="16dp"
+        android:layout_below="@+id/fatsProgres"
+        android:layout_marginStart="50dp"
         android:layout_marginTop="4dp"
+        android:layout_marginEnd="5dp"
+        android:layout_toEndOf="@+id/currentProtein"
         android:fontFamily="@font/poppins"
         android:text="@string/fat"
         android:textColor="#EDF5FC"
         android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="@+id/fatsProgres"
+        app:layout_constraintEnd_toStartOf="@+id/currentFats"
         app:layout_constraintTop_toBottomOf="@+id/fatsProgres" />
 
     <TextView
         android:id="@+id/textViewTargets"
-        android:layout_width="40dp"
-        android:layout_height="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/carbsProgres"
+        android:layout_marginStart="50dp"
         android:layout_marginTop="4dp"
+        android:layout_marginEnd="2dp"
+        android:layout_toEndOf="@+id/currentFats"
         android:fontFamily="@font/poppins"
         android:text="@string/carb"
         android:textColor="#EDF5FC"
         android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="@+id/carbsProgres"
+        app:layout_constraintEnd_toStartOf="@+id/currentCarbs"
         app:layout_constraintTop_toBottomOf="@+id/carbsProgres" />
 
     <ProgressBar
         android:id="@+id/proteinProgres"
         style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="65dp"
+        android:layout_width="wrap_content"
         android:layout_height="11dp"
-        android:layout_marginStart="112dp"
+        android:layout_below="@+id/imageView4"
+        android:layout_marginStart="1dp"
         android:layout_marginTop="10dp"
+        android:layout_marginEnd="45dp"
+        android:layout_toEndOf="@+id/calorieProgres"
         android:progressDrawable="@drawable/custom_progressbar_bg"
-        app:layout_constraintStart_toStartOf="@+id/imageView5"
+        app:layout_constraintEnd_toStartOf="@+id/fatsProgres"
         app:layout_constraintTop_toTopOf="@+id/imageView5" />
 
     <ProgressBar
         android:id="@+id/fatsProgres"
         style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="65dp"
+        android:layout_width="wrap_content"
         android:layout_height="11dp"
+        android:layout_below="@+id/imageView4"
+        android:layout_marginStart="1dp"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="112dp"
+        android:layout_weight="1"
+        android:layout_marginEnd="45dp"
+        android:layout_toEndOf="@+id/proteinProgres"
         android:progressDrawable="@drawable/custom_progressbar_bg"
-        app:layout_constraintEnd_toEndOf="@+id/imageView5"
+        app:layout_constraintEnd_toStartOf="@+id/carbsProgres"
         app:layout_constraintTop_toTopOf="@+id/imageView5" />
 
     <ProgressBar
         android:id="@+id/carbsProgres"
         style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="65dp"
+        android:layout_width="48dp"
         android:layout_height="11dp"
+        android:layout_below="@+id/imageView4"
+        android:layout_marginStart="1dp"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="15dp"
+        android:layout_toEndOf="@+id/fatsProgres"
+        android:indeterminateDrawable="@null"
         android:progressDrawable="@drawable/custom_progressbar_bg"
         app:layout_constraintEnd_toEndOf="@+id/imageView5"
         app:layout_constraintTop_toTopOf="@+id/imageView5" />
 
     <ScrollView
         android:id="@+id/scrollView2"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginBottom="12dp"
+        android:layout_above="@+id/imageView3"
+        android:layout_below="@+id/imageView5"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="0dp"
         android:fillViewport="true"
         app:layout_constraintBottom_toTopOf="@+id/imageView3"
         app:layout_constraintEnd_toEndOf="parent"
@@ -277,18 +331,19 @@
                     android:fontFamily="@font/poppins"
                     android:gravity="center_horizontal|center_vertical"
                     android:includeFontPadding="false"
-                    android:text="@string/plus"
                     android:onClick="addProductBreakfast"
+                    android:text="@string/plus"
                     android:textAlignment="gravity"
                     android:textColor="#EDF5FC"
                     android:textSize="34sp" />
             </androidx.cardview.widget.CardView>
+
             <LinearLayout
                 android:id="@+id/containerBreakfast"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
-            </LinearLayout>
+                android:orientation="vertical"></LinearLayout>
+
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -325,18 +380,18 @@
                     android:fontFamily="@font/poppins"
                     android:gravity="center_horizontal|center_vertical"
                     android:includeFontPadding="false"
-                    android:text="@string/plus"
                     android:onClick="addProductSecondBreakfast"
+                    android:text="@string/plus"
                     android:textAlignment="gravity"
                     android:textColor="#EDF5FC"
                     android:textSize="34sp" />
             </androidx.cardview.widget.CardView>
+
             <LinearLayout
                 android:id="@+id/containerSecondBreakfast"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
-            </LinearLayout>
+                android:orientation="vertical"></LinearLayout>
         </LinearLayout>
     </ScrollView>
 
@@ -345,88 +400,127 @@
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="wrap_content"
         android:layout_height="11dp"
-        android:layout_marginStart="15dp"
+        android:layout_below="@+id/imageView4"
+        android:layout_alignStart="@+id/imageView5"
+        android:layout_marginStart="5dp"
         android:layout_marginTop="10dp"
+        android:layout_marginEnd="35dp"
         android:progress="0"
         android:progressDrawable="@drawable/custom_progressbar_bg"
+        app:layout_constraintEnd_toStartOf="@+id/proteinProgres"
         app:layout_constraintStart_toStartOf="@+id/imageView5"
         app:layout_constraintTop_toTopOf="@+id/imageView5" />
 
     <TextView
         android:id="@+id/textView6"
-        android:layout_width="28dp"
+        android:layout_width="wrap_content"
         android:layout_height="16dp"
+        android:layout_below="@+id/calorieProgres"
+        android:layout_alignStart="@+id/imageView5"
+        android:layout_marginStart="5dp"
         android:layout_marginTop="4dp"
+        android:layout_marginEnd="5dp"
         android:fontFamily="@font/poppins"
         android:text="@string/kcal"
         android:textColor="#EDF5FC"
         android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="@+id/calorieProgres"
+        app:layout_constraintEnd_toStartOf="@+id/currentCalorie"
+        app:layout_constraintStart_toStartOf="@+id/imageView5"
         app:layout_constraintTop_toBottomOf="@+id/calorieProgres" />
 
     <TextView
         android:id="@+id/currentCalorie"
         android:layout_width="wrap_content"
         android:layout_height="17dp"
-        android:layout_marginStart="2dp"
+        android:layout_below="@+id/calorieProgres"
+        android:layout_alignEnd="@+id/calorieProgres"
+        android:layout_marginStart="1dp"
         android:layout_marginTop="4dp"
+        android:layout_marginEnd="0dp"
+        android:layout_toEndOf="@+id/textView6"
         android:fontFamily="@font/poppins_semibold"
+        android:text="7"
+
         android:textColor="#EDF5FC"
         android:textSize="12sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/textView6"
+        app:layout_constraintEnd_toStartOf="@+id/textView19"
         app:layout_constraintTop_toBottomOf="@+id/calorieProgres" />
 
     <TextView
         android:id="@+id/proteinLimit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/textView19"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="7dp"
+        android:layout_toEndOf="@+id/calorieLimit"
         android:fontFamily="@font/poppins"
+        android:text="7"
         android:textColor="#EDF5FC"
         android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="@+id/proteinProgres"
-        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+        app:layout_constraintEnd_toStartOf="@+id/fatLimit"
+        app:layout_constraintTop_toBottomOf="@+id/textView19" />
 
     <TextView
         android:id="@+id/fatLimit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/textView22"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="7dp"
+        android:layout_toEndOf="@+id/proteinLimit"
         android:fontFamily="@font/poppins"
+        android:text="7"
         android:textColor="#EDF5FC"
         android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="@+id/fatsProgres"
+        app:layout_constraintEnd_toStartOf="@+id/carbsLimit"
         app:layout_constraintTop_toBottomOf="@+id/textView22" />
 
     <TextView
         android:id="@+id/carbsLimit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewTargets"
+        android:layout_alignEnd="@+id/currentCarbs"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="-5dp"
+        android:layout_toEndOf="@+id/fatLimit"
         android:fontFamily="@font/poppins"
+        android:text="7"
         android:textColor="#EDF5FC"
         android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="@+id/carbsProgres"
+        app:layout_constraintEnd_toEndOf="@+id/imageView5"
         app:layout_constraintTop_toBottomOf="@+id/textViewTargets" />
 
     <TextView
         android:id="@+id/date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="43dp"
+        android:layout_marginEnd="10dp"
+        android:layout_toStartOf="@+id/imageView12"
+        android:layout_toEndOf="@+id/imageView7"
         android:fontFamily="@font/poppins_semibold"
         android:textAlignment="center"
         android:textColor="#ffffff"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView4"
-        app:layout_constraintEnd_toEndOf="@+id/imageView4"
-        app:layout_constraintStart_toStartOf="@+id/imageView4"
+        app:layout_constraintEnd_toStartOf="@+id/imageView12"
+        app:layout_constraintStart_toEndOf="@+id/imageView7"
         app:layout_constraintTop_toTopOf="@+id/imageView4" />
 
     <ImageView
         android:id="@+id/imageView6"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="25dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="39dp"
+        android:layout_marginTop="45dp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView4"
         app:layout_constraintStart_toStartOf="@+id/imageView4"
         app:layout_constraintTop_toTopOf="@+id/imageView4"
@@ -434,26 +528,33 @@
 
     <ImageView
         android:id="@+id/imageView7"
-        android:layout_width="11dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:layout_marginEnd="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="48dp"
+        android:layout_toEndOf="@+id/imageView6"
+        android:importantForAccessibility="no"
         android:onClick="previousDay"
         app:layout_constraintBottom_toBottomOf="@+id/imageView4"
-        app:layout_constraintEnd_toStartOf="@+id/date"
+        app:layout_constraintStart_toEndOf="@+id/imageView6"
         app:layout_constraintTop_toTopOf="@+id/imageView4"
         app:srcCompat="@drawable/arrow_left" />
 
     <ImageView
-        android:layout_width="11dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="25dp"
+        android:id="@+id/imageView12"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="30dp"
         android:onClick="nextDay"
         android:rotationY="180"
         app:layout_constraintBottom_toBottomOf="@+id/imageView4"
-        app:layout_constraintStart_toEndOf="@+id/date"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageView4"
-        app:srcCompat="@drawable/arrow_left" />
+        app:srcCompat="@drawable/arrow_left"
+        tools:ignore="ContentDescription" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>
