@@ -142,8 +142,8 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editTextDocelowaWaga"
         android:layout_width="match_parent"
+        android:id="@+id/editTextTargetWeight"
         android:layout_height="26dp"
         android:layout_below="@+id/textView10"
         android:layout_centerHorizontal="true"

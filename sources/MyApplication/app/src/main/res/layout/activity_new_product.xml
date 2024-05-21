@@ -20,7 +20,7 @@
         android:textAlignment="viewStart"
         android:textColor="#616061"
         android:textSize="16sp"
-        app:layout_constraintEnd_toStartOf="@+id/editText2"
+        app:layout_constraintEnd_toStartOf="@+id/editTextEnergyValue"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
@@ -38,7 +38,7 @@
         android:textAlignment="viewStart"
         android:textColor="#616061"
         android:textSize="16sp"
-        app:layout_constraintEnd_toStartOf="@+id/editText2"
+        app:layout_constraintEnd_toStartOf="@+id/editTextEnergyValue"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
@@ -59,7 +59,7 @@
         android:textColor="#616061"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/editText2"
+        app:layout_constraintStart_toEndOf="@+id/editTextEnergyValue"
         app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
     <EditText
@@ -136,7 +136,7 @@
         android:textAlignment="viewStart"
         android:textColor="#616061"
         android:textSize="16sp"
-        app:layout_constraintEnd_toStartOf="@+id/editText2"
+        app:layout_constraintEnd_toStartOf="@+id/editTextEnergyValue"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
@@ -261,13 +261,13 @@
         android:textAlignment="viewStart"
         android:textColor="#616061"
         android:textSize="16sp"
-        app:layout_constraintEnd_toStartOf="@+id/editText2"
+        app:layout_constraintEnd_toStartOf="@+id/editTextEnergyValue"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
     <EditText
-        android:id="@+id/editText2"
         android:layout_width="wrap_content"
+        android:id="@+id/editTextEnergyValue"
         android:layout_height="25dp"
         android:layout_below="@+id/editText"
         android:layout_alignParentEnd="true"
@@ -302,7 +302,7 @@
         android:textColor="#616061"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/editText2"
+        app:layout_constraintStart_toEndOf="@+id/editTextEnergyValue"
         app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
     <TextView
@@ -322,7 +322,7 @@
         android:textColor="#616061"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/editText2"
+        app:layout_constraintStart_toEndOf="@+id/editTextEnergyValue"
         app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
     <TextView
@@ -341,7 +341,7 @@
         android:textColor="#616061"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/editText2"
+        app:layout_constraintStart_toEndOf="@+id/editTextEnergyValue"
         app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
 </RelativeLayout>
