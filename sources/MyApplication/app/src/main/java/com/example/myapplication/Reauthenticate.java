@@ -82,18 +82,32 @@ public class Reauthenticate extends AppCompatActivity {
                                                                                     for (QueryDocumentSnapshot documentSnapshot2 : task3.getResult()) {
                                                                                         db.collection("users").document(document.getId()).collection("recentMeal").document(documentSnapshot2.getId()).delete()
                                                                                                 .addOnCompleteListener(task4 -> {
-                                                                                                    Log.d("Firebase", "Document successful deleted");
-                                                                                                    db.collection("users").document(
-                                                                                                            document.getId()).delete().addOnCompleteListener(
-                                                                                                            task5 -> {
-                                                                                                                if (task5.isSuccessful()) {
-                                                                                                                    Log.d("Firebase", "Document successful deleted");
-                                                                                                                } else {
-                                                                                                                    Log.d("Firebase", "Document delete failed" + task5.getException());
-                                                                                                                    Toast.makeText(this, "Document delete failed",
-                                                                                                                            Toast.LENGTH_SHORT).show();
-                                                                                                                }
-                                                                                                            });
+                                                                                                    if (task4.isSuccessful()){
+                                                                                                        Log.d("Firebase", "Document successful deleted");
+                                                                                                        db.collection("users").document(document.getId()).collection("weightDays").get()
+                                                                                                                .addOnCompleteListener(task5 -> {
+                                                                                                                    if (task5.isSuccessful()){
+                                                                                                                        for (QueryDocumentSnapshot documentSnapshot3: task5.getResult()){
+                                                                                                                            db.collection("users").document(document.getId()).collection("weightDays").document(documentSnapshot3.getId()).delete()
+                                                                                                                                    .addOnCompleteListener(task6 -> {
+                                                                                                                                        if (task6.isSuccessful()){
+                                                                                                                                            Log.d("Firebase", "Document successful deleted");
+                                                                                                                                            db.collection("users").document(document.getId()).delete().addOnCompleteListener(
+                                                                                                                                                    task7 -> {
+                                                                                                                                                        if (task7.isSuccessful()) {
+                                                                                                                                                            Log.d("Firebase", "Document successful deleted");
+                                                                                                                                                        } else {
+                                                                                                                                                            Log.d("Firebase", "Document delete failed" + task5.getException());
+                                                                                                                                                            Toast.makeText(this, "Document delete failed",
+                                                                                                                                                                    Toast.LENGTH_SHORT).show();
+                                                                                                                                                        }
+                                                                                                                                                    });
+                                                                                                                                        }
+                                                                                                                                    });
+                                                                                                                        }
+                                                                                                                    }
+                                                                                                                });
+                                                                                                    }
                                                                                                 });
                                                                                     }
                                                                                 }

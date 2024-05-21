@@ -12,6 +12,10 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.Objects;
 
 public class SignIn extends AppCompatActivity {
     private String email = "";
@@ -23,11 +27,6 @@ public class SignIn extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-            actionBar.setCustomView(R.layout.action_bar);
-        }
         setContentView(R.layout.signin_ui);
     }
     public void getCred(){
@@ -57,8 +56,23 @@ public class SignIn extends AppCompatActivity {
                     .addOnCompleteListener(this, task -> {
                         if (task.isSuccessful()) {
                             Log.d("signIn", "signInWithEmail:success");
-                            Intent intent = new Intent(SignIn.this, Menu.class);
-                            startActivity(intent);
+                            FirebaseFirestore db = FirebaseFirestore.getInstance();
+                            CollectionReference usersRef = db.collection("users");
+                            usersRef.whereEqualTo("userUID", Objects.requireNonNull(mAuth.getCurrentUser()).getUid()).get()
+                                    .addOnCompleteListener(task2 -> {
+                                        if (task.isSuccessful()) {
+                                            if (!task2.getResult().isEmpty()){
+                                                Log.d("Firebase", "Successful logged user");
+                                                Intent intent = new Intent(SignIn.this, Menu.class);
+                                                startActivity(intent);
+                                            }
+                                            else {
+                                                Log.d("Firebase", "User without document");
+                                                Intent intent = new Intent(SignIn.this, PersonalInformation.class);
+                                                startActivity(intent);
+                                            }
+                                        }
+                                    });
                         }
                         else {
                             Log.d("signIn", "signInWithEmail:failure");

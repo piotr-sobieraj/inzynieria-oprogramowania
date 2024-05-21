@@ -76,6 +76,12 @@ public class Menu extends AppCompatActivity {
 
 
     public void changeUI() {
+        getWindow().getDecorView().setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_IMMERSIVE);
         RadioGroup radioGroup = findViewById(R.id.mainMenu);
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -258,6 +264,27 @@ public class Menu extends AppCompatActivity {
         intent.putExtra("date", dateText.getText().toString());
         startActivity(intent);
     }
+    public void addProductLunch(View v){
+        Intent intent = new Intent(Menu.this, AddingProduct.class);
+        TextView dateText = findViewById(R.id.date);
+        intent.putExtra("typeOfMeal", "Lunch");
+        intent.putExtra("date", dateText.getText().toString());
+        startActivity(intent);
+    }
+    public void addProductSnack(View v){
+        Intent intent = new Intent(Menu.this, AddingProduct.class);
+        TextView dateText = findViewById(R.id.date);
+        intent.putExtra("typeOfMeal", "Snack");
+        intent.putExtra("date", dateText.getText().toString());
+        startActivity(intent);
+    }
+    public void addProductDinner(View v){
+        Intent intent = new Intent(Menu.this, AddingProduct.class);
+        TextView dateText = findViewById(R.id.date);
+        intent.putExtra("typeOfMeal", "Dinner");
+        intent.putExtra("date", dateText.getText().toString());
+        startActivity(intent);
+    }
 
     public void previousDay(View view) {
         TextView date = findViewById(R.id.date);
@@ -330,6 +357,7 @@ public class Menu extends AppCompatActivity {
         currentCarbs.setText(String.valueOf(Integer.parseInt(currentCarbs.getText().toString()) + Integer.parseInt(Objects.requireNonNull(carbsValue))));
         carbsProgressBar.setProgress((int)((Double.parseDouble(currentCarbs.getText().toString())/carbsValueLimit) * 100));
     }
+
     public void fillLimits(){
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
