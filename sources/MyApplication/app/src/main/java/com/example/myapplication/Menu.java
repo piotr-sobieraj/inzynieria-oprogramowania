@@ -92,6 +92,8 @@ public class Menu extends AppCompatActivity {
                     startActivity(intent);
                 } else if (checkedId == R.id.WeightCalendar) {
                     intent = new Intent(Menu.this, WeightCalendar.class);
+                    TextView date = findViewById(R.id.date);
+                    intent.putExtra("date", date.getText().toString());
                     startActivity(intent);
                 } else if (checkedId == R.id.More) {
                     intent = new Intent(Menu.this, MoreUI.class);
