@@ -131,7 +131,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editTextDocelowaWaga"
+        android:id="@+id/editTextTargetWeight"
         android:layout_width="0dp"
         android:layout_height="26dp"
         android:layout_marginStart="38dp"
