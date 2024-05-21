@@ -245,10 +245,10 @@ public class NewProduct extends AppCompatActivity {
                 return false;
             }
 
-            if (fats.compareTo(BigInteger.ZERO) <= 0 ||
+            if (fats.compareTo(BigInteger.ZERO) < 0 ||
                     fats.compareTo(BigInteger.valueOf(Integer.MAX_VALUE)) > 0) {
 
-                ((TextView) findViewById(R.id.fatsText)).setError("Fats value must be greater than 1.");
+                ((TextView) findViewById(R.id.fatsText)).setError("Fats value must be greater than 0.");
                 return false;
             }
 
@@ -271,10 +271,10 @@ public class NewProduct extends AppCompatActivity {
                 return false;
             }
 
-            if (carbs.compareTo(BigInteger.ZERO) <= 0 ||
+            if (carbs.compareTo(BigInteger.ZERO) < 0 ||
                     carbs.compareTo(BigInteger.valueOf(Integer.MAX_VALUE)) > 0) {
 
-                ((TextView) findViewById(R.id.carbohydratesText)).setError("Carbs value must be greater than 1.");
+                ((TextView) findViewById(R.id.carbohydratesText)).setError("Carbs value must be greater than 0.");
                 return false;
             }
 
@@ -296,10 +296,10 @@ public class NewProduct extends AppCompatActivity {
                 return false;
             }
 
-            if (proteins.compareTo(BigInteger.ZERO) <= 0 ||
+            if (proteins.compareTo(BigInteger.ZERO) < 0 ||
                     proteins.compareTo(BigInteger.valueOf(Integer.MAX_VALUE)) > 0) {
 
-                ((TextView) findViewById(R.id.proteinsText)).setError("Proteins value must be greater than 1.");
+                ((TextView) findViewById(R.id.proteinsText)).setError("Proteins value must be greater than 0.");
                 return false;
             }
 
