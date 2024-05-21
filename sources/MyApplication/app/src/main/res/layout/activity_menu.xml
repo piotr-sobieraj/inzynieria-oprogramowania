@@ -214,6 +214,24 @@
         app:layout_constraintEnd_toStartOf="@+id/currentCarbs"
         app:layout_constraintTop_toBottomOf="@+id/carbsProgres" />
 
+
+    <ProgressBar
+        android:id="@+id/calorieProgres"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="11dp"
+        android:layout_below="@+id/imageView4"
+        android:layout_alignStart="@+id/imageView5"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="35dp"
+        android:progress="0"
+        android:progressDrawable="@drawable/custom_progressbar_bg"
+        app:layout_constraintEnd_toStartOf="@+id/proteinProgres"
+        app:layout_constraintStart_toStartOf="@+id/imageView5"
+        app:layout_constraintTop_toTopOf="@+id/imageView5" />
+
     <ProgressBar
         android:id="@+id/proteinProgres"
         style="?android:attr/progressBarStyleHorizontal"
@@ -244,6 +262,7 @@
         app:layout_constraintEnd_toStartOf="@+id/carbsProgres"
         app:layout_constraintTop_toTopOf="@+id/imageView5" />
 
+
     <ProgressBar
         android:id="@+id/carbsProgres"
         style="?android:attr/progressBarStyleHorizontal"
@@ -258,6 +277,9 @@
         android:progressDrawable="@drawable/custom_progressbar_bg"
         app:layout_constraintEnd_toEndOf="@+id/imageView5"
         app:layout_constraintTop_toTopOf="@+id/imageView5" />
+
+
+
 
     <ScrollView
         android:id="@+id/scrollView2"
@@ -536,22 +558,7 @@
         </LinearLayout>
     </ScrollView>
 
-    <ProgressBar
-        android:id="@+id/calorieProgres"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="11dp"
-        android:layout_below="@+id/imageView4"
-        android:layout_alignStart="@+id/imageView5"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="35dp"
-        android:progress="0"
-        android:progressDrawable="@drawable/custom_progressbar_bg"
-        app:layout_constraintEnd_toStartOf="@+id/proteinProgres"
-        app:layout_constraintStart_toStartOf="@+id/imageView5"
-        app:layout_constraintTop_toTopOf="@+id/imageView5" />
+
 
     <TextView
         android:id="@+id/textView6"
