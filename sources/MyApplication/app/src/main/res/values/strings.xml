@@ -74,5 +74,8 @@
     <string name="new_record">New record</string>
     <string name="weight_calendar">Weight</string>
     <string name="recently_eaten">Recently eaten</string>
+    <string name="lunch">Lunch</string>
+    <string name="snack">Snack</string>
+    <string name="dinner">Dinner</string>
 
 </resources>

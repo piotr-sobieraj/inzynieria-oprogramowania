@@ -264,6 +264,27 @@ public class Menu extends AppCompatActivity {
         intent.putExtra("date", dateText.getText().toString());
         startActivity(intent);
     }
+    public void addProductLunch(View v){
+        Intent intent = new Intent(Menu.this, AddingProduct.class);
+        TextView dateText = findViewById(R.id.date);
+        intent.putExtra("typeOfMeal", "Lunch");
+        intent.putExtra("date", dateText.getText().toString());
+        startActivity(intent);
+    }
+    public void addProductSnack(View v){
+        Intent intent = new Intent(Menu.this, AddingProduct.class);
+        TextView dateText = findViewById(R.id.date);
+        intent.putExtra("typeOfMeal", "Snack");
+        intent.putExtra("date", dateText.getText().toString());
+        startActivity(intent);
+    }
+    public void addProductDinner(View v){
+        Intent intent = new Intent(Menu.this, AddingProduct.class);
+        TextView dateText = findViewById(R.id.date);
+        intent.putExtra("typeOfMeal", "Dinner");
+        intent.putExtra("date", dateText.getText().toString());
+        startActivity(intent);
+    }
 
     public void previousDay(View view) {
         TextView date = findViewById(R.id.date);

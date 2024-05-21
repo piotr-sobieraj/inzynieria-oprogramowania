@@ -19,8 +19,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
 
@@ -41,7 +43,12 @@ public class PersonalInformation extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
         checkedRadioButton();
-
+        getWindow().getDecorView().setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_IMMERSIVE);
         Button date = findViewById(R.id.pickDate);
         final Calendar c = Calendar.getInstance();
         int mYear = c.get(Calendar.YEAR) - 15;
@@ -60,7 +67,6 @@ public class PersonalInformation extends AppCompatActivity {
         });
         ((TextView) findViewById(R.id.editTextName)).setText(SignUp.firstAndLastName);
     }
-
     public void checkedRadioButton(){
         RadioGroup radioGroup = findViewById(R.id.sexRadioGroup2);
         radioGroup.setOnCheckedChangeListener((group, checkedId) -> {
@@ -114,18 +120,34 @@ public class PersonalInformation extends AppCompatActivity {
 
     private void saveUserToDatabase(User user) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("users")
-                .add(user)
-                .addOnSuccessListener(documentReference -> {
-                    Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
-                    final Calendar c = Calendar.getInstance();
-                    String date = c.get(Calendar.DAY_OF_MONTH) + "/" + (c.get(Calendar.MONTH) + 1) + "/" + c.get(Calendar.YEAR);
-                    MealDay mealDay = new MealDay(date, new HashMap<>());
-                    RecentMeal recentMeal = new RecentMeal(new HashMap<>());
-                    db.collection("users").document(documentReference.getId()).collection("mealDays").add(mealDay).addOnSuccessListener(task -> Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId()));
-                    db.collection("users").document(documentReference.getId()).collection("recentMeal").add(recentMeal).addOnSuccessListener(task -> Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId()));
-                })
-                .addOnFailureListener(e -> Log.w(TAG, "Error adding document", e));
+        CollectionReference usersRef = db.collection("users");
+        usersRef.whereEqualTo("userUID", Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid()).get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        if (!task.getResult().isEmpty()){
+                            Log.d("Firebase", "Successful logged user");
+                            Intent intent = new Intent(PersonalInformation.this, Menu.class);
+                            startActivity(intent);
+                        }
+                        else {
+                            db.collection("users")
+                                    .add(user)
+                                    .addOnSuccessListener(documentReference -> {
+                                        Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                                        final Calendar c = Calendar.getInstance();
+                                        String date = c.get(Calendar.DAY_OF_MONTH) + "/" + (c.get(Calendar.MONTH) + 1) + "/" + c.get(Calendar.YEAR);
+                                        MealDay mealDay = new MealDay(date, new HashMap<>());
+                                        RecentMeal recentMeal = new RecentMeal(new HashMap<>());
+//                                      WeightDay weightDay = new MealDay(date, new ArrayList<>());
+                                        db.collection("users").document(documentReference.getId()).collection("mealDays").add(mealDay).addOnSuccessListener(task2 -> Log.d(TAG, "DocumentSnapshot added"));
+                                        db.collection("users").document(documentReference.getId()).collection("recentMeal").add(recentMeal).addOnSuccessListener(task2 -> Log.d(TAG, "DocumentSnapshot added"));
+//                                      db.collection("users").document(documentReference.getId()).collection("weightDays").add(weightDay).addOnSuccessListener(task2 -> Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId()));
+
+                                    })
+                                    .addOnFailureListener(e -> Log.w(TAG, "Error adding document", e));
+                        }
+                    }
+                });
     }
 
     @NonNull
@@ -147,7 +169,7 @@ public class PersonalInformation extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void saveUserToDatabaseAndOpenAddingMeals(View v){
+    public void saveUserToDatabaseAndOpenMenu(View v){
         if (validateUser(buildUserData())){
             saveUserToDatabase(buildUserData());
             openMenu();

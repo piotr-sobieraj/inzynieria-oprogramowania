@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
@@ -8,24 +8,29 @@
     tools:context=".Options">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="415dp"
-        android:layout_height="77dp"
+        android:id="@+id/cardView3"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="0dp"
         app:cardBackgroundColor="#3171FE"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <Button
+        <ImageView
             android:id="@+id/backButton"
             android:layout_width="40dp"
-            android:layout_height="wrap_content"
+            android:layout_height="28dp"
             android:layout_centerVertical="true"
             android:layout_gravity="center|start"
             android:layout_marginStart="25dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="8dp"
             android:background="@null"
-            android:drawableStart="@drawable/ic_arrow"
-            android:onClick="back" />
+            android:onClick="back"
+            android:src="@drawable/arrow_left" />
 
         <TextView
             android:id="@+id/textView6"
@@ -34,17 +39,24 @@
             android:layout_centerInParent="true"
             android:layout_centerVertical="true"
             android:layout_gravity="center"
+            android:layout_marginTop="10dp"
             android:fontFamily="@font/poppins_medium"
             android:text="@string/options"
             android:textColor="#FFFFFF"
             android:textSize="24sp" />
+
     </androidx.cardview.widget.CardView>
 
     <Button
         android:id="@+id/bodyWeightButton"
         android:layout_width="411dp"
         android:layout_height="63dp"
-        android:layout_marginTop="76dp"
+        android:layout_below="@+id/cardView3"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="0dp"
         android:background="@null"
         android:fontFamily="@font/poppins_medium"
         android:onClick="profile"
@@ -62,17 +74,30 @@
 
     <View
         android:id="@+id/divider3"
-        android:layout_width="409dp"
-        android:layout_height="1dp"
-        android:background="?android:attr/listDivider"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bodyWeightButton" />
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_below="@+id/bodyWeightButton"
+        android:layout_marginTop="0dp"
+        android:background="?android:attr/listDivider" />
+
+    <View
+        android:id="@+id/divider4"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_below="@+id/rateOfWeightButton"
+        android:layout_marginTop="0dp"
+        android:background="?android:attr/listDivider" />
 
     <Button
         android:id="@+id/rateOfWeightButton"
         android:layout_width="409dp"
         android:layout_height="66dp"
+        android:layout_below="@+id/divider3"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="0dp"
         android:background="@null"
         android:fontFamily="@font/poppins_medium"
         android:onClick="targets"
@@ -87,21 +112,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider3" />
 
-    <View
-        android:id="@+id/divider4"
-        android:layout_width="409dp"
-        android:layout_height="1dp"
-        android:background="?android:attr/listDivider"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rateOfWeightButton" />
-
     <TextView
         android:id="@+id/textViewProfileInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/divider3"
+        android:layout_alignParentStart="true"
         android:layout_marginStart="20dp"
         android:layout_marginTop="115dp"
+        android:layout_marginBottom="0dp"
         android:fontFamily="@font/poppins_medium"
         android:text="{sex}, {dateBirthday}, {height}"
         android:textSize="14sp"
@@ -112,9 +131,11 @@
         android:id="@+id/textViewTargets"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/rateOfWeightButton"
+        android:layout_alignParentStart="true"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="180dp"
+        android:layout_marginTop="-27dp"
         android:text="{current weight} kg -> {target weight} kg, {rate} kg / week"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

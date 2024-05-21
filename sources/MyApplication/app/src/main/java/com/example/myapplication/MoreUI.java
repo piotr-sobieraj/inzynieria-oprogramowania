@@ -1,8 +1,11 @@
 package com.example.myapplication;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.RadioGroup;
 
 import androidx.activity.EdgeToEdge;
@@ -66,5 +69,14 @@ public class MoreUI extends AppCompatActivity {
     public void options(View v){
         Intent intent = new Intent(this, Options.class);
         startActivity(intent);
+    }
+
+    public void authors(View v){
+        Button button = findViewById(R.id.button3);
+        button.setOnClickListener(v1 -> new AlertDialog.Builder(v1.getContext())
+                .setTitle("Authors")
+                .setMessage("Bartosz Siedlecki" + System.lineSeparator() + "Piotr Sobieraj" + System.lineSeparator() + "Wiktor Szczepanik")
+                .setPositiveButton(android.R.string.ok, (dialog, which) -> {})
+                .show());
     }
 }

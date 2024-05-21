@@ -87,11 +87,13 @@
         android:id="@+id/imageView4"
         android:layout_width="match_parent"
         android:layout_height="94dp"
+        android:importantForAccessibility="no"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/rectangle_blue" />
+        app:srcCompat="@drawable/rectangle_blue"
+        tools:ignore="ContentDescription" />
 
     <ImageView
         android:id="@+id/imageView5"
@@ -103,7 +105,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="0dp"
         android:layout_marginEnd="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:importantForAccessibility="no" app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView4"
         app:srcCompat="@drawable/rectangle_gray" />
@@ -117,7 +119,6 @@
         android:layout_marginStart="5dp"
         android:layout_marginTop="6dp"
         android:fontFamily="@font/poppins"
-        android:text="7"
         android:textColor="#EDF5FC"
         android:textSize="12sp"
         app:layout_constraintEnd_toStartOf="@+id/proteinLimit"
@@ -135,7 +136,6 @@
         android:layout_marginEnd="-10dp"
         android:layout_toEndOf="@+id/textView19"
         android:fontFamily="@font/poppins_semibold"
-        android:text="7"
         android:textColor="#EDF5FC"
         android:textSize="12sp"
         android:textStyle="bold"
@@ -153,7 +153,6 @@
         android:layout_marginEnd="0dp"
         android:layout_toEndOf="@+id/textView22"
         android:fontFamily="@font/poppins_semibold"
-        android:text="7"
         android:textColor="#EDF5FC"
         android:textSize="12sp"
         android:textStyle="bold"
@@ -171,7 +170,6 @@
         android:layout_marginEnd="-5dp"
         android:layout_toEndOf="@+id/textViewTargets"
         android:fontFamily="@font/poppins_semibold"
-        android:text="7"
         android:textColor="#EDF5FC"
         android:textSize="12sp"
         android:textStyle="bold"
@@ -248,7 +246,6 @@
         android:layout_below="@+id/imageView4"
         android:layout_marginStart="1dp"
         android:layout_marginTop="10dp"
-        android:layout_weight="1"
         android:layout_marginEnd="45dp"
         android:layout_toEndOf="@+id/proteinProgres"
         android:progressDrawable="@drawable/custom_progressbar_bg"
@@ -335,14 +332,15 @@
                     android:text="@string/plus"
                     android:textAlignment="gravity"
                     android:textColor="#EDF5FC"
-                    android:textSize="34sp" />
+                    android:textSize="34sp"
+                    tools:ignore="RtlHardcoded" />
             </androidx.cardview.widget.CardView>
 
             <LinearLayout
                 android:id="@+id/containerBreakfast"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"></LinearLayout>
+                android:orientation="vertical" />
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
@@ -384,14 +382,164 @@
                     android:text="@string/plus"
                     android:textAlignment="gravity"
                     android:textColor="#EDF5FC"
-                    android:textSize="34sp" />
+                    android:textSize="34sp"
+                    tools:ignore="RtlHardcoded" />
             </androidx.cardview.widget.CardView>
 
             <LinearLayout
                 android:id="@+id/containerSecondBreakfast"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"></LinearLayout>
+                android:orientation="vertical" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="#F5FBFF"
+                app:cardElevation="0dp">
+
+                <TextView
+                    android:id="@+id/textView21"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:text="@string/lunch"
+                    android:textColor="#616061"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/kcalLunch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="29dp"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="30dp"
+                    android:fontFamily="@font/poppins"
+                    android:text="@string/_0_kcal"
+                    android:textColor="#616061"
+                    android:textSize="16sp" />
+
+                <Button
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="right|center_vertical"
+                    android:layout_marginEnd="12dp"
+                    android:background="@drawable/circle_blue"
+                    android:fontFamily="@font/poppins"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:includeFontPadding="false"
+                    android:onClick="addProductLunch"
+                    android:text="@string/plus"
+                    android:textAlignment="gravity"
+                    android:textColor="#EDF5FC"
+                    android:textSize="34sp"
+                    tools:ignore="RtlHardcoded" />
+            </androidx.cardview.widget.CardView>
+
+            <LinearLayout
+                android:id="@+id/containerLunch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="#F5FBFF"
+                app:cardElevation="0dp">
+
+                <TextView
+                    android:id="@+id/textView23"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:text="@string/snack"
+                    android:textColor="#616061"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/kcalSnack"
+                    android:layout_width="wrap_content"
+                    android:layout_height="29dp"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="30dp"
+                    android:fontFamily="@font/poppins"
+                    android:text="@string/_0_kcal"
+                    android:textColor="#616061"
+                    android:textSize="16sp" />
+
+                <Button
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="right|center_vertical"
+                    android:layout_marginEnd="12dp"
+                    android:background="@drawable/circle_blue"
+                    android:fontFamily="@font/poppins"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:includeFontPadding="false"
+                    android:onClick="addProductSnack"
+                    android:text="@string/plus"
+                    android:textAlignment="gravity"
+                    android:textColor="#EDF5FC"
+                    android:textSize="34sp"
+                    tools:ignore="RtlHardcoded" />
+            </androidx.cardview.widget.CardView>
+
+            <LinearLayout
+                android:id="@+id/containerSnack"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="#F5FBFF"
+            app:cardElevation="0dp">
+
+            <TextView
+                android:id="@+id/textView24"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="@string/dinner"
+                android:textColor="#616061"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/kcalDinner"
+                android:layout_width="wrap_content"
+                android:layout_height="29dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="30dp"
+                android:fontFamily="@font/poppins"
+                android:text="@string/_0_kcal"
+                android:textColor="#616061"
+                android:textSize="16sp" />
+
+            <Button
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="right|center_vertical"
+                android:layout_marginEnd="12dp"
+                android:background="@drawable/circle_blue"
+                android:fontFamily="@font/poppins"
+                android:gravity="center_horizontal|center_vertical"
+                android:includeFontPadding="false"
+                android:onClick="addProductDinner"
+                android:text="@string/plus"
+                android:textAlignment="gravity"
+                android:textColor="#EDF5FC"
+                android:textSize="34sp"
+                tools:ignore="RtlHardcoded" />
+        </androidx.cardview.widget.CardView>
+
+        <LinearLayout
+            android:id="@+id/containerDinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
         </LinearLayout>
     </ScrollView>
 
@@ -439,8 +587,6 @@
         android:layout_marginEnd="0dp"
         android:layout_toEndOf="@+id/textView6"
         android:fontFamily="@font/poppins_semibold"
-        android:text="7"
-
         android:textColor="#EDF5FC"
         android:textSize="12sp"
         android:textStyle="bold"
@@ -456,7 +602,6 @@
         android:layout_marginTop="7dp"
         android:layout_toEndOf="@+id/calorieLimit"
         android:fontFamily="@font/poppins"
-        android:text="7"
         android:textColor="#EDF5FC"
         android:textSize="12sp"
         app:layout_constraintEnd_toStartOf="@+id/fatLimit"
@@ -471,7 +616,6 @@
         android:layout_marginTop="7dp"
         android:layout_toEndOf="@+id/proteinLimit"
         android:fontFamily="@font/poppins"
-        android:text="7"
         android:textColor="#EDF5FC"
         android:textSize="12sp"
         app:layout_constraintEnd_toStartOf="@+id/carbsLimit"
@@ -488,7 +632,6 @@
         android:layout_marginEnd="-5dp"
         android:layout_toEndOf="@+id/fatLimit"
         android:fontFamily="@font/poppins"
-        android:text="7"
         android:textColor="#EDF5FC"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="@+id/imageView5"
@@ -521,7 +664,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="39dp"
         android:layout_marginTop="45dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView4"
+        android:importantForAccessibility="no" app:layout_constraintBottom_toBottomOf="@+id/imageView4"
         app:layout_constraintStart_toStartOf="@+id/imageView4"
         app:layout_constraintTop_toTopOf="@+id/imageView4"
         app:srcCompat="@drawable/calendar" />
