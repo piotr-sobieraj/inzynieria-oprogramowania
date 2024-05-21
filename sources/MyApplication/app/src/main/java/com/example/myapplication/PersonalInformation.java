@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -21,6 +22,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.Objects;
 
@@ -98,7 +100,7 @@ public class PersonalInformation extends AppCompatActivity {
 
     @NonNull
     private String getTargetWeightFromView() {
-        return ((TextView)findViewById(R.id.editTextDocelowaWaga)).getText().toString();
+        return ((TextView)findViewById(R.id.editTextTargetWeight)).getText().toString();
     }
 
     @NonNull
@@ -153,81 +155,125 @@ public class PersonalInformation extends AppCompatActivity {
         }
     }
 
-    private boolean validateUser(User user){
-        boolean result = true;
+    private boolean validateUser(User user) {
+
+        boolean isBirthDateCorrect = isBirthDateCorrect(user);
+        boolean isNameCorrect = isNameCorrect(user);
+        boolean isSexCorrect = isSexCorrect(user);
+        boolean isHeightCorrect = isHeightCorrect();
+        boolean isWeightCorrect = isWeightCorrect();
+        boolean isTargetWeightCorrect = isTargetWeightCorrect();
+
+
+        return isBirthDateCorrect &&
+               isNameCorrect &&
+               isSexCorrect &&
+               isHeightCorrect &&
+               isWeightCorrect &&
+               isTargetWeightCorrect;
+    }
+
+    private boolean isBirthDateCorrect(User user){
         final Calendar c = Calendar.getInstance();
         int mYear = c.get(Calendar.YEAR);
         int mMonth = c.get(Calendar.MONTH);
         int mDay = c.get(Calendar.DAY_OF_MONTH);
         String[] date = user.getBirthDate().split("/");
-        if(user.getBirthDate() == null || Objects.equals(user.getBirthDate(), ""))
-            result = false;
-        else if(Integer.parseInt(date[0]) == mDay && Integer.parseInt(date[1]) == mMonth + 1 && Integer.parseInt(date[2]) >= mYear - 13){
-            ((Button)findViewById(R.id.pickDate)).setError("Too young");
-            result = false;
-        }
-        if (user.getSex() == null || Objects.equals(user.getSex(), ""))
-            result = false;
-        if (user.getName() == null || Objects.equals(user.getName(), "")){
-            ((TextView) findViewById(R.id.editTextName)).setError("Missing Name");
-            result = false;
+        if (user.getBirthDate() == null || Objects.equals(user.getBirthDate(), ""))
+            return false;
+        else if (Integer.parseInt(date[0]) == mDay && Integer.parseInt(date[1]) == mMonth + 1 && Integer.parseInt(date[2]) >= mYear - 13) {
+            ((Button) findViewById(R.id.pickDate)).setError("Too young");
+            return false;
         }
 
-        if (user.getHeight() == null || Objects.equals(user.getHeight(), "")) {
-            ((TextView) findViewById(R.id.editTextHeight)).setError("Missing Height");
-            result = false;
-        }
-        else {
-            try {
-                int height = Integer.parseInt(user.getHeight());
-                if (height <= 0 || height > 500) {
-                    ((TextView) findViewById(R.id.editTextHeight)).setError("Height must be between 0 and 500");
-                    result = false;
-                }
-            } catch (NumberFormatException e) {
-                ((TextView) findViewById(R.id.editTextHeight)).setError("Invalid Height");
-                result = false;
-            }
-        }
-
-        if (user.getWeight() == null || Objects.equals(user.getWeight(), "")) {
-            ((TextView) findViewById(R.id.editTextWeight)).setError("Missing Weight");
-            result = false;
-        } else if (user.getWeight().matches("[a-zA-Z\\W]*[0-9]*[a-zA-Z\\W]+[0-9]*[a-zA-Z\\W]*")) {
-            ((TextView) findViewById(R.id.editTextWeight)).setError("Weight contains forbidden characters");
-            result = false;
-        }
-        else {
-            try {
-                int weight = Integer.parseInt(user.getWeight());
-                if (weight <= 0 || weight > 10000) {
-                    ((TextView) findViewById(R.id.editTextWeight)).setError("Weight must be between 0 and 10000");
-                    result = false;
-                }
-            } catch (NumberFormatException e) {
-                ((TextView) findViewById(R.id.editTextWeight)).setError("Invalid Weight");
-                result = false;
-            }
-        }
-        if (user.getTargetWeight() == null || Objects.equals(user.getTargetWeight(), "")) {
-            ((TextView) findViewById(R.id.editTextDocelowaWaga)).setError("Missing Target Weight");
-            result = false;
-        } else if (user.getTargetWeight().matches("[a-zA-Z\\W]*[0-9]*[a-zA-Z\\W]+[0-9]*[a-zA-Z\\W]*")) {
-            ((TextView) findViewById(R.id.editTextDocelowaWaga)).setError("Target Weight contains forbidden characters");
-            result = false;
-        }
-        else{
-            try {
-                int targetWeight = Integer.parseInt(user.getTargetWeight());
-                if (targetWeight <= 0 || targetWeight > 10000) {
-                    ((TextView) findViewById(R.id.editTextTargetWeight)).setError("Target weight must be between 0 and 10000");
-                    result = false;
-                }
-            } catch (NumberFormatException e) {
-                ((TextView) findViewById(R.id.editTextTargetWeight)).setError("Invalid target weight");
-                result = false;
-            }
-        }
-        return result;
+        return true;
     }
+    private boolean isNameCorrect(User user){
+        if (user.getName() == null || Objects.equals(user.getName(), "")) {
+            ((TextView) findViewById(R.id.editTextName)).setError("Missing Name");
+            return false;
+        }
+
+        return true;
+    }
+
+    private boolean isSexCorrect(User user){
+        return (user.getSex() != null && !Objects.equals(user.getSex(), ""));
+    }
+    private boolean isHeightCorrect(){
+        try {
+            String height_s = String.valueOf(((EditText)findViewById(R.id.editTextHeight)).getText());
+            BigInteger height = new BigInteger(height_s);
+
+            if(height_s.isEmpty()){
+                ((TextView) findViewById(R.id.editTextHeight)).setError("Missing Height value.");
+                return false;
+            }
+
+            if (height.compareTo(BigInteger.ZERO) <= 0 ||
+                    height.compareTo(BigInteger.valueOf(500)) > 0) {
+
+                ((TextView) findViewById(R.id.editTextHeight)).setError("Height must be greater than 0 and lower than 500.");
+                return false;
+            }
+
+        } catch (NumberFormatException e) {//Literki wyłapie
+            ((TextView) findViewById(R.id.editTextHeight)).setError("Invalid Height value.");
+            return false;
+        }
+
+        return true;
+    }
+
+    private boolean isWeightCorrect(){
+        try {
+            String weight_s = String.valueOf(((EditText)findViewById(R.id.editTextWeight)).getText());
+            BigInteger weight = new BigInteger(weight_s);
+
+            if(weight_s.isEmpty()){
+                ((TextView) findViewById(R.id.editTextWeight)).setError("Missing Weight value.");
+                return false;
+            }
+
+            if (weight.compareTo(BigInteger.ZERO) <= 0 ||
+                    weight.compareTo(BigInteger.valueOf(10000)) > 0) {
+
+                ((TextView) findViewById(R.id.editTextWeight)).setError("Weight must be greater than 0 and lower than 10000.");
+                return false;
+            }
+
+        } catch (NumberFormatException e) {//Literki wyłapie
+            ((TextView) findViewById(R.id.editTextWeight)).setError("Invalid Weight value.");
+            return false;
+        }
+
+        return true;
+    }
+
+
+    private boolean isTargetWeightCorrect(){
+        try {
+            String weight_s = String.valueOf(((EditText)findViewById(R.id.editTextTargetWeight)).getText());
+            BigInteger weight = new BigInteger(weight_s);
+
+            if(weight_s.isEmpty()){
+                ((TextView) findViewById(R.id.editTextTargetWeight)).setError("Missing Target Weight value.");
+                return false;
+            }
+
+            if (weight.compareTo(BigInteger.ZERO) <= 0 ||
+                    weight.compareTo(BigInteger.valueOf(10000)) > 0) {
+
+                ((TextView) findViewById(R.id.editTextTargetWeight)).setError("target Weight must be greater than 0 and lower than 10000.");
+                return false;
+            }
+
+        } catch (NumberFormatException e) {//Literki wyłapie
+            ((TextView) findViewById(R.id.editTextTargetWeight)).setError("Invalid Target Weight value.");
+            return false;
+        }
+
+        return true;
+    }
+
 }
