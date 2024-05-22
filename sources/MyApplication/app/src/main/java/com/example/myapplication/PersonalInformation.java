@@ -141,10 +141,10 @@ public class PersonalInformation extends AppCompatActivity {
                                         String date = c.get(Calendar.DAY_OF_MONTH) + "/" + (c.get(Calendar.MONTH) + 1) + "/" + c.get(Calendar.YEAR);
                                         MealDay mealDay = new MealDay(date, new HashMap<>());
                                         RecentMeal recentMeal = new RecentMeal(new HashMap<>());
-//                                      WeightDay weightDay = new MealDay(date, new ArrayList<>());
+                                        WeightDay weightDay = new WeightDay(date, new ArrayList<>());
                                         db.collection("users").document(documentReference.getId()).collection("mealDays").add(mealDay).addOnSuccessListener(task2 -> Log.d(TAG, "DocumentSnapshot added"));
                                         db.collection("users").document(documentReference.getId()).collection("recentMeal").add(recentMeal).addOnSuccessListener(task2 -> Log.d(TAG, "DocumentSnapshot added"));
-//                                      db.collection("users").document(documentReference.getId()).collection("weightDays").add(weightDay).addOnSuccessListener(task2 -> Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId()));
+                                        db.collection("users").document(documentReference.getId()).collection("weightDays").add(weightDay).addOnSuccessListener(task2 -> Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId()));
 
                                     })
                                     .addOnFailureListener(e -> Log.w(TAG, "Error adding document", e));
