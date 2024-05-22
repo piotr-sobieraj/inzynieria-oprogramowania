@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +21,7 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -33,14 +35,11 @@ public class NewProduct extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_new_product);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
     }
 
     public void addProductToDatabase(View v){
+        if (!isInputDataCorrect()) return;
+        
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         CollectionReference usersRef = db.collection("users");
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -51,18 +50,18 @@ public class NewProduct extends AppCompatActivity {
                            db.collection("users").document(document.getId()).collection("mealDays").get()
                                    .addOnCompleteListener(task1 -> {
                                        if (task.isSuccessful()){
-                                           boolean finded = false;
+                                           boolean found = false;
                                            for (QueryDocumentSnapshot documentSnapshot: task1.getResult()){
                                                ObjectMapper objectMapper = new ObjectMapper();
                                                MealDay mealDay = objectMapper.convertValue(documentSnapshot.getData(), MealDay.class);
                                                if (Objects.equals(mealDay.getDate(), getIntent().getStringExtra("date"))){
-                                                   finded = true;
+                                                   found = true;
                                                    List<Meal> mealList = mealDay.getMeals().get(getIntent().getStringExtra("typeOfMeal"));
                                                    if (mealList == null){
                                                        mealList = new ArrayList<>();
                                                    }
                                                    mealList.add(new Meal(((TextView)findViewById(R.id.editText)).getText().toString(),
-                                                           Integer.parseInt(((TextView)findViewById(R.id.editText2)).getText().toString()),
+                                                           Integer.parseInt(((TextView)findViewById(R.id.editTextEnergyValue)).getText().toString()),
                                                                    Integer.parseInt(((TextView)findViewById(R.id.fatsText)).getText().toString()),
                                                                            Integer.parseInt(((TextView)findViewById(R.id.carbohydratesText)).getText().toString()),
                                                                                    Integer.parseInt(((TextView)findViewById(R.id.proteinsText)).getText().toString())));
@@ -82,7 +81,7 @@ public class NewProduct extends AppCompatActivity {
                                                                                        List<Meal> list = map.get(getIntent().getStringExtra("typeOfMeal"));
                                                                                        if (list != null) {
                                                                                            for (Meal meal: list){
-                                                                                               if (Objects.equals(meal.name, ((TextView) findViewById(R.id.editText)).getText().toString()) && meal.caloricValue == Integer.parseInt(((TextView) findViewById(R.id.editText2)).getText().toString()) && meal.fatsValue == Integer.parseInt(((TextView) findViewById(R.id.fatsText)).getText().toString()) && meal.carbohydratesValue == Integer.parseInt(((TextView) findViewById(R.id.carbohydratesText)).getText().toString()) && meal.proteinsValue == Integer.parseInt(((TextView) findViewById(R.id.proteinsText)).getText().toString())){
+                                                                                               if (Objects.equals(meal.name, ((TextView) findViewById(R.id.editText)).getText().toString()) && meal.caloricValue == Integer.parseInt(((TextView) findViewById(R.id.editTextEnergyValue)).getText().toString()) && meal.fatsValue == Integer.parseInt(((TextView) findViewById(R.id.fatsText)).getText().toString()) && meal.carbohydratesValue == Integer.parseInt(((TextView) findViewById(R.id.carbohydratesText)).getText().toString()) && meal.proteinsValue == Integer.parseInt(((TextView) findViewById(R.id.proteinsText)).getText().toString())){
                                                                                                    find = true;
                                                                                                }
                                                                                            }
@@ -92,7 +91,7 @@ public class NewProduct extends AppCompatActivity {
                                                                                        }
                                                                                        if (!find) {
                                                                                            list.add(new Meal(((TextView) findViewById(R.id.editText)).getText().toString(),
-                                                                                                   Integer.parseInt(((TextView) findViewById(R.id.editText2)).getText().toString()),
+                                                                                                   Integer.parseInt(((TextView) findViewById(R.id.editTextEnergyValue)).getText().toString()),
                                                                                                    Integer.parseInt(((TextView) findViewById(R.id.fatsText)).getText().toString()),
                                                                                                    Integer.parseInt(((TextView) findViewById(R.id.carbohydratesText)).getText().toString()),
                                                                                                    Integer.parseInt(((TextView) findViewById(R.id.proteinsText)).getText().toString())));
@@ -127,11 +126,11 @@ public class NewProduct extends AppCompatActivity {
                                                            });
                                                }
                                            }
-                                           if (!finded){
+                                           if (!found){
                                                Map<String, List<Meal>> mealMap = new HashMap<>();
                                                List<Meal> mealList = new ArrayList<>();
                                                mealList.add(new Meal(((TextView)findViewById(R.id.editText)).getText().toString(),
-                                                       Integer.parseInt(((TextView)findViewById(R.id.editText2)).getText().toString()),
+                                                       Integer.parseInt(((TextView)findViewById(R.id.editTextEnergyValue)).getText().toString()),
                                                        Integer.parseInt(((TextView)findViewById(R.id.fatsText)).getText().toString()),
                                                        Integer.parseInt(((TextView)findViewById(R.id.carbohydratesText)).getText().toString()),
                                                        Integer.parseInt(((TextView)findViewById(R.id.proteinsText)).getText().toString())));
@@ -151,7 +150,7 @@ public class NewProduct extends AppCompatActivity {
                                                                                    List<Meal> list = map.get(getIntent().getStringExtra("typeOfMeal"));
                                                                                    if (list != null) {
                                                                                        for (Meal meal: list){
-                                                                                           if (Objects.equals(meal.name, ((TextView) findViewById(R.id.editText)).getText().toString()) && meal.fatsValue == Integer.parseInt(((TextView) findViewById(R.id.editText2)).getText().toString()) && meal.carbohydratesValue == Integer.parseInt(((TextView) findViewById(R.id.fatsText)).getText().toString()) && meal.proteinsValue == Integer.parseInt(((TextView) findViewById(R.id.proteinsText)).getText().toString())){
+                                                                                           if (Objects.equals(meal.name, ((TextView) findViewById(R.id.editText)).getText().toString()) && meal.fatsValue == Integer.parseInt(((TextView) findViewById(R.id.editTextEnergyValue)).getText().toString()) && meal.carbohydratesValue == Integer.parseInt(((TextView) findViewById(R.id.fatsText)).getText().toString()) && meal.proteinsValue == Integer.parseInt(((TextView) findViewById(R.id.proteinsText)).getText().toString())){
                                                                                                find = true;
                                                                                            }
                                                                                        }
@@ -159,7 +158,7 @@ public class NewProduct extends AppCompatActivity {
                                                                                    if (!find) {
                                                                                        if (list != null) {
                                                                                            list.add(new Meal(((TextView) findViewById(R.id.editText)).getText().toString(),
-                                                                                                   Integer.parseInt(((TextView) findViewById(R.id.editText2)).getText().toString()),
+                                                                                                   Integer.parseInt(((TextView) findViewById(R.id.editTextEnergyValue)).getText().toString()),
                                                                                                    Integer.parseInt(((TextView) findViewById(R.id.fatsText)).getText().toString()),
                                                                                                    Integer.parseInt(((TextView) findViewById(R.id.carbohydratesText)).getText().toString()),
                                                                                                    Integer.parseInt(((TextView) findViewById(R.id.proteinsText)).getText().toString())));
@@ -196,6 +195,117 @@ public class NewProduct extends AppCompatActivity {
                    }
                });
     }
+
+    private boolean isInputDataCorrect() {
+        boolean isEnergyValueCorrect = isEnergyValueCorrect();
+        boolean isFatsValueCorrect = isFatsValueCorrect();
+        boolean isCarbsValueCorrect = isCarbsValueCorrect();
+        boolean isProteinsValueCorrect = isProteinsValueCorrect();
+
+        return isEnergyValueCorrect && isFatsValueCorrect && isCarbsValueCorrect && isProteinsValueCorrect;
+    }
+
+    private boolean isEnergyValueCorrect(){
+        try {
+            String energyValue_s = String.valueOf(((EditText)findViewById(R.id.editTextEnergyValue)).getText());
+            BigInteger energyValue = new BigInteger(energyValue_s);
+
+            if(energyValue_s.isEmpty()){
+                ((TextView) findViewById(R.id.editTextEnergyValue)).setError("Missing Energy value.");
+                return false;
+            }
+
+            if (energyValue.compareTo(BigInteger.ZERO) <= 0 ||
+                    energyValue.compareTo(BigInteger.valueOf(Integer.MAX_VALUE)) > 0) {
+
+                ((TextView) findViewById(R.id.editTextEnergyValue)).setError("Energy value must be greater than 1.");
+                return false;
+            }
+
+        } catch (NumberFormatException e) {//Literki wyłapie
+            ((TextView) findViewById(R.id.editTextEnergyValue)).setError("Invalid energy value.");
+            return false;
+        }
+
+        return true;
+    }
+
+    private boolean isFatsValueCorrect(){
+        try {
+            String fats_s = String.valueOf(((EditText)findViewById(R.id.fatsText)).getText());
+            BigInteger fats = new BigInteger(fats_s);
+
+            if(fats_s.isEmpty()){
+                ((TextView) findViewById(R.id.fatsText)).setError("Missing Fats.");
+                return false;
+            }
+
+            if (fats.compareTo(BigInteger.ZERO) < 0 ||
+                    fats.compareTo(BigInteger.valueOf(Integer.MAX_VALUE)) > 0) {
+
+                ((TextView) findViewById(R.id.fatsText)).setError("Fats value must be greater than 0.");
+                return false;
+            }
+
+        } catch (NumberFormatException e) {//Literki wyłapie
+            ((TextView) findViewById(R.id.fatsText)).setError("Invalid Fats value.");
+            return false;
+        }
+
+        return true;
+    }
+
+
+    private boolean isCarbsValueCorrect(){
+        try {
+            String carbs_s = String.valueOf(((EditText)findViewById(R.id.carbohydratesText)).getText());
+            BigInteger carbs = new BigInteger(carbs_s);
+
+            if(carbs_s.isEmpty()){
+                ((TextView) findViewById(R.id.carbohydratesText)).setError("Missing Carbs.");
+                return false;
+            }
+
+            if (carbs.compareTo(BigInteger.ZERO) < 0 ||
+                    carbs.compareTo(BigInteger.valueOf(Integer.MAX_VALUE)) > 0) {
+
+                ((TextView) findViewById(R.id.carbohydratesText)).setError("Carbs value must be greater than 0.");
+                return false;
+            }
+
+        } catch (NumberFormatException e) {//Literki wyłapie
+            ((TextView) findViewById(R.id.carbohydratesText)).setError("Invalid Carbs value.");
+            return false;
+        }
+
+        return true;
+    }
+
+    private boolean isProteinsValueCorrect(){
+        try {
+            String proteins_s = String.valueOf(((EditText)findViewById(R.id.proteinsText)).getText());
+            BigInteger proteins = new BigInteger(proteins_s);
+
+            if(proteins_s.isEmpty()){
+                ((TextView) findViewById(R.id.proteinsText)).setError("Missing Proteins.");
+                return false;
+            }
+
+            if (proteins.compareTo(BigInteger.ZERO) < 0 ||
+                    proteins.compareTo(BigInteger.valueOf(Integer.MAX_VALUE)) > 0) {
+
+                ((TextView) findViewById(R.id.proteinsText)).setError("Proteins value must be greater than 0.");
+                return false;
+            }
+
+        } catch (NumberFormatException e) {//Literki wyłapie
+            ((TextView) findViewById(R.id.proteinsText)).setError("Invalid Proteins value.");
+            return false;
+        }
+
+        return true;
+    }
+
 
     public void back(View view) {
         Intent intent = new Intent(NewProduct.this, AddingProduct.class);

@@ -15,6 +15,7 @@
             android:padding="10dp">
 
             <TextView
+                android:id="@+id/date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="10dp"
@@ -24,10 +25,11 @@
                 android:textSize="22sp" />
 
             <TextView
+                android:id="@+id/weight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins"
                 android:layout_marginEnd="10dp"
+                android:fontFamily="@font/poppins"
                 android:text="Weight: 85 kg"
                 android:textAllCaps="true"
                 android:textColor="#fff"
@@ -52,6 +54,7 @@
                     android:src="@drawable/rectangle_white"/>
 
                 <TextView
+                    android:id="@+id/difference"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_semibold"

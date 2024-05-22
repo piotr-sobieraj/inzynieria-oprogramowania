@@ -15,9 +15,7 @@
         <activity
             android:name=".AddingProduct"
             android:exported="false" />
-        <activity
-            android:name=".TargetsRateWeight"
-            android:exported="false" />
+
         <activity
             android:name=".TargetsBodyWeight"
             android:exported="false" />
@@ -64,8 +62,6 @@
         <activity
             android:name=".SignUp"
             android:exported="false" />
-        <activity android:name=".RecipesUI" />
-
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

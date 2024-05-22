@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
@@ -9,23 +9,29 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
-        android:layout_width="407dp"
-        android:layout_height="66dp"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="0dp"
         app:cardBackgroundColor="#3171FE"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <Button
+        <ImageView
             android:id="@+id/backButton"
             android:layout_width="30dp"
-            android:layout_height="wrap_content"
+            android:layout_height="28dp"
             android:layout_centerVertical="true"
             android:layout_gravity="center|start"
             android:layout_marginStart="25dp"
             android:layout_marginTop="5dp"
             android:background="@null"
-            android:drawableStart="@drawable/ic_arrow"
-            android:onClick="back" />
+            android:onClick="back"
+            android:src="@drawable/arrow_left" />
 
         <TextView
             android:id="@+id/textView6"
@@ -34,7 +40,6 @@
             android:layout_centerInParent="true"
             android:layout_centerVertical="true"
             android:layout_gravity="center"
-            android:layout_marginBottom="10dp"
             android:fontFamily="@font/poppins"
             android:text="@string/targets"
             android:textColor="#FFFFFF"
@@ -50,7 +55,7 @@
             android:layout_centerInParent="true"
             android:layout_centerVertical="true"
             android:layout_gravity="center"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="32dp"
             android:layout_marginBottom="10dp"
             android:fontFamily="@font/poppins"
             android:text="@string/body_weight"
@@ -79,11 +84,13 @@
 
     <EditText
         android:id="@+id/editTextTargetWeight"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="25dp"
-        android:layout_marginStart="38dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="38dp"
+        android:layout_below="@+id/textView8"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="30dp"
         android:background="@drawable/rectangle_border"
         android:ems="10"
         android:importantForAutofill="no"
@@ -98,8 +105,10 @@
         android:id="@+id/textView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="16dp"
+        android:layout_below="@+id/editTextCurrentWeight"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="15dp"
         android:fontFamily="@font/poppins"
         android:text="@string/target_body_weight"
         android:textSize="12sp"
@@ -111,8 +120,10 @@
         android:id="@+id/textView9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="38dp"
-        android:layout_marginTop="20dp"
+        android:layout_below="@+id/cardView"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp"
         android:fontFamily="@font/poppins"
         android:text="@string/current_body_weight"
         android:textSize="12sp"
@@ -122,11 +133,13 @@
 
     <EditText
         android:id="@+id/editTextCurrentWeight"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="25dp"
-        android:layout_marginStart="38dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="38dp"
+        android:layout_below="@+id/textView9"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="30dp"
         android:background="@drawable/rectangle_border"
         android:ems="10"
         android:importantForAutofill="no"
@@ -137,4 +150,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView9"
         tools:ignore="LabelFor" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

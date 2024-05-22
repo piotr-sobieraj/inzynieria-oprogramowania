@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -19,7 +20,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+
+import java.util.ArrayList;
+import java.math.BigInteger;
 
 import java.util.HashMap;
 import java.util.Objects;
@@ -34,14 +40,19 @@ public class PersonalInformation extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        // super.onBackPressed();
+//         super.onBackPressed();
     }
 
     private void setUpUI() {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
         checkedRadioButton();
-
+        getWindow().getDecorView().setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_IMMERSIVE);
         Button date = findViewById(R.id.pickDate);
         final Calendar c = Calendar.getInstance();
         int mYear = c.get(Calendar.YEAR) - 15;
@@ -52,7 +63,7 @@ public class PersonalInformation extends AppCompatActivity {
         date.setOnClickListener(v -> {
             SpinnerDatePickerDialog datePickerDialog = new SpinnerDatePickerDialog(this,
                     (view, year, monthOfYear, dayOfMonth) -> {
-                        String date_s = dayOfMonth + "/" + (monthOfYear + 1) + "/" + (year);
+                        String date_s = dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
                         date.setText(date_s);
                     },
                     mYear, mMonth, mDay);
@@ -60,7 +71,6 @@ public class PersonalInformation extends AppCompatActivity {
         });
         ((TextView) findViewById(R.id.editTextName)).setText(SignUp.firstAndLastName);
     }
-
     public void checkedRadioButton(){
         RadioGroup radioGroup = findViewById(R.id.sexRadioGroup2);
         radioGroup.setOnCheckedChangeListener((group, checkedId) -> {
@@ -98,7 +108,7 @@ public class PersonalInformation extends AppCompatActivity {
 
     @NonNull
     private String getTargetWeightFromView() {
-        return ((TextView)findViewById(R.id.editTextDocelowaWaga)).getText().toString();
+        return ((TextView)findViewById(R.id.editTextTargetWeight)).getText().toString();
     }
 
     @NonNull
@@ -111,35 +121,52 @@ public class PersonalInformation extends AppCompatActivity {
         return ((TextView)findViewById(R.id.editTextHeight)).getText().toString();
     }
 
-
     private void saveUserToDatabase(User user) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("users")
-                .add(user)
-                .addOnSuccessListener(documentReference -> {
-                    Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
-                    final Calendar c = Calendar.getInstance();
-                    String date = c.get(Calendar.DAY_OF_MONTH) + "/" + (c.get(Calendar.MONTH) + 1) + "/" + c.get(Calendar.YEAR);
-                    MealDay mealDay = new MealDay(date, new HashMap<>());
-                    RecentMeal recentMeal = new RecentMeal(new HashMap<>());
-                    db.collection("users").document(documentReference.getId()).collection("mealDays").add(mealDay).addOnSuccessListener(task -> Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId()));
-                    db.collection("users").document(documentReference.getId()).collection("recentMeal").add(recentMeal).addOnSuccessListener(task -> Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId()));
-                })
-                .addOnFailureListener(e -> Log.w(TAG, "Error adding document", e));
+        CollectionReference usersRef = db.collection("users");
+        usersRef.whereEqualTo("userUID", Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid()).get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        if (!task.getResult().isEmpty()){
+                            Log.d("Firebase", "Successful logged user");
+                            Intent intent = new Intent(PersonalInformation.this, Plan.class);
+                            startActivity(intent);
+                        }
+                        else {
+                            db.collection("users")
+                                    .add(user)
+                                    .addOnSuccessListener(documentReference -> {
+                                        Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                                        final Calendar c = Calendar.getInstance();
+                                        String date = c.get(Calendar.DAY_OF_MONTH) + "/" + (c.get(Calendar.MONTH) + 1) + "/" + c.get(Calendar.YEAR);
+                                        MealDay mealDay = new MealDay(date, new HashMap<>());
+                                        RecentMeal recentMeal = new RecentMeal(new HashMap<>());
+                                        WeightDay weightDay = new WeightDay(date, new ArrayList<>());
+                                        db.collection("users").document(documentReference.getId()).collection("mealDays").add(mealDay).addOnSuccessListener(task2 -> Log.d(TAG, "DocumentSnapshot added"));
+                                        db.collection("users").document(documentReference.getId()).collection("recentMeal").add(recentMeal).addOnSuccessListener(task2 -> Log.d(TAG, "DocumentSnapshot added"));
+                                        db.collection("users").document(documentReference.getId()).collection("weightDays").add(weightDay).addOnSuccessListener(task2 -> Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId()));
+
+                                    })
+                                    .addOnFailureListener(e -> Log.w(TAG, "Error adding document", e));
+                            Intent intent = new Intent(PersonalInformation.this, Plan.class);
+                            startActivity(intent);
+                        }
+                    }
+                });
     }
 
     @NonNull
     private User buildUserData() {
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         return new User(Objects.requireNonNull(firebaseUser).getUid(),
-                        getNameFromView(),
-                        getSexFromView(),
-                        getBirthDateFromView(),
-                        getHeightFromView(),
-                        getWeightFromView(),
-                        getTargetWeightFromView(),
-              null,
-            null);
+                getNameFromView(),
+                getSexFromView(),
+                getBirthDateFromView(),
+                getHeightFromView(),
+                getWeightFromView(),
+                getTargetWeightFromView(),
+                null,
+                null);
     }
 
     public void openMenu(){
@@ -147,64 +174,131 @@ public class PersonalInformation extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void saveUserToDatabaseAndOpenAddingMeals(View v){
+    public void saveUserToDatabaseAndOpenMenu(View v){
         if (validateUser(buildUserData())){
             saveUserToDatabase(buildUserData());
-            openMenu();
         }
     }
 
-    private boolean validateUser(User user){
-        boolean result = true;
+    private boolean validateUser(User user) {
+
+        boolean isBirthDateCorrect = isBirthDateCorrect(user);
+        boolean isNameCorrect = isNameCorrect(user);
+        boolean isSexCorrect = isSexCorrect(user);
+        boolean isHeightCorrect = isHeightCorrect();
+        boolean isWeightCorrect = isWeightCorrect();
+        boolean isTargetWeightCorrect = isTargetWeightCorrect();
+
+
+        return isBirthDateCorrect &&
+               isNameCorrect &&
+               isSexCorrect &&
+               isHeightCorrect &&
+               isWeightCorrect &&
+               isTargetWeightCorrect;
+    }
+
+    private boolean isBirthDateCorrect(User user){
         final Calendar c = Calendar.getInstance();
         int mYear = c.get(Calendar.YEAR);
         int mMonth = c.get(Calendar.MONTH);
         int mDay = c.get(Calendar.DAY_OF_MONTH);
         String[] date = user.getBirthDate().split("/");
-        if(user.getBirthDate() == null || Objects.equals(user.getBirthDate(), ""))
-            result = false;
-        else if(Integer.parseInt(date[0]) == mDay && Integer.parseInt(date[1]) == mMonth + 1 && Integer.parseInt(date[2]) >= mYear - 13){
-            ((Button)findViewById(R.id.pickDate)).setError("Too young");
-            result = false;
+        if (user.getBirthDate() == null || Objects.equals(user.getBirthDate(), ""))
+            return false;
+        else if (Integer.parseInt(date[0]) == mDay && Integer.parseInt(date[1]) == mMonth + 1 && Integer.parseInt(date[2]) >= mYear - 13) {
+            ((Button) findViewById(R.id.pickDate)).setError("Too young");
+            return false;
         }
-        else if (user.getHeight().matches("[a-zA-Z\\W]*[0-9]*[a-zA-Z\\W]+[0-9]*[a-zA-Z\\W]*")) {
-            ((TextView) findViewById(R.id.editTextHeight)).setError("Height contains forbidden characters");
-            result = false;
-        }
-        if (user.getSex() == null || Objects.equals(user.getSex(), ""))
-            result = false;
-        if (user.getName() == null || Objects.equals(user.getName(), "")){
-            ((TextView) findViewById(R.id.editTextName)).setError("Missing Name");
-            result = false;
-        }
-        else if (user.getName().matches("\\W*[a-zA-Z0-9]*\\W+[a-zA-Z0-9]*\\W*")) {
-            ((TextView) findViewById(R.id.editTextName)).setError("Name contains forbidden characters");
-            result = false;
-        }
-        if (user.getHeight() == null || Objects.equals(user.getHeight(), "")) {
-            ((TextView) findViewById(R.id.editTextHeight)).setError("Missing Height");
-            result = false;
-        }
-        else if (user.getHeight().matches("[a-zA-Z\\W]*[0-9]*[a-zA-Z\\W]+[0-9]*[a-zA-Z\\W]*")) {
-            ((TextView) findViewById(R.id.editTextHeight)).setError("Height contains forbidden characters");
-            result = false;
-        }
-        if (user.getWeight() == null || Objects.equals(user.getWeight(), "")) {
-            ((TextView) findViewById(R.id.editTextWeight)).setError("Missing Weight");
-            result = false;
-        }
-        else if (user.getWeight().matches("[a-zA-Z\\W]*[0-9]*[a-zA-Z\\W]+[0-9]*[a-zA-Z\\W]*")) {
-            ((TextView) findViewById(R.id.editTextWeight)).setError("Weight contains forbidden characters");
-            result = false;
-        }
-        if (user.getTargetWeight() == null || Objects.equals(user.getTargetWeight(), "")) {
-            ((TextView) findViewById(R.id.editTextDocelowaWaga)).setError("Missing Target Weight");
-            result = false;
-        }
-        else if (user.getTargetWeight().matches("[a-zA-Z\\W]*[0-9]*[a-zA-Z\\W]+[0-9]*[a-zA-Z\\W]*")) {
-            ((TextView) findViewById(R.id.editTextDocelowaWaga)).setError("Target Weight contains forbidden characters");
-            result = false;
-        }
-        return result;
+
+        return true;
     }
+    private boolean isNameCorrect(User user){
+        if (user.getName() == null || Objects.equals(user.getName(), "")) {
+            ((TextView) findViewById(R.id.editTextName)).setError("Missing Name");
+            return false;
+        }
+
+        return true;
+    }
+
+    private boolean isSexCorrect(User user){
+        return (user.getSex() != null && !Objects.equals(user.getSex(), ""));
+    }
+    private boolean isHeightCorrect(){
+        try {
+            String height_s = String.valueOf(((EditText)findViewById(R.id.editTextHeight)).getText());
+            BigInteger height = new BigInteger(height_s);
+
+            if(height_s.isEmpty()){
+                ((TextView) findViewById(R.id.editTextHeight)).setError("Missing Height value.");
+                return false;
+            }
+
+            if (height.compareTo(BigInteger.ZERO) <= 0 ||
+                    height.compareTo(BigInteger.valueOf(500)) > 0) {
+
+                ((TextView) findViewById(R.id.editTextHeight)).setError("Height must be greater than 0 and lower than 500.");
+                return false;
+            }
+
+        } catch (NumberFormatException e) {//Literki wyłapie
+            ((TextView) findViewById(R.id.editTextHeight)).setError("Invalid Height value.");
+            return false;
+        }
+
+        return true;
+    }
+
+    private boolean isWeightCorrect(){
+        try {
+            String weight_s = String.valueOf(((EditText)findViewById(R.id.editTextWeight)).getText());
+            BigInteger weight = new BigInteger(weight_s);
+
+            if(weight_s.isEmpty()){
+                ((TextView) findViewById(R.id.editTextWeight)).setError("Missing Weight value.");
+                return false;
+            }
+
+            if (weight.compareTo(BigInteger.ZERO) <= 0 ||
+                    weight.compareTo(BigInteger.valueOf(10000)) > 0) {
+
+                ((TextView) findViewById(R.id.editTextWeight)).setError("Weight must be greater than 0 and lower than 10000.");
+                return false;
+            }
+
+        } catch (NumberFormatException e) {//Literki wyłapie
+            ((TextView) findViewById(R.id.editTextWeight)).setError("Invalid Weight value.");
+            return false;
+        }
+
+        return true;
+    }
+
+
+    private boolean isTargetWeightCorrect(){
+        try {
+            String weight_s = String.valueOf(((EditText)findViewById(R.id.editTextTargetWeight)).getText());
+            BigInteger weight = new BigInteger(weight_s);
+
+            if(weight_s.isEmpty()){
+                ((TextView) findViewById(R.id.editTextTargetWeight)).setError("Missing Target Weight value.");
+                return false;
+            }
+
+            if (weight.compareTo(BigInteger.ZERO) <= 0 ||
+                    weight.compareTo(BigInteger.valueOf(10000)) > 0) {
+
+                ((TextView) findViewById(R.id.editTextTargetWeight)).setError("target Weight must be greater than 0 and lower than 10000.");
+                return false;
+            }
+
+        } catch (NumberFormatException e) {//Literki wyłapie
+            ((TextView) findViewById(R.id.editTextTargetWeight)).setError("Invalid Target Weight value.");
+            return false;
+        }
+
+        return true;
+    }
+
 }
