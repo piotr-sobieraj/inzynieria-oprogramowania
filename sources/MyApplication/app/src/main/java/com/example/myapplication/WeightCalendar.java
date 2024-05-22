@@ -21,9 +21,14 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
@@ -110,16 +115,28 @@ public class WeightCalendar extends AppCompatActivity {
                         for(QueryDocumentSnapshot document : task.getResult()) {
                             db.collection("users").document(document.getId()).collection("weightDays").get().addOnCompleteListener(task1 -> {
                                 if(task1.isSuccessful()){
+                                    ArrayList<WeightDay> weightDays = new ArrayList<>();
                                     for(QueryDocumentSnapshot documentSnapshot : task1.getResult()) {
                                         ObjectMapper objectMapper = new ObjectMapper();
                                         WeightDay weightDay = objectMapper.convertValue(documentSnapshot.getData(), WeightDay.class);
-                                        List<Weight> weightList = weightDay.getWeight();
-                                        for (int i = 0; i <weightList.size(); i++) {
-                                            if(i>0) {
-                                                AddCardWeight(weightDay.getDate(), String.valueOf(weightList.get(i).weight), String.valueOf(weightList.get(i).weight - weightList.get(i-1).weight));
-                                            }else {
-                                                AddCardWeight(weightDay.getDate(), String.valueOf(weightList.get(i).weight), "0");
+                                        weightDays.add(weightDay);
+                                        SimpleDateFormat sdf = new SimpleDateFormat("d/M/yyyy", Locale.ENGLISH);
+                                        weightDays.sort((date, date2) -> {
+                                            try {
+                                                return sdf.parse(date.getDate()).compareTo(sdf.parse(date2.getDate()));
+                                            } catch (ParseException e) {
+                                                throw new IllegalArgumentException(e);
                                             }
+                                        });
+                                    }
+                                    AddCardWeight(weightDays.get(0).getDate(), String.valueOf(weightDays.get(0).getWeight().get(0).weight), "0");
+                                    for (int i = 1; i < weightDays.size(); i++) {
+                                        for (int j = 0; j < weightDays.get(i).getWeight().size(); j++) {
+                                            if(j == 0){
+                                                AddCardWeight(weightDays.get(i).getDate(), String.valueOf(weightDays.get(i).getWeight().get(j).weight), String.valueOf(weightDays.get(i).getWeight().get(j).weight - weightDays.get(i-1).getWeight().get(weightDays.get(i-1).getWeight().size() - 1).weight));
+                                            }
+                                            else
+                                                AddCardWeight(weightDays.get(i).getDate(), String.valueOf(weightDays.get(i).getWeight().get(j).weight), String.valueOf(weightDays.get(i).getWeight().get(j).weight - weightDays.get(i).getWeight().get(j-1).weight));
                                         }
                                     }
                                 }
