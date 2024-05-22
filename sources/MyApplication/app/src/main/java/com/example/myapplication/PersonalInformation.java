@@ -148,6 +148,8 @@ public class PersonalInformation extends AppCompatActivity {
 
                                     })
                                     .addOnFailureListener(e -> Log.w(TAG, "Error adding document", e));
+                            Intent intent = new Intent(PersonalInformation.this, Plan.class);
+                            startActivity(intent);
                         }
                     }
                 });
@@ -175,7 +177,6 @@ public class PersonalInformation extends AppCompatActivity {
     public void saveUserToDatabaseAndOpenMenu(View v){
         if (validateUser(buildUserData())){
             saveUserToDatabase(buildUserData());
-            openMenu();
         }
     }
 

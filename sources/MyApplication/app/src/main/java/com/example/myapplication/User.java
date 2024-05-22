@@ -1,6 +1,9 @@
 package com.example.myapplication;
 
 import android.annotation.SuppressLint;
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
 
 import java.io.Serializable;
 import java.text.ParseException;
@@ -132,6 +135,7 @@ public class User implements Serializable {
         return bmr_s;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public String calculateAndSetReachGoalDate(){
         //Aby użyć, ustaw weight i targetWeight
         double reduce = Double.parseDouble(getTargetWeight()) - Double.parseDouble(getWeight());
