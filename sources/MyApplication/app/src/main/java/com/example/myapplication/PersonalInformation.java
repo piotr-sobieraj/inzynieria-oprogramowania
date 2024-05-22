@@ -129,7 +129,7 @@ public class PersonalInformation extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         if (!task.getResult().isEmpty()){
                             Log.d("Firebase", "Successful logged user");
-                            Intent intent = new Intent(PersonalInformation.this, Menu.class);
+                            Intent intent = new Intent(PersonalInformation.this, Plan.class);
                             startActivity(intent);
                         }
                         else {
