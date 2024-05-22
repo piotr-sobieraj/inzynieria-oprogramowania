@@ -129,14 +129,17 @@ public class WeightCalendar extends AppCompatActivity {
                                             }
                                         });
                                     }
-                                    AddCardWeight(weightDays.get(0).getDate(), String.valueOf(weightDays.get(0).getWeight().get(0).weight), "0");
-                                    for (int i = 1; i < weightDays.size(); i++) {
-                                        for (int j = 0; j < weightDays.get(i).getWeight().size(); j++) {
-                                            if(j == 0){
-                                                AddCardWeight(weightDays.get(i).getDate(), String.valueOf(weightDays.get(i).getWeight().get(j).weight), String.valueOf(weightDays.get(i).getWeight().get(j).weight - weightDays.get(i-1).getWeight().get(weightDays.get(i-1).getWeight().size() - 1).weight));
+                                    if(!weightDays.isEmpty() && !weightDays.get(0).getWeight().isEmpty()) {
+                                        AddCardWeight(weightDays.get(0).getDate(), String.valueOf(weightDays.get(0).getWeight().get(0).weight), "0");
+
+                                        for (int i = 0; i < weightDays.size(); i++) {
+                                            for (int j = 1; j < weightDays.get(i).getWeight().size(); j++) {
+                                                if(weightDays.get(i).getWeight().size() > 1 && weightDays.size() > 1){
+                                                        AddCardWeight(weightDays.get(i).getDate(), String.valueOf(weightDays.get(i).getWeight().get(j).weight), String.valueOf(weightDays.get(i).getWeight().get(j).weight - weightDays.get(i - 1).getWeight().get(weightDays.get(i - 1).getWeight().size() - 1).weight));
+                                                    }
+                                                 else
+                                                    AddCardWeight(weightDays.get(i).getDate(), String.valueOf(weightDays.get(i).getWeight().get(j).weight), String.valueOf(weightDays.get(i).getWeight().get(j).weight - weightDays.get(i).getWeight().get(j - 1).weight));
                                             }
-                                            else
-                                                AddCardWeight(weightDays.get(i).getDate(), String.valueOf(weightDays.get(i).getWeight().get(j).weight), String.valueOf(weightDays.get(i).getWeight().get(j).weight - weightDays.get(i).getWeight().get(j-1).weight));
                                         }
                                     }
                                 }
