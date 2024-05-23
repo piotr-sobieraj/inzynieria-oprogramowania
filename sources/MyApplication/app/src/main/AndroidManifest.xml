@@ -58,6 +58,7 @@
             android:exported="true" />
         <activity
             android:name=".WeightCalendar"
+            android:windowSoftInputMode="adjustPan"
             android:exported="true" />
         <activity
             android:name=".SignUp"
