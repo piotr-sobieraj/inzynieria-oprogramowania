@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -21,6 +22,7 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
+import java.math.BigInteger;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -44,6 +46,9 @@ public class WeightCalendar extends AppCompatActivity {
     }
 
     public void addWeightToDatabase(View v){
+
+        if(!isWeightCorrect()) return;
+
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         CollectionReference usersRef = db.collection("users");
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -133,11 +138,13 @@ public class WeightCalendar extends AppCompatActivity {
                                         AddCardWeight(weightDays.get(0).getDate(), String.valueOf(weightDays.get(0).getWeight().get(0).weight), "0");
 
                                         for (int i = 0; i < weightDays.size(); i++) {
-                                            for (int j = 1; j < weightDays.get(i).getWeight().size(); j++) {
-                                                if(weightDays.get(i).getWeight().size() > 1 && weightDays.size() > 1){
-                                                        AddCardWeight(weightDays.get(i).getDate(), String.valueOf(weightDays.get(i).getWeight().get(j).weight), String.valueOf(weightDays.get(i).getWeight().get(j).weight - weightDays.get(i - 1).getWeight().get(weightDays.get(i - 1).getWeight().size() - 1).weight));
+                                            for (int j = 0; j < weightDays.get(i).getWeight().size(); j++) {
+                                                if (i == 0 && j == 0)
+                                                    continue;
+                                                if(j == 0 && weightDays.size() > 1){
+                                                        AddCardWeight(weightDays.get(i).getDate(), String.valueOf(weightDays.get(i).getWeight().get(j).weight), String.valueOf(weightDays.get(i).getWeight().get(j).weight - weightDays.get(i - 1).getWeight().get(weightDays.get(i-1).getWeight().size() - 1).weight));
                                                     }
-                                                 else
+                                                else
                                                     AddCardWeight(weightDays.get(i).getDate(), String.valueOf(weightDays.get(i).getWeight().get(j).weight), String.valueOf(weightDays.get(i).getWeight().get(j).weight - weightDays.get(i).getWeight().get(j - 1).weight));
                                             }
                                         }
@@ -156,16 +163,23 @@ public class WeightCalendar extends AppCompatActivity {
         layout.addView(view);
 
     }
-    public void setWeight(View view, String _date, String _weight, String _difference){
+    public void setWeight(View view, String _date, String _weight, String _difference) {
         TextView date = view.findViewById(R.id.date);
         date.setText(_date);
+
         TextView weight = view.findViewById(R.id.weight);
         String tmp = "Weight: " + _weight;
         weight.setText(tmp);
+
         TextView difference = view.findViewById(R.id.difference);
-        tmp = _difference;
+        // Konwersja _difference na liczbę zmiennoprzecinkową
+        double differenceValue = Double.parseDouble(_difference);
+
+        // Zaokrąglenie do dwóch miejsc po przecinku i konwersja z powrotem na string
+        tmp = String.format("%.2f", differenceValue);
         difference.setText(tmp);
     }
+
     public void changeUI() {
         getWindow().getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_LAYOUT_STABLE
@@ -191,4 +205,31 @@ public class WeightCalendar extends AppCompatActivity {
             }
         });
     }
+
+    private boolean isWeightCorrect() {
+        try {
+            String weight_s = ((TextView)findViewById(R.id.weightText)).getText().toString();
+
+            if(weight_s.isEmpty()){
+                ((TextView) findViewById(R.id.weightText)).setError("Missing Weight value.");
+                return false;
+            }
+
+            // Próbujemy sparsować wartość jako float
+            float weight = Float.parseFloat(weight_s);
+
+            if (weight <= 0 || weight > 10000) {
+                ((TextView) findViewById(R.id.weightText)).setError("Weight must be greater than 0 and lower than 10000.");
+                return false;
+            }
+
+        } catch (NumberFormatException e) {
+            // Wyłapanie liter lub innych nieprawidłowych znaków
+            ((TextView) findViewById(R.id.weightText)).setError("Invalid Weight value.");
+            return false;
+        }
+
+        return true;
+    }
+
 }
