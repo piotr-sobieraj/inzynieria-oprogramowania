@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -21,6 +22,7 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
+import java.math.BigInteger;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -44,6 +46,9 @@ public class WeightCalendar extends AppCompatActivity {
     }
 
     public void addWeightToDatabase(View v){
+
+        if(!isWeightCorrect()) return;
+
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         CollectionReference usersRef = db.collection("users");
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -200,4 +205,31 @@ public class WeightCalendar extends AppCompatActivity {
             }
         });
     }
+
+    private boolean isWeightCorrect() {
+        try {
+            String weight_s = ((TextView)findViewById(R.id.weightText)).getText().toString();
+
+            if(weight_s.isEmpty()){
+                ((TextView) findViewById(R.id.weightText)).setError("Missing Weight value.");
+                return false;
+            }
+
+            // Próbujemy sparsować wartość jako float
+            float weight = Float.parseFloat(weight_s);
+
+            if (weight <= 0 || weight > 10000) {
+                ((TextView) findViewById(R.id.weightText)).setError("Weight must be greater than 0 and lower than 10000.");
+                return false;
+            }
+
+        } catch (NumberFormatException e) {
+            // Wyłapanie liter lub innych nieprawidłowych znaków
+            ((TextView) findViewById(R.id.weightText)).setError("Invalid Weight value.");
+            return false;
+        }
+
+        return true;
+    }
+
 }
