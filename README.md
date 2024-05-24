@@ -1,3 +1,8 @@
+## 21 maja
+- [Kalendarz ważeń](#kalendarz-ważeń)
+- [Poprawki w kalendarzu posiłków](#Poprawki-w-kalendarzu-posiłków)
+
+
 ## 9 maja
 - [Ulepszenia w dodawaniu posiłków](#ulepszenia-w-dodawaniu-posiłków)
 - [Przeliczanie daty osiągnięcia celu i limitu kalorii w reakcji na zmianę parametrów](#przeliczanie-daty-osiągnięcia–celu–i-limitu-kalorii-w-reakcji-na-zmianę-parametrów)
@@ -30,6 +35,18 @@
 
 
 ---
+# Kalendarz ważeń
+<div style="text-align: center;">
+    <img src="/pictures/12.meals.calendar.jpg" alt="Kalendarz ważeń posiłków" width="40%">
+</div>
+
+# Poprawki w kalendarzu posiłków
+<div style="text-align: center;">
+    <img src="/pictures/13.kalendarz.ważeń.jpg" alt="Kalendarz ważeń posiłków" width="40%">
+</div>
+
+
+
 # 9 maja
 ## Ulepszenia w dodawaniu posiłków
 ## Przeliczanie daty osiągnięcia celu i limitu kalorii w reakcji na zmianę parametrów
