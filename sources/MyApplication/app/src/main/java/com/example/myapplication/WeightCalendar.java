@@ -158,16 +158,23 @@ public class WeightCalendar extends AppCompatActivity {
         layout.addView(view);
 
     }
-    public void setWeight(View view, String _date, String _weight, String _difference){
+    public void setWeight(View view, String _date, String _weight, String _difference) {
         TextView date = view.findViewById(R.id.date);
         date.setText(_date);
+
         TextView weight = view.findViewById(R.id.weight);
         String tmp = "Weight: " + _weight;
         weight.setText(tmp);
+
         TextView difference = view.findViewById(R.id.difference);
-        tmp = _difference;
+        // Konwersja _difference na liczbę zmiennoprzecinkową
+        double differenceValue = Double.parseDouble(_difference);
+
+        // Zaokrąglenie do dwóch miejsc po przecinku i konwersja z powrotem na string
+        tmp = String.format("%.2f", differenceValue);
         difference.setText(tmp);
     }
+
     public void changeUI() {
         getWindow().getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_LAYOUT_STABLE
